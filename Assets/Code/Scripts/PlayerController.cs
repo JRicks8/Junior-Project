@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity.y,
             desiredHorizVel.z + Mathf.Sqrt(rb.velocity.z - horizontalVel.z));
         Debug.Log(newVelocity);
-        rb.velocity = newVelocity
+        rb.velocity = newVelocity;
     }
 
     // Input Action Callbacks
