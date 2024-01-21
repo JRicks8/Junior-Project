@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Linq.Expressions;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,34 +28,52 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float yRotationLimit = 88.0f;
     [SerializeField] private LayerMask CameraBlocking;
 
-    [Header("Movement")]
+    [Header("Movement Settings")]
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private float maxWalkSpeed;
-    [SerializeField] private float maxRunSpeed;
-    [SerializeField] private float acceleration;
+    [SerializeField] private float softMaxWalkSpeed;
+    [SerializeField] private float softMaxRunSpeed;
+    [SerializeField][Range(0.0f, 0.95f)] private float velocityDecayRate; // If the velocity's mag is more than the limit, multiply the excess by this multiplier to stifle it
+    [SerializeField] private float groundAcceleration;
+    [SerializeField] private float airAcceleration;
     [SerializeField][Range(0.01f, 1.0f)] private float groundIdleDrag;
     [SerializeField][Range(0.01f, 1.0f)] private float airIdleDrag;
+    [SerializeField] private float jumpUpForce;
+    [SerializeField] private float jumpForwardForce;
+    [SerializeField] private int maxNumJumps;
 
-    [SerializeField] private float turnSpeedMin = 0.05f;
-    [SerializeField] private float turnSpeedMax = 0.5f;
-    [SerializeField][Range(0.0f, 2.0f)] private float turnSpeed; // The rate at which the character will rotate to face the desired direction
+    [SerializeField] private float gravity;
+    [SerializeField] private float gravityScale;
+
+    [SerializeField] private float turnSpeedMin;
+    [SerializeField] private float turnSpeedMax;
+    [SerializeField] private float walkingTurnSpeedMulti = 3.0f;
+
+    [Header("Movement Details")]
+    [SerializeField][Range(0.01f, 5.0f)] private float turnSpeed; // The rate at which the character will rotate to face the desired direction
+    [SerializeField] private float tempMaxAirMag; // Need to limit air velocity, this is reset every time the player jumps to their velocity at the start of the jump or when the player does an action in mid-air that effects the velocity
 
     [SerializeField] private Vector2 moveInput;
-    [SerializeField] private Vector3 facingDirection = Vector3.forward;
-    [SerializeField] private Vector3 desiredDirection = Vector3.forward;
+    [SerializeField] private Vector3 facingDirection = Vector3.forward; // The flat vector representing the direction the player is facing and moving in.
+    [SerializeField] private Vector3 desiredDirection = Vector3.forward; // The flat vector representing the direction the player wants to go.
 
     [SerializeField] private bool walking = true;
-    [SerializeField] private bool running = false;
+    [SerializeField] private bool sprinting = false;
     [SerializeField] private bool grounded = false;
 
-    [Header("Details")]
+    [SerializeField] private int jumps;
+
+    [Header("General Details")]
     public GameObject currentGround;
+
+    private IEnumerator regainJumpsAfterDelay;
 
     private void Awake()
     {
         // Input
         InputActionMap actionMap = actions.FindActionMap("Gameplay");
         actionMap.FindAction("jump").performed += OnJumpAction;
+        actionMap.FindAction("sprint").started += OnSprintStart;
+        actionMap.FindAction("sprint").canceled += OnSprintCanceled;
         actionMap.FindAction("crouch").performed += OnCrouchAction;
         actionMap.FindAction("interact").performed += OnInteractAction;
         moveAction = actionMap.FindAction("move");
@@ -66,8 +88,15 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    float airTime = 0.0f;
     private void Update()
     {
+        if (!grounded) airTime += Time.deltaTime;
+        else if (grounded && airTime > 0.0f)
+        {
+            Debug.Log("Air Time: " + airTime);
+            airTime = 0.0f;
+        }
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
@@ -75,10 +104,13 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawLine(transform.position, transform.position + facingDirection * 2, Color.blue);
         Debug.DrawLine(transform.position, transform.position + desiredDirection * 2, Color.red);
+        DebugUpdate();
     }
 
     private void FixedUpdate()
     {
+        rb.AddForce(new Vector3(0, gravity * gravityScale, 0), ForceMode.Acceleration);
+
         CheckGround();
 
         Move();
@@ -90,8 +122,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // Setup Variables
-        Vector3 horizVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        float horizVelocityMag = horizVelocity.magnitude;
+        Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        float flatVelocityMag = flatVelocity.magnitude;
 
         Vector3 camForward = cam.transform.forward;
         Vector3 flatCamForward = new Vector3(camForward.x, 0, camForward.z).normalized;
@@ -99,45 +131,77 @@ public class PlayerController : MonoBehaviour
         Vector3 flatCamRight = new Vector3(camRight.x, 0, camRight.z).normalized;
 
         // Update Turning Speed
-        float t = Mathf.Clamp01(1 - (horizVelocityMag / maxRunSpeed));
+        float t = Mathf.Clamp01(1 - (flatVelocityMag / softMaxRunSpeed));
         turnSpeed = turnSpeedMin + (turnSpeedMax - turnSpeedMin) * t;
+        if (walking && grounded)
+            turnSpeed *= walkingTurnSpeedMulti;
 
-        if (moveInput.x != 0 || moveInput.y != 0) // If we are moving
+        // Determine if we're trying to move
+        bool tryingToMove = moveInput.x != 0 || moveInput.y != 0;
+        if (tryingToMove) // If we are trying to move
         {
+            // Calculate the desired movement direction
+            Vector3 rightForce = flatCamRight * moveInput.x;
+            Vector3 forwardForce = flatCamForward * moveInput.y;
+            desiredDirection = (rightForce + forwardForce).normalized;
+
             if (grounded) // Ground movement calculations
             {
-                // Calculate the desired movement direction
-                Vector3 rightForce = flatCamRight * moveInput.x;
-                Vector3 forwardForce = flatCamForward * moveInput.y;
-                desiredDirection = (rightForce + forwardForce).normalized;
-
                 // Try to align the facing direction with the desired move direction
                 facingDirection = Vector3.RotateTowards(facingDirection, desiredDirection, turnSpeed, 1.0f).normalized;
 
                 // Move using the facing direction
-                Vector3 moveForce = facingDirection * acceleration;
+                Vector3 moveForce = facingDirection * groundAcceleration;
                 rb.AddForce(moveForce, ForceMode.Acceleration);
+
+                // Limit flat velocity if we're trying to move and grounded.
+                // We don't limit it this way if we're not moving because the idle drag should decrease the velocity much faster
+                // than this method anyways.
+                if (walking && flatVelocityMag > softMaxWalkSpeed)
+                {
+                    LimitFlatVelocitySoft(flatVelocity, softMaxWalkSpeed);
+                }
+                else if (sprinting && flatVelocityMag > softMaxRunSpeed)
+                {
+                    LimitFlatVelocitySoft(flatVelocity, softMaxRunSpeed);
+                }
             }
             else // Air movement calculations
             {
-                // TODO: Air Movement
+                // Facing direction should remain unchanged
+                // Allow limited movement, but the player shouldn't be able to increase their flat velocity by just moving
+
+                // Move using the desired direction
+                Vector3 moveForce = desiredDirection * airAcceleration;
+                rb.AddForce(moveForce, ForceMode.Acceleration);
+
+                // Limit flat velocity if its greater than the max air magnitude
+                if (flatVelocityMag > tempMaxAirMag)
+                {
+                    LimitFlatVelocitySoft(flatVelocity, tempMaxAirMag);
+                }
             }
         }
-        else if (grounded) // We aren't moving and we're on the ground, so stifle the velocity to imitate drag
+        else if (grounded) // We aren't trying to move and we're on the ground, so stifle the flat velocity to imitate drag
         {
-            rb.velocity *= groundIdleDrag;
+            rb.velocity = new Vector3(rb.velocity.x * groundIdleDrag, rb.velocity.y, rb.velocity.z * groundIdleDrag);
         }
+        else // We aren't trying to move and we're in the air, so stifle the flat velocity slightly using the air idle drag
+        {
+            rb.velocity = new Vector3(rb.velocity.x * airIdleDrag, rb.velocity.y, rb.velocity.z * airIdleDrag);
+        }
+    }
 
-        // Limit maximum horizontal velocity
-        if (walking && horizVelocityMag > maxWalkSpeed)
-        {
-            Debug.Log(horizVelocityMag);
-            LimitHorizontalVelocity(horizVelocity, maxWalkSpeed);
-        }
-        else if (running && horizVelocityMag > maxRunSpeed)
-        {
-            LimitHorizontalVelocity(horizVelocity, maxRunSpeed);
-        }
+    private void Jump()
+    {
+        if (jumps <= 0) return;
+        jumps--;
+
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        Vector3 compositeForce = desiredDirection * jumpForwardForce;
+        compositeForce.y += jumpUpForce;
+        rb.AddForce(compositeForce * rb.mass, ForceMode.Impulse);
+        tempMaxAirMag = Mathf.Max(rb.velocity.magnitude, softMaxWalkSpeed);
     }
 
     private void CheckGround()
@@ -146,6 +210,7 @@ public class PlayerController : MonoBehaviour
         Physics.OverlapSphereNonAlloc(bottom.position, 0.3f, colliders, whatIsGround);
         if (colliders[0] != null)
         {
+            if (!grounded) OnLand();
             grounded = true;
             currentGround = colliders[0].gameObject;
         }
@@ -188,21 +253,60 @@ public class PlayerController : MonoBehaviour
         camTransform.position = newPosition;
     }
 
-    private void LimitHorizontalVelocity(Vector3 horizontalVel, float magLimit)
+    /// <summary>
+    /// Soft limit for the flat velocity (x and z components). Uses the velocity decay rate to calculate
+    /// the new velocity, somewhere between the desired velocity and actual velocity.
+    /// </summary>
+    /// <param name="flatVelocity"></param>
+    /// <param name="magLimit"></param>
+    private void LimitFlatVelocitySoft(Vector3 flatVelocity, float magLimit)
     {
-        Vector3 desiredHorizVel = horizontalVel.normalized * magLimit;
+        Vector3 desiredFlatVel = flatVelocity.normalized * magLimit;
         Vector3 newVelocity = new Vector3(
-            desiredHorizVel.x + Mathf.Sqrt(rb.velocity.x - horizontalVel.x),
+            desiredFlatVel.x + (flatVelocity.x - desiredFlatVel.x) * velocityDecayRate,
             rb.velocity.y,
-            desiredHorizVel.z + Mathf.Sqrt(rb.velocity.z - horizontalVel.z));
-        Debug.Log(newVelocity);
+            desiredFlatVel.z + (flatVelocity.z - desiredFlatVel.z) * velocityDecayRate);
         rb.velocity = newVelocity;
+    }
+
+    private void OnLand()
+    {
+        regainJumpsAfterDelay = RegainJumpsAfterDelay(0.06f);
+        StartCoroutine(regainJumpsAfterDelay);
+    }
+
+    private bool active = false;
+    /// <summary>
+    /// This IEnumerator replenishes jumps after a short delay.
+    /// Intended to prevent potentially infinite velocity gain by jumping within a couple of frames after hitting the ground.
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <returns></returns>
+    IEnumerator RegainJumpsAfterDelay(float delay)
+    {
+        if (active) yield break;
+        active = true;
+        yield return new WaitForSeconds(delay);
+        active = false;
+        jumps = maxNumJumps;
     }
 
     // Input Action Callbacks
     private void OnJumpAction(InputAction.CallbackContext context)
     {
+        Jump();
+    }
 
+    private void OnSprintStart(InputAction.CallbackContext context)
+    {
+        walking = false;
+        sprinting = true;
+    }
+
+    private void OnSprintCanceled(InputAction.CallbackContext context)
+    {
+        walking = true;
+        sprinting = false;
     }
 
     private void OnCrouchAction(InputAction.CallbackContext context)
@@ -222,5 +326,18 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         actions.FindActionMap("gameplay").Disable();
+    }
+
+    // Debug
+    [Header("Debug")]
+    public TextMeshProUGUI speedText;
+    private void DebugUpdate()
+    {
+        if (speedText != null)
+        {
+            Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            decimal value = Math.Round((decimal)flatVelocity.magnitude, 3);
+            speedText.text = "Speed: " + value;
+        }
     }
 }
