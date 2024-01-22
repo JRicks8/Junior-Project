@@ -9,6 +9,9 @@ using UnityEngineInternal;
 
 public class PlayerController : MonoBehaviour
 {
+    // TODO: Implement buffered inputs
+    // TODO: Implement support for multiple jumps. On each jump the facing direction should change to face the desired direction the instant the player executes the jump.
+
     [Header("Object References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Camera cam;
@@ -17,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Input")]
     [SerializeField] private InputActionAsset actions;
     private InputAction moveAction;
+    private InputAction jumpAction;
     private InputAction lookAction;
 
     [Header("Camera")]
@@ -59,6 +63,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool walking = true;
     [SerializeField] private bool sprinting = false;
     [SerializeField] private bool grounded = false;
+    [SerializeField] private bool jumping = false;
 
     [SerializeField] private int jumps;
 
@@ -71,11 +76,11 @@ public class PlayerController : MonoBehaviour
     {
         // Input
         InputActionMap actionMap = actions.FindActionMap("Gameplay");
-        actionMap.FindAction("jump").performed += OnJumpAction;
         actionMap.FindAction("sprint").started += OnSprintStart;
         actionMap.FindAction("sprint").canceled += OnSprintCanceled;
         actionMap.FindAction("crouch").performed += OnCrouchAction;
         actionMap.FindAction("interact").performed += OnInteractAction;
+        jumpAction.performed += OnJumpAction;
         moveAction = actionMap.FindAction("move");
         lookAction = actionMap.FindAction("look");
 
@@ -192,22 +197,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    // Return value is the success of the command
+    private bool Jump()
     {
-        if (jumps <= 0) return;
+        if (jumps <= 0) return false;
         jumps--;
+        jumping = true;
 
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         Vector3 compositeForce = desiredDirection * jumpForwardForce;
         compositeForce.y += jumpUpForce;
         rb.AddForce(compositeForce * rb.mass, ForceMode.Impulse);
-        tempMaxAirMag = Mathf.Max(rb.velocity.magnitude, softMaxWalkSpeed);
+        return true;
     }
 
     private void CheckGround()
     {
         Collider[] colliders = new Collider[1];
-        Physics.OverlapSphereNonAlloc(bottom.position, 0.3f, colliders, whatIsGround);
+        Physics.OverlapSphereNonAlloc(bottom.position, 0.48f, colliders, whatIsGround);
         if (colliders[0] != null)
         {
             if (!grounded) OnLand();
@@ -216,6 +223,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            if (grounded) OnLeaveGround();
             grounded = false;
             currentGround = null;
         }
@@ -269,10 +277,23 @@ public class PlayerController : MonoBehaviour
         rb.velocity = newVelocity;
     }
 
+    private void OnLeaveGround()
+    {
+        if (!jumping) jumps--; // If we didn't leave the ground from a jump, then take away a jump.
+        CalculateTempAirMaxMagnitude();
+    }
+
     private void OnLand()
     {
+        jumping = false;
         regainJumpsAfterDelay = RegainJumpsAfterDelay(0.06f);
         StartCoroutine(regainJumpsAfterDelay);
+    }
+
+    private void CalculateTempAirMaxMagnitude()
+    {
+        Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        tempMaxAirMag = Mathf.Max(flatVelocity.magnitude, softMaxWalkSpeed);
     }
 
     private bool active = false;
@@ -294,7 +315,11 @@ public class PlayerController : MonoBehaviour
     // Input Action Callbacks
     private void OnJumpAction(InputAction.CallbackContext context)
     {
-        Jump();
+        bool jumpSuccess = Jump();
+        if (!jumpSuccess)
+        {
+            // TODO: Implement buffered inputs
+        }
     }
 
     private void OnSprintStart(InputAction.CallbackContext context)
