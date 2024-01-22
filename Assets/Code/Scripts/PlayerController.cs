@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Linq.Expressions;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngineInternal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +19,10 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction lookAction;
+    [SerializeField] private float bufferInputThres;
+    private float bufferInputTimer;
+    private string lastBufferedAction;
+    private string bufferedAction;
 
     [Header("Camera")]
     [SerializeField] private Transform CameraFocusPoint;
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         actionMap.FindAction("sprint").canceled += OnSprintCanceled;
         actionMap.FindAction("crouch").performed += OnCrouchAction;
         actionMap.FindAction("interact").performed += OnInteractAction;
+        jumpAction = actionMap.FindAction("jump");
         jumpAction.performed += OnJumpAction;
         moveAction = actionMap.FindAction("move");
         lookAction = actionMap.FindAction("look");
@@ -93,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    float airTime = 0.0f;
+    private float airTime = 0.0f;
     private void Update()
     {
         if (!grounded) airTime += Time.deltaTime;
@@ -114,6 +116,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Execute buffered action
+        if (bufferedAction != null)
+        {
+            Invoke(bufferedAction, 0.0f);
+            bufferedAction = null;
+        }
+
+        // Gravity
         rb.AddForce(new Vector3(0, gravity * gravityScale, 0), ForceMode.Acceleration);
 
         CheckGround();
@@ -214,7 +224,7 @@ public class PlayerController : MonoBehaviour
     private void CheckGround()
     {
         Collider[] colliders = new Collider[1];
-        Physics.OverlapSphereNonAlloc(bottom.position, 0.48f, colliders, whatIsGround);
+        Physics.OverlapSphereNonAlloc(bottom.position, 0.50f, colliders, whatIsGround);
         if (colliders[0] != null)
         {
             if (!grounded) OnLand();
@@ -318,7 +328,17 @@ public class PlayerController : MonoBehaviour
         bool jumpSuccess = Jump();
         if (!jumpSuccess)
         {
-            // TODO: Implement buffered inputs
+            bufferedAction = nameof(JumpBufferedAction);
+        }
+    }
+
+    // Buffered action functions can't have parameters since they are invoked, so we have to make another function for the buffer
+    private void JumpBufferedAction()
+    {
+        bool jumpSuccess = Jump();
+        if (!jumpSuccess)
+        {
+            bufferedAction = nameof(JumpBufferedAction);
         }
     }
 

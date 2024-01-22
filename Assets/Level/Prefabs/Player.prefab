@@ -291,7 +291,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &2101969855281247971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   walking: 1
   sprinting: 0
   grounded: 0
+  jumping: 0
   jumps: 1
   currentGround: {fileID: 0}
   speedText: {fileID: 0}
