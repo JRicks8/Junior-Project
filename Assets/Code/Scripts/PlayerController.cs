@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         InputActionMap actionMap = actions.FindActionMap("Gameplay");
         actionMap.FindAction("sprint").started += OnSprintStart;
         actionMap.FindAction("sprint").canceled += OnSprintCanceled;
-        actionMap.FindAction("crouch").performed += OnCrouchAction;
+        actionMap.FindAction("dash").performed += OnDashAction;
         actionMap.FindAction("interact").performed += OnInteractAction;
         jumpAction = actionMap.FindAction("jump");
         jumpAction.performed += OnJumpAction;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         if (!grounded) airTime += Time.deltaTime;
         else if (grounded && airTime > 0.0f)
         {
-            Debug.Log("Air Time: " + airTime);
+            //Debug.Log("Air Time: " + airTime);
             airTime = 0.0f;
         }
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
@@ -116,12 +116,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Execute buffered action
-        if (bufferedAction != null)
-        {
-            Invoke(bufferedAction, 0.0f);
-            bufferedAction = null;
-        }
+        ExecuteBufferedAction();
 
         // Gravity
         rb.AddForce(new Vector3(0, gravity * gravityScale, 0), ForceMode.Acceleration);
@@ -216,9 +211,25 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         Vector3 compositeForce = desiredDirection * jumpForwardForce;
+        facingDirection = desiredDirection;
         compositeForce.y += jumpUpForce;
         rb.AddForce(compositeForce * rb.mass, ForceMode.Impulse);
+        CalculateTempAirMaxMagnitude(false);
         return true;
+    }
+
+    // Return value is the success of the command
+    private bool Dash()
+    {
+        if (grounded)
+        {
+            Debug.Log("Dash grounded");
+        }
+        else
+        {
+            Debug.Log("Dash air");
+        }
+        return false;
     }
 
     private void CheckGround()
@@ -249,6 +260,8 @@ public class PlayerController : MonoBehaviour
 
         // Handle Rotation
         cameraRotation.x += lookDelta.x * cameraSensitivity;
+        while (cameraRotation.x >= 360) cameraRotation.x -= 360;
+        while (cameraRotation.x < 0) cameraRotation.x += 360;
         cameraRotation.y += lookDelta.y * cameraSensitivity;
         cameraRotation.y = Mathf.Clamp(cameraRotation.y, -yRotationLimit, yRotationLimit);
         Quaternion xQuat = Quaternion.AngleAxis(cameraRotation.x, Vector3.up);
@@ -269,6 +282,34 @@ public class PlayerController : MonoBehaviour
         }
         Vector3 newPosition = CameraFocusPoint.position - camTransform.forward * (newCameraDistance - cameraHitCushion);
         camTransform.position = newPosition;
+    }
+
+    // Execute buffered action
+    // If we attempt an action and it fails for whatever reason,
+    // store the requested action in a buffer and try to execute it next frame.
+    // If the last buffered action is the same as this frame, increase the timer by 
+    // delta time. If the timer is too great, then set the action to null and stop
+    // trying to execute it.
+    private void ExecuteBufferedAction()
+    {
+        if (bufferedAction != null)
+        {
+            if (lastBufferedAction == bufferedAction)
+            {
+                bufferInputTimer += Time.fixedDeltaTime;
+                if (bufferInputTimer > bufferInputThres)
+                {
+                    bufferedAction = null;
+                }
+                else
+                    Invoke(bufferedAction, 0.0f);
+            }
+            else
+                bufferInputTimer = 0.0f;
+
+            lastBufferedAction = bufferedAction;
+            bufferedAction = null;
+        }
     }
 
     /// <summary>
@@ -300,10 +341,16 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(regainJumpsAfterDelay);
     }
 
-    private void CalculateTempAirMaxMagnitude()
+    // Recalculates the temporary maximum value for air movement.
+    // If shouldDecreaseMax is false, the new maximum cannot be lower than the
+    // initial value.
+    private void CalculateTempAirMaxMagnitude(bool shouldDecreaseMax = true)
     {
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        float lastMax = tempMaxAirMag;
         tempMaxAirMag = Mathf.Max(flatVelocity.magnitude, softMaxWalkSpeed);
+        if (!shouldDecreaseMax)
+            tempMaxAirMag = Mathf.Max(lastMax, tempMaxAirMag);
     }
 
     private bool active = false;
@@ -354,9 +401,9 @@ public class PlayerController : MonoBehaviour
         sprinting = false;
     }
 
-    private void OnCrouchAction(InputAction.CallbackContext context)
+    private void OnDashAction(InputAction.CallbackContext context)
     {
-
+        bool dashSuccess = Dash();
     }
 
     private void OnInteractAction(InputAction.CallbackContext context)
