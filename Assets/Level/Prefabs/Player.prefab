@@ -119,8 +119,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2852978606247082711}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -305,7 +305,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6195570678299542044}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b18a54ac418d84645aa894bbe40f6f87, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -387,6 +387,10 @@ MonoBehaviour:
   jumpUpForce: 10
   jumpForwardForce: 1.5
   maxNumJumps: 2
+  dashVelocityMagnitude: 18
+  dashDuration: 0.25
+  maxAirMagPostDash: 15
+  maxNumDashes: 1
   gravity: -9.81
   gravityScale: 2.1
   turnSpeedMin: 0.1
@@ -397,10 +401,13 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0, z: 0}
   desiredDirection: {x: 0, y: 0, z: 0}
+  busy: 0
   walking: 1
   sprinting: 0
   grounded: 0
   jumping: 0
-  jumps: 1
+  dashing: 0
+  jumpsLeft: 0
+  dashesLeft: 0
   currentGround: {fileID: 0}
   speedText: {fileID: 0}

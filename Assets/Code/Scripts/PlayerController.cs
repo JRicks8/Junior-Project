@@ -33,26 +33,37 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float yRotationLimit = 88.0f;
     [SerializeField] private LayerMask CameraBlocking;
 
-    [Header("Movement Settings")]
+    [Space]
+    [Header("-----Movement Settings-----")]
+    [Header("Change these settings to effect the movement.")]
+    [Header("Walking & Running")]
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private float softMaxWalkSpeed;
     [SerializeField] private float softMaxRunSpeed;
-    [SerializeField][Range(0.0f, 0.95f)] private float velocityDecayRate; // If the velocity's mag is more than the limit, multiply the excess by this multiplier to stifle it
     [SerializeField] private float groundAcceleration;
     [SerializeField] private float airAcceleration;
     [SerializeField][Range(0.01f, 1.0f)] private float groundIdleDrag;
     [SerializeField][Range(0.01f, 1.0f)] private float airIdleDrag;
+    [Header("Jumping")]
     [SerializeField] private float jumpUpForce;
     [SerializeField] private float jumpForwardForce;
     [SerializeField] private int maxNumJumps;
-
+    [Header("Dashing")]
+    [SerializeField] private float dashVelocityMagnitude;
+    [SerializeField] private float dashDuration;
+    [SerializeField] private float maxAirMagPostDash; // The max air magnitude after dashing
+    [SerializeField] private int maxNumDashes;
+    [Header("Other")]
     [SerializeField] private float gravity;
     [SerializeField] private float gravityScale;
 
+    [SerializeField][Range(0.0f, 0.95f)] private float velocityDecayRate; // If the velocity's mag is more than the limit, multiply the excess by this multiplier to stifle it
     [SerializeField] private float turnSpeedMin;
     [SerializeField] private float turnSpeedMax;
     [SerializeField] private float walkingTurnSpeedMulti = 3.0f;
 
+    [Header("-----End Movement Settings-----")]
+    [Space]
     [Header("Movement Details")]
     [SerializeField][Range(0.01f, 5.0f)] private float turnSpeed; // The rate at which the character will rotate to face the desired direction
     [SerializeField] private float tempMaxAirMag; // Need to limit air velocity, this is reset every time the player jumps to their velocity at the start of the jump or when the player does an action in mid-air that effects the velocity
@@ -61,17 +72,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 facingDirection = Vector3.forward; // The flat vector representing the direction the player is facing and moving in.
     [SerializeField] private Vector3 desiredDirection = Vector3.forward; // The flat vector representing the direction the player wants to go.
 
+    [SerializeField] private bool busy = false; // Busy is the catch-all for actions. If we are ever "busy", we cannot take any action.
     [SerializeField] private bool walking = true;
     [SerializeField] private bool sprinting = false;
     [SerializeField] private bool grounded = false;
     [SerializeField] private bool jumping = false;
+    [SerializeField] private bool dashing = false;
 
-    [SerializeField] private int jumps;
+    [SerializeField] private int jumpsLeft;
+    [SerializeField] private int dashesLeft;
 
     [Header("General Details")]
     public GameObject currentGround;
 
-    private IEnumerator regainJumpsAfterDelay;
+    private IEnumerator dashHandler;
 
     private void Awake()
     {
@@ -95,15 +109,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private float airTime = 0.0f;
     private void Update()
     {
-        if (!grounded) airTime += Time.deltaTime;
-        else if (grounded && airTime > 0.0f)
-        {
-            //Debug.Log("Air Time: " + airTime);
-            airTime = 0.0f;
-        }
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
@@ -131,6 +138,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Move()
     {
+        if (busy) return;
+
         // Setup Variables
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float flatVelocityMag = flatVelocity.magnitude;
@@ -205,8 +214,8 @@ public class PlayerController : MonoBehaviour
     // Return value is the success of the command
     private bool Jump()
     {
-        if (jumps <= 0) return false;
-        jumps--;
+        if (jumpsLeft <= 0 || busy) return false;
+        jumpsLeft--;
         jumping = true;
 
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
@@ -221,21 +230,26 @@ public class PlayerController : MonoBehaviour
     // Return value is the success of the command
     private bool Dash()
     {
-        if (grounded)
-        {
-            Debug.Log("Dash grounded");
-        }
-        else
-        {
-            Debug.Log("Dash air");
-        }
-        return false;
+        // Do not dash if we're already dashing or committed to another action
+        if (dashing || busy || dashesLeft <= 0) return false;
+        dashing = true;
+        busy = true;
+
+        Vector3 velocity = desiredDirection * dashVelocityMagnitude;
+        dashHandler = DashHandler(velocity);
+        StartCoroutine(dashHandler);
+
+        // Adjust the facing direction
+        facingDirection = desiredDirection;
+        dashesLeft--;
+
+        return true;
     }
 
     private void CheckGround()
     {
         Collider[] colliders = new Collider[1];
-        Physics.OverlapSphereNonAlloc(bottom.position, 0.50f, colliders, whatIsGround);
+        Physics.OverlapSphereNonAlloc(bottom.position, 0.45f, colliders, whatIsGround);
         if (colliders[0] != null)
         {
             if (!grounded) OnLand();
@@ -330,15 +344,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnLeaveGround()
     {
-        if (!jumping) jumps--; // If we didn't leave the ground from a jump, then take away a jump.
+        if (!jumping) jumpsLeft--; // If we didn't leave the ground from a jump, then take away a jump.
         CalculateTempAirMaxMagnitude();
     }
 
     private void OnLand()
     {
         jumping = false;
-        regainJumpsAfterDelay = RegainJumpsAfterDelay(0.06f);
-        StartCoroutine(regainJumpsAfterDelay);
+        dashesLeft = maxNumDashes;
+        StartCoroutine(RegainJumpsAfterDelay(0.06f));
     }
 
     // Recalculates the temporary maximum value for air movement.
@@ -366,7 +380,27 @@ public class PlayerController : MonoBehaviour
         active = true;
         yield return new WaitForSeconds(delay);
         active = false;
-        jumps = maxNumJumps;
+        jumpsLeft = maxNumJumps;
+    }
+
+    IEnumerator DashHandler(Vector3 velocity)
+    {
+        float timer = dashDuration;
+
+        while (timer > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            timer -= Time.fixedDeltaTime;
+
+            rb.velocity = velocity;
+        }
+
+
+        tempMaxAirMag = dashVelocityMagnitude * 0.6f;
+        dashing = false;
+        busy = false;
+        if (grounded)
+            dashesLeft = maxNumDashes;
     }
 
     // Input Action Callbacks
