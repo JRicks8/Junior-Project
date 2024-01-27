@@ -131,6 +131,8 @@ public class PlayerController : MonoBehaviour
         CheckGround();
 
         Move();
+
+        StepUp();
     }
 
     /// <summary>
@@ -262,6 +264,17 @@ public class PlayerController : MonoBehaviour
             grounded = false;
             currentGround = null;
         }
+    }
+
+    private void StepUp()
+    {
+        // Send raycast from bottom of character + stepHeight to the facing direction + the step forward offset
+
+
+        // If we didn't hit anything...
+            // Send another raycast from the end of the last raycast + step down offset.
+            // If we hit something...
+                // Snap the player's position to the top of the step
     }
 
     /// <summary>
