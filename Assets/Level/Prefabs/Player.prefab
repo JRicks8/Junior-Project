@@ -377,11 +377,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
-  softMaxWalkSpeed: 4
-  softMaxRunSpeed: 7
-  velocityDecayRate: 0.8
-  groundAcceleration: 30
-  airAcceleration: 15
+  softMaxRunSpeed: 3
+  groundAcceleration: 50
+  airAcceleration: 30
   groundIdleDrag: 0.82
   airIdleDrag: 0.99
   jumpUpForce: 10
@@ -391,19 +389,20 @@ MonoBehaviour:
   dashDuration: 0.25
   maxAirMagPostDash: 15
   maxNumDashes: 1
+  stepHeight: 0.25
+  forwardStepTest: 0.6
   gravity: -9.81
   gravityScale: 2.1
+  velocityDecayRate: 0.8
   turnSpeedMin: 0.1
   turnSpeedMax: 5
-  walkingTurnSpeedMulti: 2
+  groundedTurnSpeedMulti: 2.5
   turnSpeed: 5
   tempMaxAirMag: 0
   moveInput: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0, z: 0}
   desiredDirection: {x: 0, y: 0, z: 0}
   busy: 0
-  walking: 1
-  sprinting: 0
   grounded: 0
   jumping: 0
   dashing: 0

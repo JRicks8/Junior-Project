@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
     [Header("Change these settings to effect the movement.")]
     [Header("Walking & Running")]
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private float softMaxWalkSpeed;
     [SerializeField] private float softMaxRunSpeed;
     [SerializeField] private float groundAcceleration;
     [SerializeField] private float airAcceleration;
@@ -53,6 +52,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashDuration;
     [SerializeField] private float maxAirMagPostDash; // The max air magnitude after dashing
     [SerializeField] private int maxNumDashes;
+    [Header("Step Up")]
+    [SerializeField] private float stepHeight;
+    [SerializeField] private float forwardStepTest;
+
     [Header("Other")]
     [SerializeField] private float gravity;
     [SerializeField] private float gravityScale;
@@ -60,7 +63,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.0f, 0.95f)] private float velocityDecayRate; // If the velocity's mag is more than the limit, multiply the excess by this multiplier to stifle it
     [SerializeField] private float turnSpeedMin;
     [SerializeField] private float turnSpeedMax;
-    [SerializeField] private float walkingTurnSpeedMulti = 3.0f;
+    [SerializeField] private float groundedTurnSpeedMulti;
 
     [Header("-----End Movement Settings-----")]
     [Space]
@@ -73,8 +76,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 desiredDirection = Vector3.forward; // The flat vector representing the direction the player wants to go.
 
     [SerializeField] private bool busy = false; // Busy is the catch-all for actions. If we are ever "busy", we cannot take any action.
-    [SerializeField] private bool walking = true;
-    [SerializeField] private bool sprinting = false;
     [SerializeField] private bool grounded = false;
     [SerializeField] private bool jumping = false;
     [SerializeField] private bool dashing = false;
@@ -91,8 +92,6 @@ public class PlayerController : MonoBehaviour
     {
         // Input
         InputActionMap actionMap = actions.FindActionMap("Gameplay");
-        actionMap.FindAction("sprint").started += OnSprintStart;
-        actionMap.FindAction("sprint").canceled += OnSprintCanceled;
         actionMap.FindAction("dash").performed += OnDashAction;
         actionMap.FindAction("interact").performed += OnInteractAction;
         jumpAction = actionMap.FindAction("jump");
@@ -116,6 +115,10 @@ public class PlayerController : MonoBehaviour
 
         CameraUpdate(lookInput);
 
+        // If we're moving, step up. This needs to be in update to prevent catching on stairs
+        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f && grounded)
+            StepUp();
+
         Debug.DrawLine(transform.position, transform.position + facingDirection * 2, Color.blue);
         Debug.DrawLine(transform.position, transform.position + desiredDirection * 2, Color.red);
         DebugUpdate();
@@ -131,8 +134,6 @@ public class PlayerController : MonoBehaviour
         CheckGround();
 
         Move();
-
-        StepUp();
     }
 
     /// <summary>
@@ -154,8 +155,8 @@ public class PlayerController : MonoBehaviour
         // Update Turning Speed
         float t = Mathf.Clamp01(1 - (flatVelocityMag / softMaxRunSpeed));
         turnSpeed = turnSpeedMin + (turnSpeedMax - turnSpeedMin) * t;
-        if (walking && grounded)
-            turnSpeed *= walkingTurnSpeedMulti;
+        if (grounded)
+            turnSpeed *= groundedTurnSpeedMulti;
 
         // Determine if we're trying to move
         bool tryingToMove = moveInput.x != 0 || moveInput.y != 0;
@@ -178,11 +179,7 @@ public class PlayerController : MonoBehaviour
                 // Limit flat velocity if we're trying to move and grounded.
                 // We don't limit it this way if we're not moving because the idle drag should decrease the velocity much faster
                 // than this method anyways.
-                if (walking && flatVelocityMag > softMaxWalkSpeed)
-                {
-                    LimitFlatVelocitySoft(flatVelocity, softMaxWalkSpeed);
-                }
-                else if (sprinting && flatVelocityMag > softMaxRunSpeed)
+                if (flatVelocityMag > softMaxRunSpeed)
                 {
                     LimitFlatVelocitySoft(flatVelocity, softMaxRunSpeed);
                 }
@@ -245,6 +242,10 @@ public class PlayerController : MonoBehaviour
         facingDirection = desiredDirection;
         dashesLeft--;
 
+        // If at the beginning of the dash we are grounded, refresh our dashes.
+        if (grounded)
+            dashesLeft = maxNumDashes;
+
         return true;
     }
 
@@ -269,7 +270,27 @@ public class PlayerController : MonoBehaviour
     private void StepUp()
     {
         // Send raycast from bottom of character + stepHeight to the facing direction + the step forward offset
+        Ray forwardTest = new Ray(
+            bottom.position + new Vector3(0, stepHeight, 0),
+            facingDirection);
 
+        Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), facingDirection * forwardStepTest, Color.red, Time.fixedDeltaTime);
+
+        if (!Physics.Raycast(forwardTest, out RaycastHit forwardHit, forwardStepTest, whatIsGround))
+        {
+            Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * forwardStepTest;
+            Ray stepTest = new Ray(origin, Vector3.down);
+
+            Debug.DrawRay(origin, Vector3.down * (stepHeight - 0.05f), Color.blue, 0.5f);
+
+            if (Physics.Raycast(stepTest, out RaycastHit stepHit, stepHeight, whatIsGround))
+            {
+                transform.position = new Vector3(
+                    transform.position.x,
+                    transform.position.y + stepHeight - stepHit.distance,
+                    transform.position.z);
+            }
+        }
 
         // If we didn't hit anything...
             // Send another raycast from the end of the last raycast + step down offset.
@@ -375,7 +396,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float lastMax = tempMaxAirMag;
-        tempMaxAirMag = Mathf.Max(flatVelocity.magnitude, softMaxWalkSpeed);
+        tempMaxAirMag = Mathf.Max(flatVelocity.magnitude, softMaxRunSpeed);
         if (!shouldDecreaseMax)
             tempMaxAirMag = Mathf.Max(lastMax, tempMaxAirMag);
     }
@@ -412,8 +433,6 @@ public class PlayerController : MonoBehaviour
         tempMaxAirMag = dashVelocityMagnitude * 0.6f;
         dashing = false;
         busy = false;
-        if (grounded)
-            dashesLeft = maxNumDashes;
     }
 
     // Input Action Callbacks
@@ -436,21 +455,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnSprintStart(InputAction.CallbackContext context)
-    {
-        walking = false;
-        sprinting = true;
-    }
-
-    private void OnSprintCanceled(InputAction.CallbackContext context)
-    {
-        walking = true;
-        sprinting = false;
-    }
-
     private void OnDashAction(InputAction.CallbackContext context)
     {
         bool dashSuccess = Dash();
+        if (!dashSuccess)
+        {
+            bufferedAction = nameof(DashBufferedAction);
+        }
+    }
+
+    private void DashBufferedAction()
+    {
+        bool dashSuccess = Dash();
+        if (!dashSuccess)
+        {
+            bufferedAction = nameof(DashBufferedAction);
+        }
     }
 
     private void OnInteractAction(InputAction.CallbackContext context)
