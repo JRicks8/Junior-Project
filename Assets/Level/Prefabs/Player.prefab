@@ -389,6 +389,8 @@ MonoBehaviour:
   dashDuration: 0.25
   maxAirMagPostDash: 15
   maxNumDashes: 1
+  diveMaxDuration: 5
+  diveVelocity: {x: 0, y: -25, z: 0}
   stepHeight: 0.25
   forwardStepTest: 0.6
   gravity: -9.81
@@ -406,6 +408,7 @@ MonoBehaviour:
   grounded: 0
   jumping: 0
   dashing: 0
+  diving: 0
   jumpsLeft: 0
   dashesLeft: 0
   currentGround: {fileID: 0}

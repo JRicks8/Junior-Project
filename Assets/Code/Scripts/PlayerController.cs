@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashDuration;
     [SerializeField] private float maxAirMagPostDash; // The max air magnitude after dashing
     [SerializeField] private int maxNumDashes;
+    [Header("Diving")]
+    [SerializeField] private float diveMaxDuration; // The dive persists until hitting the ground or the max time is reached
+    [SerializeField] private Vector3 diveVelocity;
     [Header("Step Up")]
     [SerializeField] private float stepHeight;
     [SerializeField] private float forwardStepTest;
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool grounded = false;
     [SerializeField] private bool jumping = false;
     [SerializeField] private bool dashing = false;
+    [SerializeField] private bool diving = false;
 
     [SerializeField] private int jumpsLeft;
     [SerializeField] private int dashesLeft;
@@ -87,12 +91,14 @@ public class PlayerController : MonoBehaviour
     public GameObject currentGround;
 
     private IEnumerator dashHandler;
+    private IEnumerator diveHandler;
 
     private void Awake()
     {
         // Input
         InputActionMap actionMap = actions.FindActionMap("Gameplay");
         actionMap.FindAction("dash").performed += OnDashAction;
+        actionMap.FindAction("dive").performed += OnDiveAction;
         actionMap.FindAction("interact").performed += OnInteractAction;
         jumpAction = actionMap.FindAction("jump");
         jumpAction.performed += OnJumpAction;
@@ -246,6 +252,18 @@ public class PlayerController : MonoBehaviour
         if (grounded)
             dashesLeft = maxNumDashes;
 
+        return true;
+    }
+
+    // Dive freezes horizontal velocity and moves downward at a fixed velocity. Upon hitting the ground,
+    // horizontal velocity is restored and the player destroys nearby objects that can be destroyed.
+    private bool Dive()
+    {
+        if (diving || busy || grounded) return false;
+
+        Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        diveHandler = DiveHandler(flatVelocity);
+        StartCoroutine(diveHandler);
         return true;
     }
 
@@ -429,9 +447,25 @@ public class PlayerController : MonoBehaviour
             rb.velocity = velocity;
         }
 
-
         tempMaxAirMag = dashVelocityMagnitude * 0.6f;
         dashing = false;
+        busy = false;
+    }
+
+    IEnumerator DiveHandler(Vector3 storedFlatVelocity)
+    {
+        float timer = diveMaxDuration;
+
+        while (!grounded && timer > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            timer -= Time.fixedDeltaTime;
+
+            rb.velocity = diveVelocity;
+        }
+
+        rb.velocity = storedFlatVelocity;
+        diving = false;
         busy = false;
     }
 
@@ -470,6 +504,24 @@ public class PlayerController : MonoBehaviour
         if (!dashSuccess)
         {
             bufferedAction = nameof(DashBufferedAction);
+        }
+    }
+
+    private void OnDiveAction(InputAction.CallbackContext context)
+    {
+        bool diveSuccess = Dive();
+        if (!diveSuccess)
+        {
+            bufferedAction += nameof(DiveBufferedAction);
+        }
+    }
+    
+    private void DiveBufferedAction()
+    {
+        bool diveSuccess = Dive();
+        if (!diveSuccess)
+        {
+            bufferedAction += nameof(DiveBufferedAction);
         }
     }
 
