@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     private string bufferedAction;
 
     [Header("Camera")]
+    [SerializeField] private CursorLockMode cursorLockState;
+    [SerializeField] private bool cursorVisible;
     [SerializeField] private Transform CameraFocusPoint;
     [SerializeField] private Vector2 cameraRotation = Vector2.zero;
     [SerializeField] private float cameraDistance; // Where x is the horizontal offset and y is the vertical offset
@@ -58,6 +60,11 @@ public class PlayerController : MonoBehaviour
     [Header("Step Up")]
     [SerializeField] private float stepHeight;
     [SerializeField] private float forwardStepTest;
+    [Header("Grapple")]
+    [SerializeField] private float grappleRange;
+    [SerializeField] private float grappleMinDistance;
+    [SerializeField] private float grappleAcceleration;
+    [SerializeField] private float biasToMoveDir; // The grapple should take into account the desired move direction.
 
     [Header("Other")]
     [SerializeField] private float gravity;
@@ -83,6 +90,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool jumping = false;
     [SerializeField] private bool dashing = false;
     [SerializeField] private bool diving = false;
+    [SerializeField] private bool grappling = false;
 
     [SerializeField] private int jumpsLeft;
     [SerializeField] private int dashesLeft;
@@ -92,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator dashHandler;
     private IEnumerator diveHandler;
+    private IEnumerator grappleHandler;
 
     private void Awake()
     {
@@ -100,6 +109,8 @@ public class PlayerController : MonoBehaviour
         actionMap.FindAction("dash").performed += OnDashAction;
         actionMap.FindAction("dive").performed += OnDiveAction;
         actionMap.FindAction("interact").performed += OnInteractAction;
+        actionMap.FindAction("grapple").started += OnGrappleStart;
+        actionMap.FindAction("grapple").canceled += OnGrappleEnd;
         jumpAction = actionMap.FindAction("jump");
         jumpAction.performed += OnJumpAction;
         moveAction = actionMap.FindAction("move");
@@ -111,7 +122,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
+        Cursor.visible = cursorVisible;
+        Cursor.lockState = cursorLockState;
     }
 
     private void Update()
@@ -236,7 +248,7 @@ public class PlayerController : MonoBehaviour
     private bool Dash()
     {
         // Do not dash if we're already dashing or committed to another action
-        if (dashing || busy || dashesLeft <= 0) return false;
+        if (dashing || grappling || busy || dashesLeft <= 0) return false;
         dashing = true;
         busy = true;
 
@@ -259,8 +271,10 @@ public class PlayerController : MonoBehaviour
     // horizontal velocity is restored and the player destroys nearby objects that can be destroyed.
     private bool Dive()
     {
-        if (diving || busy || grounded) return false;
+        if (diving || grappling || busy || grounded) return false;
 
+        diving = true;
+        busy = true;
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         diveHandler = DiveHandler(flatVelocity);
         StartCoroutine(diveHandler);
@@ -311,9 +325,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // If we didn't hit anything...
-            // Send another raycast from the end of the last raycast + step down offset.
-            // If we hit something...
-                // Snap the player's position to the top of the step
+        // Send another raycast from the end of the last raycast + step down offset.
+        // If we hit something...
+        // Snap the player's position to the top of the step
     }
 
     /// <summary>
@@ -469,6 +483,35 @@ public class PlayerController : MonoBehaviour
         busy = false;
     }
 
+    IEnumerator GrappleHandler(Transform grapplePoint)
+    {
+        if (grapplePoint == null) yield break;
+        Vector3 grapplePosition = grapplePoint.position;
+        // Store the velocity between frame updates in case the simulation screws with our rigidbody
+        Vector3 lastVelocity = rb.velocity;
+
+        while (grappling)
+        {
+            yield return new WaitForFixedUpdate();
+
+            Vector3 dirToGrapplePoint = (grapplePosition - transform.position).normalized;
+            if ((grapplePosition - transform.position).magnitude < grappleMinDistance) break;
+
+            Vector3 resultingVector = Vector3.RotateTowards(dirToGrapplePoint, desiredDirection, biasToMoveDir, 0.0f);
+            Vector3 newVelocity = resultingVector * lastVelocity.magnitude;
+            rb.velocity = newVelocity + resultingVector * grappleAcceleration;
+            lastVelocity = rb.velocity;
+
+            // Adjust facing direction to match the velocity
+            facingDirection = new Vector3(rb.velocity.x, 0, rb.velocity.z).normalized;
+
+            // Debug
+            Debug.DrawLine(transform.position, grapplePosition, Color.blue, Time.fixedDeltaTime);
+        }
+
+        Debug.Log("Stopped Grappling");
+    }
+
     // Input Action Callbacks
     private void OnJumpAction(InputAction.CallbackContext context)
     {
@@ -515,7 +558,7 @@ public class PlayerController : MonoBehaviour
             bufferedAction += nameof(DiveBufferedAction);
         }
     }
-    
+
     private void DiveBufferedAction()
     {
         bool diveSuccess = Dive();
@@ -530,6 +573,32 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnGrappleStart(InputAction.CallbackContext context)
+    {
+        if (grappling || dashing || diving || busy) return;
+
+        Collider[] overlapped = Physics.OverlapSphere(transform.position, grappleRange);
+
+        Transform grapplePoint = null;
+        foreach (Collider collider in overlapped)
+        {
+            if (collider.TryGetComponent(out GrapplePoint point))
+                grapplePoint = collider.transform;
+        }
+
+        if (grapplePoint != null)
+        {
+            grappling = true;
+            grappleHandler = GrappleHandler(grapplePoint);
+            StartCoroutine(grappleHandler);
+        }
+    }
+
+    private void OnGrappleEnd(InputAction.CallbackContext context)
+    {
+        grappling = false;
+    }
+
     void OnEnable()
     {
         actions.FindActionMap("gameplay").Enable();
@@ -542,6 +611,11 @@ public class PlayerController : MonoBehaviour
     // Debug
     [Header("Debug")]
     public TextMeshProUGUI speedText;
+
+    [SerializeField] private MeshRenderer mRenderer;
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material diveMaterial;
+    [SerializeField] private Material dashMaterial;
     private void DebugUpdate()
     {
         if (speedText != null)
@@ -550,5 +624,12 @@ public class PlayerController : MonoBehaviour
             decimal value = Math.Round((decimal)flatVelocity.magnitude, 3);
             speedText.text = "Speed: " + value;
         }
+
+        if (diving)
+            mRenderer.material = diveMaterial;
+        else if (dashing) 
+            mRenderer.material = dashMaterial;
+        else
+            mRenderer.material = defaultMaterial;
     }
 }
