@@ -509,7 +509,6 @@ public class PlayerController : MonoBehaviour
             Debug.DrawLine(transform.position, grapplePosition, Color.blue, Time.fixedDeltaTime);
         }
 
-        Debug.Log("Stopped Grappling");
     }
 
     // Input Action Callbacks

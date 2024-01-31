@@ -19243,18 +19243,6 @@ PrefabInstance:
       propertyPath: speedText
       value: 
       objectReference: {fileID: 139733033}
-    - target: {fileID: 2101969855281247971, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
-      propertyPath: biasToMoveDir
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2101969855281247971, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
-      propertyPath: grappleMinDistance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2101969855281247971, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
-      propertyPath: grappleAcceleration
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 2852978606247082711, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

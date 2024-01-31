@@ -396,9 +396,9 @@ MonoBehaviour:
   stepHeight: 0.25
   forwardStepTest: 0.6
   grappleRange: 10
-  grappleMinDistance: 1
-  grappleAcceleration: 5
-  biasToMoveDir: 1
+  grappleMinDistance: 2
+  grappleAcceleration: 0.5
+  biasToMoveDir: 0.6
   gravity: -9.81
   gravityScale: 2.1
   velocityDecayRate: 0.8
