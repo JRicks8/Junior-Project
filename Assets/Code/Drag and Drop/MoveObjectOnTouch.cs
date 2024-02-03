@@ -22,7 +22,7 @@ public class MoveObjectOnTouch : MonoBehaviour
         //homeRotation = objectToMove.transform.rotation;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (!objectToMove) return;
         Gizmos.color = Color.red;
