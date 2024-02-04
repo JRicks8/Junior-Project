@@ -419,6 +419,8 @@ MonoBehaviour:
   jumpsLeft: 0
   dashesLeft: 0
   currentGround: {fileID: 0}
+  lastGround: {fileID: 0}
+  lastGroundPosition: {x: 0, y: 0, z: 0}
   speedText: {fileID: 0}
   mRenderer: {fileID: 8385750798783661132}
   defaultMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
