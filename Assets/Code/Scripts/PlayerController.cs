@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Transactions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -97,6 +98,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("General Details")]
     public GameObject currentGround;
+    [SerializeField] private GameObject lastGround;
+    [SerializeField] private Vector3 lastGroundPosition;
 
     private IEnumerator dashHandler;
     private IEnumerator diveHandler;
@@ -290,13 +293,27 @@ public class PlayerController : MonoBehaviour
             if (!grounded) OnLand();
             grounded = true;
             currentGround = colliders[0].gameObject;
+
+            SnapToGround();
+
+            lastGroundPosition = currentGround.transform.position;
         }
         else
         {
             if (grounded) OnLeaveGround();
             grounded = false;
             currentGround = null;
+            lastGroundPosition = Vector3.zero;
         }
+
+        lastGround = currentGround;
+    }
+
+    private void SnapToGround()
+    {
+        if (lastGround != currentGround) return;
+        Vector3 delta = currentGround.transform.position - lastGroundPosition;
+        transform.position += delta;
     }
 
     private void StepUp()
