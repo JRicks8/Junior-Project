@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class GrapplePoint : MonoBehaviour
 {
-    SphereCollider sphereCollider;
+    private SphereCollider sphereCollider;
 
     void Start()
     {

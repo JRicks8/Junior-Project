@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float yRotationLimit = 88.0f;
     [SerializeField] private LayerMask CameraBlocking;
 
+    [Header("Interact")]
+    [SerializeField] private float interactRange;
+
     [Space]
     [Header("-----Movement Settings-----")]
     [Header("Change these settings to effect the movement.")]
@@ -528,9 +531,21 @@ public class PlayerController : MonoBehaviour
             Vector3 dirToGrapplePoint = (grapplePosition - transform.position).normalized;
             if ((grapplePosition - transform.position).magnitude < grappleMinDistance) break;
 
-            Vector3 resultingVector = Vector3.RotateTowards(dirToGrapplePoint, desiredDirection, biasToMoveDir, 0.0f);
-            Vector3 newVelocity = resultingVector * lastVelocity.magnitude;
-            rb.velocity = newVelocity + resultingVector * grappleAcceleration;
+            Vector3 flatDirToGrapplePoint = (
+                new Vector3(grapplePosition.x, 0, grapplePosition.z)
+                - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
+            float dot = Vector3.Dot(flatDirToGrapplePoint, desiredDirection);
+
+            if (dot > -0.7f)
+            {
+                Vector3 resultingVector = Vector3.RotateTowards(dirToGrapplePoint, desiredDirection, biasToMoveDir, 0.0f);
+                Vector3 newVelocity = resultingVector * lastVelocity.magnitude;
+                rb.velocity = newVelocity + resultingVector * grappleAcceleration;
+            }
+            else
+            {
+                rb.velocity = dirToGrapplePoint * lastVelocity.magnitude + Vector3.up * grappleAcceleration;
+            }
             lastVelocity = rb.velocity;
 
             // Adjust facing direction to match the velocity
@@ -600,7 +615,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteractAction(InputAction.CallbackContext context)
     {
+        Collider[] overlapped = Physics.OverlapSphere(transform.position, interactRange);
 
+        Interactible subject = null;
+        foreach (Collider collider in overlapped)
+        {
+            if (collider.TryGetComponent(out Interactible script))
+            {
+                if (subject == null || Vector3.Distance(collider.transform.position, transform.position) < Vector3.Distance(subject.transform.position, transform.position))
+                {
+                    subject = script;
+                }
+            }
+        }
+
+        if (subject != null)
+            subject.Interact(Interactible.InteractMethod.Action);
     }
 
     private void OnGrappleStart(InputAction.CallbackContext context)
@@ -612,8 +642,14 @@ public class PlayerController : MonoBehaviour
         Transform grapplePoint = null;
         foreach (Collider collider in overlapped)
         {
+            float camDot = Vector3.Dot(collider.transform.position - transform.position, cam.transform.forward);
             if (collider.TryGetComponent(out GrapplePoint point))
-                grapplePoint = collider.transform;
+            {
+                if (grapplePoint == null || camDot > Vector3.Dot(grapplePoint.position - transform.position, cam.transform.forward))
+                {
+                    grapplePoint = collider.transform;
+                }
+            }
         }
 
         if (grapplePoint != null)
