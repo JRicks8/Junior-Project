@@ -1,24 +1,32 @@
+using NUnit.Framework;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.UIElements.Experimental;
 
 [RequireComponent(typeof(SphereCollider))]
-public class Interactible : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
     [Serializable]
     public enum OnInteractType { Dialogue, SpawnObject, MoveObject, DestroyObject }
     public enum InteractMethod { Action, TriggerEnter }
-    public enum MoveType { Teleport, Linear, EaseIn, EaseOut, EaseInOut }
 
     [SerializeField] private InteractMethod method;
     [SerializeField] private OnInteractType interactionType;
     // Dialogue
     [SerializeField] private string dialogueText;
+    [SerializeField] private TextMeshProUGUI textBox;
+    [SerializeField] private Vector3 textLocation;
+    [SerializeField] private Vector3 textRotation;
     // Spawn Object
     [SerializeField] private GameObject objectToSpawn;
     [SerializeField] private Vector3 locationToSpawn;
     // Move Object
-    [SerializeField] private MoveType moveType;
-    [SerializeField] private GameObject objectToMove;
+    [SerializeField] private EasingMode moveType;
+    [SerializeField] private Transform objectToMove;
     [SerializeField] private Vector3 origin;
     [SerializeField] private Vector3 destination;
     [SerializeField] private float moveTime;
@@ -26,6 +34,11 @@ public class Interactible : MonoBehaviour
     [SerializeField] private GameObject objectToDestroy;
 
     private SphereCollider sphereCollider;
+
+    private List<Action> easeFunctions = new List<Action>()
+    {
+        //x => Easing.Linear(x),
+    };
 
     void Start()
     {
@@ -39,11 +52,13 @@ public class Interactible : MonoBehaviour
 
         if (interactionType == OnInteractType.Dialogue)
         {
-            Debug.Log(dialogueText);
+            textBox.text = dialogueText;
+            textBox.transform.localPosition = textLocation;
+            textBox.transform.localRotation = Quaternion.Euler(textRotation);
         }
         else if (interactionType == OnInteractType.SpawnObject)
         {
-
+            Instantiate(objectToSpawn, locationToSpawn, Quaternion.identity);
         }
         else if (interactionType == OnInteractType.MoveObject)
         {
@@ -59,6 +74,4 @@ public class Interactible : MonoBehaviour
     {
         return interactionType;
     }
-
-    public MoveType GetMoveType() { return moveType; }
 }
