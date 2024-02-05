@@ -20,7 +20,7 @@ public class MovingObject : MonoBehaviour
     private int targetLocationIndex = 1;
     private Rigidbody playerRigidBody;
 
-    private Vector3 lastFramePosition = new();
+    //private Vector3 lastFramePosition = new();
     private Quaternion lastRotationOnWait;
 
 
@@ -62,20 +62,20 @@ public class MovingObject : MonoBehaviour
     {
         MoveObject();
 
-        if (playerRigidBody)
-        {
+        //if (playerRigidBody)
+        //{
 
-            Vector3 platformChangeInPosition = new(transform.position.x - lastFramePosition.x,
-                                                    0f,
-                                                    transform.position.z - lastFramePosition.z);
-            playerRigidBody.AddForce(platformChangeInPosition * 700 , ForceMode.Force);            
-        }
+        //    Vector3 platformChangeInPosition = new(transform.position.x - lastFramePosition.x,
+        //                                            0f,
+        //                                            transform.position.z - lastFramePosition.z);
+        //    playerRigidBody.AddForce(platformChangeInPosition * 700 , ForceMode.Force);            
+        //}
         
     }
 
     private void MoveObject()
     {
-        lastFramePosition = transform.position;
+        //lastFramePosition = transform.position;
         if (waitTime < waitDuration) 
         {
             transform.rotation = Quaternion.Lerp(lastRotationOnWait, Quaternion.Euler(0f, lastRotationOnWait.eulerAngles.y + rotateAmountOnWait, 0f), waitTime / waitDuration);
