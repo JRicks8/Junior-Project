@@ -8,7 +8,7 @@ public class SpawnObjectOnTouch : MonoBehaviour
     [SerializeField] private GameObject prefabToSpawn;
     [SerializeField] private Vector3 spawnPosition;
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, spawnPosition);

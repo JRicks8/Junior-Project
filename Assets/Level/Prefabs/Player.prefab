@@ -365,6 +365,8 @@ MonoBehaviour:
   bottom: {fileID: 5106829021206888699}
   actions: {fileID: -944628639613478452, guid: 5c2596107436aa7499e6eaf13741314b, type: 3}
   bufferInputThres: 0.3
+  cursorLockState: 1
+  cursorVisible: 1
   CameraFocusPoint: {fileID: 2852978606247082711}
   cameraRotation: {x: 0, y: 0}
   cameraDistance: 10
@@ -393,12 +395,16 @@ MonoBehaviour:
   diveVelocity: {x: 0, y: -25, z: 0}
   stepHeight: 0.25
   forwardStepTest: 0.6
+  grappleRange: 10
+  grappleMinDistance: 2
+  grappleAcceleration: 0.5
+  biasToMoveDir: 0.6
   gravity: -9.81
   gravityScale: 2.1
   velocityDecayRate: 0.8
   turnSpeedMin: 0.1
   turnSpeedMax: 5
-  groundedTurnSpeedMulti: 2.5
+  groundedTurnSpeedMulti: 3
   turnSpeed: 5
   tempMaxAirMag: 0
   moveInput: {x: 0, y: 0}
@@ -409,7 +415,14 @@ MonoBehaviour:
   jumping: 0
   dashing: 0
   diving: 0
+  grappling: 0
   jumpsLeft: 0
   dashesLeft: 0
   currentGround: {fileID: 0}
+  lastGround: {fileID: 0}
+  lastGroundPosition: {x: 0, y: 0, z: 0}
   speedText: {fileID: 0}
+  mRenderer: {fileID: 8385750798783661132}
+  defaultMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  diveMaterial: {fileID: 2100000, guid: 5ea07e1bc1a4fdf45982043412c41431, type: 2}
+  dashMaterial: {fileID: 2100000, guid: 9911237beacc63e4a8ad936a550ff35e, type: 2}
