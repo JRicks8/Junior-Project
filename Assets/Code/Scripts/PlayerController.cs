@@ -237,6 +237,7 @@ public class PlayerController : MonoBehaviour
         if (jumpsLeft <= 0 || busy) return false;
         jumpsLeft--;
         jumping = true;
+        grappling = false; // Cancel grapple
 
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         Vector3 compositeForce = desiredDirection * jumpForwardForce;
@@ -428,6 +429,19 @@ public class PlayerController : MonoBehaviour
     private void OnLeaveGround()
     {
         if (!jumping) jumpsLeft--; // If we didn't leave the ground from a jump, then take away a jump.
+        if (currentGround != null)
+        {
+            if (currentGround.TryGetComponent(out Rigidbody groundRb))
+            {
+                rb.velocity += groundRb.velocity;
+            }
+            else
+            {
+                Vector3 delta = currentGround.transform.position - lastGroundPosition;
+                Debug.Log(delta);
+                rb.velocity += delta * 60.0f; // multiply by sixty because there are 60 physics updates in a second, converting to m/s
+            }
+        }
         CalculateTempAirMaxMagnitude();
     }
 
