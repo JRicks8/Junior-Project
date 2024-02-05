@@ -4,6 +4,7 @@ using System.Transactions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
@@ -441,7 +442,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Vector3 delta = currentGround.transform.position - lastGroundPosition;
-                Debug.Log(delta);
                 rb.velocity += delta * 60.0f; // multiply by sixty because there are 60 physics updates in a second, converting to m/s
             }
         }
@@ -617,10 +617,10 @@ public class PlayerController : MonoBehaviour
     {
         Collider[] overlapped = Physics.OverlapSphere(transform.position, interactRange);
 
-        Interactible subject = null;
+        Interactable subject = null;
         foreach (Collider collider in overlapped)
         {
-            if (collider.TryGetComponent(out Interactible script))
+            if (collider.TryGetComponent(out Interactable script))
             {
                 if (subject == null || Vector3.Distance(collider.transform.position, transform.position) < Vector3.Distance(subject.transform.position, transform.position))
                 {
@@ -630,7 +630,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (subject != null)
-            subject.Interact(Interactible.InteractMethod.Action);
+            subject.Interact(Interactable.InteractMethod.Action);
     }
 
     private void OnGrappleStart(InputAction.CallbackContext context)

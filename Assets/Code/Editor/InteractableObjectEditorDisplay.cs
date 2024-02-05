@@ -2,17 +2,20 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using UnityEngine.UIElements;
-using static Interactible;
+using static Interactable;
 
-[CustomEditor(typeof(Interactible))]
-public class InteractibleObjectEditorDisplay : Editor
+[CustomEditor(typeof(Interactable))]
+public class InteractableObjectEditorDisplay : Editor
 {
-    Interactible script;
+    Interactable script;
 
     SerializedProperty method;
     SerializedProperty interactionType;
     // Dialogue
     SerializedProperty dialogueText;
+    SerializedProperty textBox;
+    SerializedProperty textLocation;
+    SerializedProperty textRotation;
     // Spawn Object
     SerializedProperty objectToSpawn;
     SerializedProperty locationToSpawn;
@@ -27,11 +30,14 @@ public class InteractibleObjectEditorDisplay : Editor
 
     void OnEnable()
     {
-        script = (Interactible)target;
+        script = (Interactable)target;
         method = serializedObject.FindProperty("method");
         interactionType = serializedObject.FindProperty("interactionType");
         // Dialogue
         dialogueText = serializedObject.FindProperty("dialogueText");
+        textBox = serializedObject.FindProperty("textBox");
+        textLocation = serializedObject.FindProperty("textLocation");
+        textRotation = serializedObject.FindProperty("textRotation");
         // Spawn Object
         objectToSpawn = serializedObject.FindProperty("objectToSpawn");
         locationToSpawn = serializedObject.FindProperty("locationToSpawn");
@@ -53,6 +59,9 @@ public class InteractibleObjectEditorDisplay : Editor
         if (script.GetInteractionType() == OnInteractType.Dialogue)
         {
             EditorGUILayout.PropertyField(dialogueText);
+            EditorGUILayout.PropertyField(textBox);
+            EditorGUILayout.PropertyField(textLocation);
+            EditorGUILayout.PropertyField(textRotation);
         }
         else if (script.GetInteractionType() == OnInteractType.SpawnObject)
         {
@@ -65,8 +74,7 @@ public class InteractibleObjectEditorDisplay : Editor
             EditorGUILayout.PropertyField(objectToMove);
             EditorGUILayout.PropertyField(origin);
             EditorGUILayout.PropertyField(destination);
-            if (script.GetMoveType() != MoveType.Teleport)
-                EditorGUILayout.PropertyField(moveTime);
+            EditorGUILayout.PropertyField(moveTime);
         }
         else if (script.GetInteractionType() == OnInteractType.DestroyObject)
         {
