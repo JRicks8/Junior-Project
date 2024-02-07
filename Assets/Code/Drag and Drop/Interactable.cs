@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,17 +26,42 @@ public class Interactable : MonoBehaviour
     // Move Object
     [SerializeField] private EasingMode moveType;
     [SerializeField] private Transform objectToMove;
-    [SerializeField] private Vector3 origin;
-    [SerializeField] private Vector3 destination;
+    [SerializeField] private bool moveFromCurrentPosition;
+    [SerializeField] private Vector3 moveOrigin;
+    [SerializeField] private Vector3 moveDestination;
     [SerializeField] private float moveTime;
+    private IEnumerator moveHandler;
+    private bool objectMoving = false;
     // Destroy Object
     [SerializeField] private GameObject objectToDestroy;
 
     private SphereCollider sphereCollider;
 
-    private List<Action> easeFunctions = new List<Action>()
+    private List<Func<float, float>> easeFunctions = new List<Func<float, float>>()
     {
-        //x => Easing.Linear(x),
+        Easing.InOutSine, //Ease,
+        Easing.InQuad,//EaseIn,
+        Easing.OutQuad,//EaseOut,
+        Easing.InOutQuad,//EaseInOut,
+        Easing.Linear,//Linear,
+        Easing.InSine,//EaseInSine,
+        Easing.OutSine,//EaseOutSine,
+        Easing.InOutSine,//EaseInOutSine,
+        Easing.InCubic,//EaseInCubic,
+        Easing.OutCubic,//EaseOutCubic,
+        Easing.InOutCubic,//EaseInOutCubic,
+        Easing.InCirc,//EaseInCirc,
+        Easing.OutCirc,//EaseOutCirc,
+        Easing.InOutCirc,//EaseInOutCirc,
+        Easing.InElastic,//EaseInElastic,
+        Easing.OutElastic,//EaseOutElastic,
+        Easing.InOutElastic,//EaseInOutElastic,
+        Easing.InBack,//EaseInBack,
+        Easing.OutBack,//EaseOutBack,
+        Easing.InOutBack,//EaseInOutBack,
+        Easing.InBounce,//EaseInBounce,
+        Easing.OutBounce,//EaseOutBounce,
+        Easing.InOutBounce,//EaseInOutBounce
     };
 
     void Start()
@@ -62,16 +86,46 @@ public class Interactable : MonoBehaviour
         }
         else if (interactionType == OnInteractType.MoveObject)
         {
-
+            if (!objectMoving)
+            {
+                moveHandler = MoveHandler(easeFunctions[(int)moveType]);
+                StartCoroutine(moveHandler);
+            }
         }
         else if (interactionType == OnInteractType.DestroyObject)
         {
-
+            Destroy(objectToDestroy);
         }
+    }
+
+    private IEnumerator MoveHandler(Func<float, float> func)
+    {
+        float timer = 0.0f;
+        float maxTime = moveTime;
+        Vector3 origin = moveOrigin;
+        if (moveFromCurrentPosition)
+            origin = objectToMove.transform.position;
+
+        while (timer < maxTime)
+        {
+            yield return new WaitForFixedUpdate();
+            float t = timer / moveTime;
+            t = func(t);
+            Vector3 newPosition = Vector3.LerpUnclamped(origin, moveDestination, t);
+            objectToMove.transform.position = newPosition;
+            timer += Time.fixedDeltaTime;
+        }
+
+        objectToMove.transform.position = moveDestination;
     }
 
     public OnInteractType GetInteractionType()
     {
         return interactionType;
+    }
+
+    public bool GetMoveFromCurrentPosition()
+    {
+        return moveFromCurrentPosition;
     }
 }

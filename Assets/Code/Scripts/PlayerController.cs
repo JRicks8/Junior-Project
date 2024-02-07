@@ -8,9 +8,6 @@ using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
-    // TODO: Implement buffered inputs
-    // TODO: Implement support for multiple jumps. On each jump the facing direction should change to face the desired direction the instant the player executes the jump.
-
     [Header("Object References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Camera cam;
@@ -50,6 +47,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float airAcceleration;
     [SerializeField][Range(0.01f, 1.0f)] private float groundIdleDrag;
     [SerializeField][Range(0.01f, 1.0f)] private float airIdleDrag;
+    [SerializeField][Range(0.0f, 1.0f)] private float slopeLimit; // Dot value. 1.0f is no limit to slope, 0.0f means you can't walk on any surface basically.
     [Header("Jumping")]
     [SerializeField] private float jumpUpForce;
     [SerializeField] private float jumpForwardForce;
@@ -70,10 +68,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float grappleMinDistance;
     [SerializeField] private float grappleAcceleration;
     [SerializeField] private float biasToMoveDir; // The grapple should take into account the desired move direction.
-
     [Header("Other")]
-    [SerializeField] private float gravity;
-    [SerializeField] private float gravityScale;
+    [SerializeField] private float defaultGravityScale;
+    [SerializeField] private float steepSlopeGravityScale; // For when we want to prevent the player from gliding up slopes that are too steep
+    private float gravity = -9.81f;
 
     [SerializeField][Range(0.0f, 0.95f)] private float velocityDecayRate; // If the velocity's mag is more than the limit, multiply the excess by this multiplier to stifle it
     [SerializeField] private float turnSpeedMin;
@@ -85,6 +83,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Details")]
     [SerializeField][Range(0.01f, 5.0f)] private float turnSpeed; // The rate at which the character will rotate to face the desired direction
     [SerializeField] private float tempMaxAirMag; // Need to limit air velocity, this is reset every time the player jumps to their velocity at the start of the jump or when the player does an action in mid-air that effects the velocity
+    [SerializeField] private float gravityScale;
 
     [SerializeField] private Vector2 moveInput;
     [SerializeField] private Vector3 facingDirection = Vector3.forward; // The flat vector representing the direction the player is facing and moving in.
@@ -153,10 +152,11 @@ public class PlayerController : MonoBehaviour
     {
         ExecuteBufferedAction();
 
+        gravityScale = defaultGravityScale; // Set before checkground because it might be changed
+        CheckGround();
+
         // Gravity
         rb.AddForce(new Vector3(0, gravity * gravityScale, 0), ForceMode.Acceleration);
-
-        CheckGround();
 
         Move();
     }
@@ -293,25 +293,39 @@ public class PlayerController : MonoBehaviour
     {
         Collider[] colliders = new Collider[1];
         Physics.OverlapSphereNonAlloc(bottom.position, 0.45f, colliders, whatIsGround);
-        if (colliders[0] != null)
+        if (Physics.SphereCast(transform.position, 0.45f, Vector3.down, out RaycastHit hit, 1.0f, whatIsGround))
         {
-            if (!grounded) OnLand();
-            grounded = true;
-            currentGround = colliders[0].gameObject;
+            if (Vector3.Dot(Vector3.up, hit.normal) < slopeLimit)
+            {
+                NotGrounded();
+                gravityScale = steepSlopeGravityScale;
+            }
+            else
+            {
+                if (!grounded) OnLand();
+                grounded = true;
+                currentGround = colliders[0].gameObject;
 
-            SnapToGround();
+                SnapToGround();
 
-            lastGroundPosition = currentGround.transform.position;
+                lastGroundPosition = currentGround.transform.position;
+            }
+            
         }
         else
         {
-            if (grounded) OnLeaveGround();
-            grounded = false;
-            currentGround = null;
-            lastGroundPosition = Vector3.zero;
+            NotGrounded();
         }
 
         lastGround = currentGround;
+    }
+
+    private void NotGrounded()
+    {
+        if (grounded) OnLeaveGround();
+        grounded = false;
+        currentGround = null;
+        lastGroundPosition = Vector3.zero;
     }
 
     private void SnapToGround()
@@ -339,6 +353,9 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(stepTest, out RaycastHit stepHit, stepHeight, whatIsGround))
             {
+                // return if the ground is too steep
+                if (Vector3.Dot(Vector3.up, stepHit.normal) < slopeLimit) return;
+
                 transform.position = new Vector3(
                     transform.position.x,
                     transform.position.y + stepHeight - stepHit.distance,
