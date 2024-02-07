@@ -22,8 +22,9 @@ public class InteractableObjectEditorDisplay : Editor
     // Move Object
     SerializedProperty moveType;
     SerializedProperty objectToMove;
-    SerializedProperty origin;
-    SerializedProperty destination;
+    SerializedProperty moveFromCurrentPosition;
+    SerializedProperty moveOrigin;
+    SerializedProperty moveDestination;
     SerializedProperty moveTime;
     // Destroy Object
     SerializedProperty objectToDestroy;
@@ -44,8 +45,9 @@ public class InteractableObjectEditorDisplay : Editor
         // Move Object
         moveType = serializedObject.FindProperty("moveType");
         objectToMove = serializedObject.FindProperty("objectToMove");
-        origin = serializedObject.FindProperty("origin");
-        destination = serializedObject.FindProperty("destination");
+        moveFromCurrentPosition = serializedObject.FindProperty("moveFromCurrentPosition");
+        moveOrigin = serializedObject.FindProperty("moveOrigin");
+        moveDestination = serializedObject.FindProperty("moveDestination");
         moveTime = serializedObject.FindProperty("moveTime");
         // Destroy Object
         objectToDestroy = serializedObject.FindProperty("objectToDestroy");
@@ -72,8 +74,10 @@ public class InteractableObjectEditorDisplay : Editor
         {
             EditorGUILayout.PropertyField(moveType);
             EditorGUILayout.PropertyField(objectToMove);
-            EditorGUILayout.PropertyField(origin);
-            EditorGUILayout.PropertyField(destination);
+            EditorGUILayout.PropertyField(moveFromCurrentPosition);
+            if (!script.GetMoveFromCurrentPosition())
+                EditorGUILayout.PropertyField(moveOrigin);
+            EditorGUILayout.PropertyField(moveDestination);
             EditorGUILayout.PropertyField(moveTime);
         }
         else if (script.GetInteractionType() == OnInteractType.DestroyObject)

@@ -400,8 +400,8 @@ MonoBehaviour:
   grappleMinDistance: 2
   grappleAcceleration: 0.5
   biasToMoveDir: 0.5
-  gravity: -9.81
-  gravityScale: 2.1
+  defaultGravityScale: 2.1
+  steepSlopeGravityScale: 4.5
   velocityDecayRate: 0.8
   turnSpeedMin: 0.1
   turnSpeedMax: 5
