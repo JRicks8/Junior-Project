@@ -28,7 +28,7 @@ public class MoveObjectOnTouch : MonoBehaviour
         if (!isMoving) return;
         if (elapsedTime >= timeToMove) return;
         objectToMove.transform.position = Vector3.Lerp(homePosition, targetLocation, elapsedTime / timeToMove);
-        elapsedTime += Time.deltaTime;
+        elapsedTime += Time.fixedDeltaTime;
     }
 
     private void OnDrawGizmosSelected()
