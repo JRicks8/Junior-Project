@@ -4,12 +4,10 @@ using System.Transactions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
-    // TODO: Implement buffered inputs
-    // TODO: Implement support for multiple jumps. On each jump the facing direction should change to face the desired direction the instant the player executes the jump.
-
     [Header("Object References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Camera cam;
@@ -36,6 +34,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float yRotationLimit = 88.0f;
     [SerializeField] private LayerMask CameraBlocking;
 
+    [Header("Interact")]
+    [SerializeField] private float interactRange;
+
     [Space]
     [Header("-----Movement Settings-----")]
     [Header("Change these settings to effect the movement.")]
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float airAcceleration;
     [SerializeField][Range(0.01f, 1.0f)] private float groundIdleDrag;
     [SerializeField][Range(0.01f, 1.0f)] private float airIdleDrag;
+    [SerializeField][Range(0.0f, 1.0f)] private float slopeLimit; // Dot value. 1.0f is no limit to slope, 0.0f means you can't walk on any surface basically.
     [Header("Jumping")]
     [SerializeField] private float jumpUpForce;
     [SerializeField] private float jumpForwardForce;
@@ -66,10 +68,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float grappleMinDistance;
     [SerializeField] private float grappleAcceleration;
     [SerializeField] private float biasToMoveDir; // The grapple should take into account the desired move direction.
-
     [Header("Other")]
-    [SerializeField] private float gravity;
-    [SerializeField] private float gravityScale;
+    [SerializeField] private float defaultGravityScale;
+    [SerializeField] private float steepSlopeGravityScale; // For when we want to prevent the player from gliding up slopes that are too steep
+    private float gravity = -9.81f;
 
     [SerializeField][Range(0.0f, 0.95f)] private float velocityDecayRate; // If the velocity's mag is more than the limit, multiply the excess by this multiplier to stifle it
     [SerializeField] private float turnSpeedMin;
@@ -81,6 +83,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Details")]
     [SerializeField][Range(0.01f, 5.0f)] private float turnSpeed; // The rate at which the character will rotate to face the desired direction
     [SerializeField] private float tempMaxAirMag; // Need to limit air velocity, this is reset every time the player jumps to their velocity at the start of the jump or when the player does an action in mid-air that effects the velocity
+    [SerializeField] private float gravityScale;
 
     [SerializeField] private Vector2 moveInput;
     [SerializeField] private Vector3 facingDirection = Vector3.forward; // The flat vector representing the direction the player is facing and moving in.
@@ -149,10 +152,11 @@ public class PlayerController : MonoBehaviour
     {
         ExecuteBufferedAction();
 
+        gravityScale = defaultGravityScale; // Set before checkground because it might be changed
+        CheckGround();
+
         // Gravity
         rb.AddForce(new Vector3(0, gravity * gravityScale, 0), ForceMode.Acceleration);
-
-        CheckGround();
 
         Move();
     }
@@ -289,25 +293,39 @@ public class PlayerController : MonoBehaviour
     {
         Collider[] colliders = new Collider[1];
         Physics.OverlapSphereNonAlloc(bottom.position, 0.45f, colliders, whatIsGround);
-        if (colliders[0] != null)
+        if (Physics.SphereCast(transform.position, 0.45f, Vector3.down, out RaycastHit hit, 1.0f, whatIsGround))
         {
-            if (!grounded) OnLand();
-            grounded = true;
-            currentGround = colliders[0].gameObject;
+            if (Vector3.Dot(Vector3.up, hit.normal) < slopeLimit)
+            {
+                NotGrounded();
+                gravityScale = steepSlopeGravityScale;
+            }
+            else
+            {
+                if (!grounded) OnLand();
+                grounded = true;
+                currentGround = colliders[0].gameObject;
 
-            SnapToGround();
+                SnapToGround();
 
-            lastGroundPosition = currentGround.transform.position;
+                lastGroundPosition = currentGround.transform.position;
+            }
+            
         }
         else
         {
-            if (grounded) OnLeaveGround();
-            grounded = false;
-            currentGround = null;
-            lastGroundPosition = Vector3.zero;
+            NotGrounded();
         }
 
         lastGround = currentGround;
+    }
+
+    private void NotGrounded()
+    {
+        if (grounded) OnLeaveGround();
+        grounded = false;
+        currentGround = null;
+        lastGroundPosition = Vector3.zero;
     }
 
     private void SnapToGround()
@@ -335,6 +353,9 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(stepTest, out RaycastHit stepHit, stepHeight, whatIsGround))
             {
+                // return if the ground is too steep
+                if (Vector3.Dot(Vector3.up, stepHit.normal) < slopeLimit) return;
+
                 transform.position = new Vector3(
                     transform.position.x,
                     transform.position.y + stepHeight - stepHit.distance,
@@ -438,7 +459,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Vector3 delta = currentGround.transform.position - lastGroundPosition;
-                Debug.Log(delta);
                 rb.velocity += delta * 60.0f; // multiply by sixty because there are 60 physics updates in a second, converting to m/s
             }
         }
@@ -528,9 +548,21 @@ public class PlayerController : MonoBehaviour
             Vector3 dirToGrapplePoint = (grapplePosition - transform.position).normalized;
             if ((grapplePosition - transform.position).magnitude < grappleMinDistance) break;
 
-            Vector3 resultingVector = Vector3.RotateTowards(dirToGrapplePoint, desiredDirection, biasToMoveDir, 0.0f);
-            Vector3 newVelocity = resultingVector * lastVelocity.magnitude;
-            rb.velocity = newVelocity + resultingVector * grappleAcceleration;
+            Vector3 flatDirToGrapplePoint = (
+                new Vector3(grapplePosition.x, 0, grapplePosition.z)
+                - new Vector3(transform.position.x, 0, transform.position.z)).normalized;
+            float dot = Vector3.Dot(flatDirToGrapplePoint, desiredDirection);
+
+            if (dot > -0.7f)
+            {
+                Vector3 resultingVector = Vector3.RotateTowards(dirToGrapplePoint, desiredDirection, biasToMoveDir, 0.0f);
+                Vector3 newVelocity = resultingVector * lastVelocity.magnitude;
+                rb.velocity = newVelocity + resultingVector * grappleAcceleration;
+            }
+            else
+            {
+                rb.velocity = dirToGrapplePoint * lastVelocity.magnitude + Vector3.up * grappleAcceleration;
+            }
             lastVelocity = rb.velocity;
 
             // Adjust facing direction to match the velocity
@@ -600,7 +632,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnInteractAction(InputAction.CallbackContext context)
     {
+        Collider[] overlapped = Physics.OverlapSphere(transform.position, interactRange);
 
+        Interactable subject = null;
+        foreach (Collider collider in overlapped)
+        {
+            if (collider.TryGetComponent(out Interactable script))
+            {
+                if (subject == null || Vector3.Distance(collider.transform.position, transform.position) < Vector3.Distance(subject.transform.position, transform.position))
+                {
+                    subject = script;
+                }
+            }
+        }
+
+        if (subject != null)
+            subject.Interact(Interactable.InteractMethod.Action);
     }
 
     private void OnGrappleStart(InputAction.CallbackContext context)
@@ -612,8 +659,14 @@ public class PlayerController : MonoBehaviour
         Transform grapplePoint = null;
         foreach (Collider collider in overlapped)
         {
+            float camDot = Vector3.Dot(collider.transform.position - transform.position, cam.transform.forward);
             if (collider.TryGetComponent(out GrapplePoint point))
-                grapplePoint = collider.transform;
+            {
+                if (grapplePoint == null || camDot > Vector3.Dot(grapplePoint.position - transform.position, cam.transform.forward))
+                {
+                    grapplePoint = collider.transform;
+                }
+            }
         }
 
         if (grapplePoint != null)

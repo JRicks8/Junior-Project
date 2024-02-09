@@ -376,6 +376,7 @@ MonoBehaviour:
   CameraBlocking:
     serializedVersion: 2
     m_Bits: 128
+  interactRange: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -398,9 +399,9 @@ MonoBehaviour:
   grappleRange: 10
   grappleMinDistance: 2
   grappleAcceleration: 0.5
-  biasToMoveDir: 0.6
-  gravity: -9.81
-  gravityScale: 2.1
+  biasToMoveDir: 0.5
+  defaultGravityScale: 2.1
+  steepSlopeGravityScale: 4.5
   velocityDecayRate: 0.8
   turnSpeedMin: 0.1
   turnSpeedMax: 5

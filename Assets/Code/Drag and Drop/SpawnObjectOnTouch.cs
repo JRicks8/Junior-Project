@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnObjectOnTouch : MonoBehaviour
 {
+    [Header("Set this to 'Player' if you want player touch to spawn the object.")]
     [SerializeField] private string tagToCheck;
     [SerializeField] private GameObject prefabToSpawn;
     [SerializeField] private Vector3 spawnPosition;

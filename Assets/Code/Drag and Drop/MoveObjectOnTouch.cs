@@ -10,6 +10,7 @@ public class MoveObjectOnTouch : MonoBehaviour
     [SerializeField] private GameObject objectToMove;
     [SerializeField] private Vector3 targetLocation;
     //[SerializeField] private Vector3 targetRotation;
+    private bool isMoving = false;
 
     private Vector3 homePosition;
     //private Quaternion homeRotation;
@@ -20,6 +21,14 @@ public class MoveObjectOnTouch : MonoBehaviour
     {
         homePosition = objectToMove.transform.position;
         //homeRotation = objectToMove.transform.rotation;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isMoving) return;
+        if (elapsedTime >= timeToMove) return;
+        objectToMove.transform.position = Vector3.Lerp(homePosition, targetLocation, elapsedTime / timeToMove);
+        elapsedTime += Time.fixedDeltaTime;
     }
 
     private void OnDrawGizmosSelected()
@@ -35,15 +44,7 @@ public class MoveObjectOnTouch : MonoBehaviour
     {
         if (other.CompareTag(tagToCheck))
         {
-            MoveObject();
+            isMoving = true;
         }
-    }
-
-    private void MoveObject()
-    {
-        objectToMove.transform.position = Vector3.Lerp(homePosition, targetLocation, elapsedTime / timeToMove);
-        elapsedTime += Time.deltaTime;
-        if (elapsedTime >= timeToMove) return;
-        Invoke("MoveObject", Time.deltaTime);
     }
 }
