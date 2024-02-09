@@ -385,6 +385,7 @@ MonoBehaviour:
   airAcceleration: 30
   groundIdleDrag: 0.82
   airIdleDrag: 0.99
+  slopeLimit: 0.8
   jumpUpForce: 10
   jumpForwardForce: 1.5
   maxNumJumps: 2
@@ -408,6 +409,7 @@ MonoBehaviour:
   groundedTurnSpeedMulti: 3
   turnSpeed: 5
   tempMaxAirMag: 0
+  gravityScale: 0
   moveInput: {x: 0, y: 0}
   facingDirection: {x: 0, y: 0, z: 0}
   desiredDirection: {x: 0, y: 0, z: 0}
