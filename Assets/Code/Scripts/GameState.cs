@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameState : MonoBehaviour, IDataPersistence
@@ -5,11 +6,11 @@ public class GameState : MonoBehaviour, IDataPersistence
     public static GameState instance;
 
     [Header("Game Data - Serializable")]
-    public bool[] lostSouls;
+    public Dictionary<string, bool> lostSouls;
     public uint coins;
     public float personalRecord;
     public float currentTime;
-    public bool[] abilitiesCollected;
+    public Dictionary<string, bool> abilitiesCollected;
     public float fastestSpeedAchieved;
     public Transform spawnPoint;
 
@@ -28,7 +29,7 @@ public class GameState : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        lostSouls = data.lostSouls;
+        lostSouls = data.lostSoulsCollected;
         coins = data.coins;
         personalRecord = data.personalRecord;
         currentTime = data.currentTime;
@@ -39,7 +40,7 @@ public class GameState : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.lostSouls = lostSouls;
+        data.lostSoulsCollected = lostSouls;
         data.coins = coins;
         data.personalRecord = personalRecord;
         data.currentTime = currentTime;
