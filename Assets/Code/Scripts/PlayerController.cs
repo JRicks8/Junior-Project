@@ -140,7 +140,8 @@ public class PlayerController : MonoBehaviour
         CameraUpdate(lookInput);
 
         // If we're moving, step up. This needs to be in update to prevent catching on stairs
-        if (new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f && grounded)
+        if ((new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f && grounded)
+            || (moveInput != Vector2.zero && grounded))
             StepUp();
 
         Debug.DrawLine(transform.position, transform.position + facingDirection * 2, Color.blue);
@@ -337,14 +338,16 @@ public class PlayerController : MonoBehaviour
 
     private void StepUp()
     {
+        bool stepped = false;
+
         // Send raycast from bottom of character + stepHeight to the facing direction + the step forward offset
         Ray forwardTest = new Ray(
             bottom.position + new Vector3(0, stepHeight, 0),
             facingDirection);
 
-        Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), facingDirection * forwardStepTest, Color.red, Time.fixedDeltaTime);
+        Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), facingDirection);
 
-        if (!Physics.Raycast(forwardTest, out RaycastHit forwardHit, forwardStepTest, whatIsGround))
+        if (!Physics.Raycast(forwardTest, out RaycastHit _, forwardStepTest, whatIsGround))
         {
             Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * forwardStepTest;
             Ray stepTest = new Ray(origin, Vector3.down);
@@ -360,6 +363,70 @@ public class PlayerController : MonoBehaviour
                     transform.position.x,
                     transform.position.y + stepHeight - stepHit.distance,
                     transform.position.z);
+
+                stepped = true;
+            }
+        }
+
+        if (!stepped)
+        {
+            // Right test
+            Vector3 cross = Vector3.Cross(facingDirection, Vector3.up);
+            Vector3 rightVector = Vector3.RotateTowards(facingDirection, -1 * cross, Mathf.Deg2Rad * 45.0f, 0.0f);
+            Ray rightTest = new Ray(
+                bottom.position + new Vector3(0, stepHeight, 0),
+                rightVector);
+
+            Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), rightVector);
+
+            if (!Physics.Raycast(rightTest, out RaycastHit _, forwardStepTest, whatIsGround))
+            {
+                Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * forwardStepTest;
+                Ray stepTest = new Ray(origin, Vector3.down);
+
+                if (Physics.Raycast(stepTest, out RaycastHit stepHit, stepHeight, whatIsGround))
+                {
+                    // return if the ground is too steep
+                    if (Vector3.Dot(Vector3.up, stepHit.normal) < slopeLimit) return;
+
+                    transform.position = new Vector3(
+                        transform.position.x,
+                        transform.position.y + stepHeight - stepHit.distance,
+                        transform.position.z);
+
+                    stepped = true;
+                }
+            }
+        }
+
+        if (!stepped)
+        {
+            // Left test
+            Vector3 cross = Vector3.Cross(facingDirection, Vector3.up);
+            Vector3 leftVector = Vector3.RotateTowards(facingDirection, cross, Mathf.Deg2Rad * 20.0f, 0.0f);
+            Ray leftTest = new Ray(
+                bottom.position + new Vector3(0, stepHeight, 0),
+                leftVector);
+
+            Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), leftVector);
+
+            if (!Physics.Raycast(leftTest, out RaycastHit _, forwardStepTest, whatIsGround))
+            {
+                Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * forwardStepTest;
+                Ray stepTest = new Ray(origin, Vector3.down);
+
+                Debug.DrawRay(origin, Vector3.down * (stepHeight - 0.05f), Color.blue, 0.5f);
+
+                if (Physics.Raycast(stepTest, out RaycastHit stepHit, stepHeight, whatIsGround))
+                {
+                    // return if the ground is too steep
+                    if (Vector3.Dot(Vector3.up, stepHit.normal) < slopeLimit) return;
+
+                    transform.position = new Vector3(
+                        transform.position.x,
+                        transform.position.y + stepHeight - stepHit.distance,
+                        transform.position.z);
+                }
             }
         }
 
