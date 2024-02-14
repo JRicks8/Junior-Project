@@ -12,10 +12,11 @@ public class PlayEffectOnDestroy : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameObject spawnedObject = Instantiate(m_EffectSourceObjectPrefab, transform.position, transform.rotation, null);
-        spawnedObject.CopyComponent(m_EffectSourceComponent);
-        ParticleSystem spawnedComponent = spawnedObject.GetComponent<ParticleSystem>();
-        if (!spawnedComponent || spawnedComponent.isPlaying) return;
-        spawnedComponent.Play();
+        foreach (Component c in GetComponents<Component>()) if (c != m_EffectSourceComponent || c != this) Destroy(c);
+        //GameObject spawnedObject = Instantiate(m_EffectSourceObjectPrefab, transform.position, transform.rotation, null);
+        //spawnedObject.CopyComponent(m_EffectSourceComponent);
+        //ParticleSystem spawnedComponent = spawnedObject.GetComponent<ParticleSystem>();
+        //if (!spawnedComponent || spawnedComponent.isPlaying) return;
+        m_EffectSourceComponent.Play();
     }
 }

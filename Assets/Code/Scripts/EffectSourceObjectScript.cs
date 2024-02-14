@@ -18,9 +18,9 @@ public class EffectSourceObjectScript : MonoBehaviour
     {
         while (particleSystem.isPlaying)
         {
+            elapsed += 0.2f;
             yield return new WaitForSeconds(0.2f);
-            elapsed += Time.deltaTime;
-            if (elapsed > particleSystem.main.duration) particleSystem.Stop(); // HEHE I DONT KNOW HOW TO GET IT TO SHUT OFF
+            if (elapsed > particleSystem.main.duration) particleSystem.Stop();
             if (!particleSystem) particleSystem = GetComponent<ParticleSystem>();
 
             if (!particleSystem.isPlaying)
