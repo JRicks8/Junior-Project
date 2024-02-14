@@ -396,7 +396,7 @@ MonoBehaviour:
   diveMaxDuration: 5
   diveVelocity: {x: 0, y: -25, z: 0}
   stepHeight: 0.25
-  forwardStepTest: 0.6
+  forwardStepTest: 0.7
   grappleRange: 10
   grappleMinDistance: 2
   grappleAcceleration: 0.5
