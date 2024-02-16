@@ -6,16 +6,19 @@ public class GameState : MonoBehaviour, IDataPersistence
     public static GameState instance;
 
     [Header("Game Data - Serializable")]
-    public Dictionary<string, bool> lostSouls;
+    public SerializableDictionary<string, bool> lostSouls;
     public uint coins;
     public float personalRecord;
     public float currentTime;
-    public Dictionary<string, bool> abilitiesCollected;
+    public bool hasDoubleJump;
+    public bool hasDash;
+    public bool hasDive;
+    public bool hasGrapple;
     public float fastestSpeedAchieved;
     public Transform spawnPoint;
 
     [Header("Other")]
-    private static uint maxCurrency;
+    private static readonly uint maxCurrency = 999;
 
     private void Awake()
     {
@@ -33,7 +36,10 @@ public class GameState : MonoBehaviour, IDataPersistence
         coins = data.coins;
         personalRecord = data.personalRecord;
         currentTime = data.currentTime;
-        abilitiesCollected = data.abilitiesCollected;
+        hasDoubleJump = data.hasDoubleJump;
+        hasDash = data.hasDash;
+        hasDive = data.hasDive;
+        hasGrapple = data.hasGrapple;
         fastestSpeedAchieved = data.fastestSpeedAchieved;
         spawnPoint = data.spawnPoint;
     }
@@ -44,7 +50,10 @@ public class GameState : MonoBehaviour, IDataPersistence
         data.coins = coins;
         data.personalRecord = personalRecord;
         data.currentTime = currentTime;
-        data.abilitiesCollected = abilitiesCollected;
+        data.hasDoubleJump = hasDoubleJump;
+        data.hasDash = hasDash;
+        data.hasDive = hasDive;
+        data.hasGrapple = hasGrapple;
         data.fastestSpeedAchieved = fastestSpeedAchieved;
         data.spawnPoint = spawnPoint;
     }

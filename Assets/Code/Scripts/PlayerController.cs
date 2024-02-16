@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Transactions;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Camera cam;
     [SerializeField] private Transform bottom;
+    [SerializeField] private GrappleVisual grappleVisualScript;
 
     [Header("Input")]
     [SerializeField] private InputActionAsset actions;
@@ -139,7 +141,7 @@ public class PlayerController : MonoBehaviour
 
         CameraUpdate(lookInput);
 
-        // If we're moving, step up. This needs to be in update to prevent catching on stairs
+        // If we're moving, step up. This needs to be in update to prevent catching on stairs too often
         if ((new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f && grounded)
             || (moveInput != Vector2.zero && grounded))
             StepUp();
@@ -345,11 +347,14 @@ public class PlayerController : MonoBehaviour
             bottom.position + new Vector3(0, stepHeight, 0),
             facingDirection);
 
+        Vector2 flatVelocity = new Vector2(rb.velocity.x, rb.velocity.z);
+        float adjustedForwardStepTest = 0.5f + flatVelocity.magnitude / 60.0f;
+
         Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), facingDirection);
 
-        if (!Physics.Raycast(forwardTest, out RaycastHit _, forwardStepTest, whatIsGround))
+        if (!Physics.Raycast(forwardTest, out RaycastHit _, adjustedForwardStepTest, whatIsGround))
         {
-            Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * forwardStepTest;
+            Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * adjustedForwardStepTest;
             Ray stepTest = new Ray(origin, Vector3.down);
 
             Debug.DrawRay(origin, Vector3.down * (stepHeight - 0.05f), Color.blue, 0.5f);
@@ -372,17 +377,19 @@ public class PlayerController : MonoBehaviour
         {
             // Right test
             Vector3 cross = Vector3.Cross(facingDirection, Vector3.up);
-            Vector3 rightVector = Vector3.RotateTowards(facingDirection, -1 * cross, Mathf.Deg2Rad * 45.0f, 0.0f);
+            Vector3 rightDirection = Vector3.RotateTowards(facingDirection, -1 * cross, Mathf.Deg2Rad * 45.0f, 0.0f);
             Ray rightTest = new Ray(
                 bottom.position + new Vector3(0, stepHeight, 0),
-                rightVector);
+                rightDirection);
 
-            Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), rightVector);
+            Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), rightDirection);
 
             if (!Physics.Raycast(rightTest, out RaycastHit _, forwardStepTest, whatIsGround))
             {
-                Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * forwardStepTest;
+                Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + rightDirection * forwardStepTest;
                 Ray stepTest = new Ray(origin, Vector3.down);
+
+                Debug.DrawRay(origin, Vector3.down * (stepHeight - 0.05f), Color.blue, 0.5f);
 
                 if (Physics.Raycast(stepTest, out RaycastHit stepHit, stepHeight, whatIsGround))
                 {
@@ -403,16 +410,16 @@ public class PlayerController : MonoBehaviour
         {
             // Left test
             Vector3 cross = Vector3.Cross(facingDirection, Vector3.up);
-            Vector3 leftVector = Vector3.RotateTowards(facingDirection, cross, Mathf.Deg2Rad * 20.0f, 0.0f);
+            Vector3 leftDirection = Vector3.RotateTowards(facingDirection, cross, Mathf.Deg2Rad * 45.0f, 0.0f);
             Ray leftTest = new Ray(
                 bottom.position + new Vector3(0, stepHeight, 0),
-                leftVector);
+                leftDirection);
 
-            Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), leftVector);
+            Debug.DrawRay(bottom.position + new Vector3(0, stepHeight, 0), leftDirection);
 
             if (!Physics.Raycast(leftTest, out RaycastHit _, forwardStepTest, whatIsGround))
             {
-                Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + facingDirection * forwardStepTest;
+                Vector3 origin = bottom.position + new Vector3(0, stepHeight, 0) + leftDirection * forwardStepTest;
                 Ray stepTest = new Ray(origin, Vector3.down);
 
                 Debug.DrawRay(origin, Vector3.down * (stepHeight - 0.05f), Color.blue, 0.5f);
@@ -607,10 +614,15 @@ public class PlayerController : MonoBehaviour
         Vector3 grapplePosition = grapplePoint.position;
         // Store the velocity between frame updates in case the simulation screws with our rigidbody
         Vector3 lastVelocity = rb.velocity;
+        grappleVisualScript.gameObject.SetActive(true);
 
         while (grappling)
         {
             yield return new WaitForFixedUpdate();
+
+            // Update visual
+            grappleVisualScript.Point1 = transform.position;
+            grappleVisualScript.Point2 = grapplePosition;
 
             Vector3 dirToGrapplePoint = (grapplePosition - transform.position).normalized;
             if ((grapplePosition - transform.position).magnitude < grappleMinDistance) break;
@@ -639,6 +651,7 @@ public class PlayerController : MonoBehaviour
             Debug.DrawLine(transform.position, grapplePosition, Color.blue, Time.fixedDeltaTime);
         }
 
+        grappleVisualScript.gameObject.SetActive(false);
     }
 
     // Input Action Callbacks
