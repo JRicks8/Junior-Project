@@ -14,6 +14,8 @@ public class PlaySoundOnDestroy : MonoBehaviour
     {
         GameObject spawnedObject = Instantiate(m_AudioSourceObjectPrefab);
         AudioSource spawnedObjAudioSource = spawnedObject.GetComponent<AudioSource>();
+        spawnedObject.transform.position = transform.position;
+        spawnedObject.transform.rotation = transform.rotation;
         spawnedObjAudioSource.clip = m_AudioSourceComponent.clip;
         spawnedObjAudioSource.volume = m_AudioSourceComponent.volume;
         spawnedObjAudioSource.pitch = m_AudioSourceComponent.pitch;
