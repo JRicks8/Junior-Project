@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour
         actionMap.FindAction("interact").performed += OnInteractAction;
         actionMap.FindAction("grapple").started += OnGrappleStart;
         actionMap.FindAction("grapple").canceled += OnGrappleEnd;
+        //actionMap.FindAction("escape").performed += OnEscapeAction;
         jumpAction = actionMap.FindAction("jump");
         jumpAction.performed += OnJumpAction;
         moveAction = actionMap.FindAction("move");

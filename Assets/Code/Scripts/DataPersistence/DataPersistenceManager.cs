@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using System;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -30,13 +33,18 @@ public class DataPersistenceManager : MonoBehaviour
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    
-    // TODO: MAKE GAME LOAD UPON OPENING NEW SCENE
 
     private void OnApplicationQuit()
     {
         SaveGame();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        LoadGame();
     }
 
     public void NewGame()
@@ -50,7 +58,7 @@ public class DataPersistenceManager : MonoBehaviour
 
         if (this.gameData == null)
         {
-            Debug.Log("No data was found. Initializing to defaults.");
+            Debug.Log("No save data was found. Initializing to defaults.");
             NewGame();
         }
 
@@ -59,7 +67,7 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObj.LoadData(gameData);
         }
 
-        Debug.Log("Loaded coin amount: " + gameData.coins);
+        Debug.Log("Loaded Data");
     }
 
     public void SaveGame()
@@ -69,7 +77,7 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObj.SaveData(ref gameData);
         }
 
-        Debug.Log("Saved coin amount: " + gameData.coins);
+        Debug.Log("Saved Data");
 
         dataHandler.Save(gameData);
     }

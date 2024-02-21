@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject settingsMenuObject;
     public string gameSceneName = "Movement Testing";
 
     public void OnContinueClicked()
     {
-        DataPersistenceManager.instance.LoadGame();
         SceneManager.LoadScene(gameSceneName);
     }
 
@@ -19,7 +19,8 @@ public class MainMenu : MonoBehaviour
 
     public void OnSettingsClicked()
     {
-        Debug.Log("NOT IMPLEMENTED :(");
+        settingsMenuObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void OnQuitClicked()

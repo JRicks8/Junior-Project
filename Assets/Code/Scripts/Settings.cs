@@ -6,7 +6,7 @@ public class Settings : MonoBehaviour, IDataPersistence
 {
     public static Settings instance;
 
-    public bool vsync;
+    [SerializeField] private bool vsync;
 
     private void Awake()
     {
@@ -26,5 +26,10 @@ public class Settings : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         data.vsync = vsync;
+    }
+
+    public void SetVSync(bool value)
+    {
+        vsync = value;
     }
 }
