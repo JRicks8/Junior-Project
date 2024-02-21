@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 909223255887410266}
   - component: {fileID: 2223608031442646641}
   m_Layer: 0
-  m_Name: Linner_ZeusCloud_PS
+  m_Name: Linner_ZeusCloudWhite_PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,22 +221,22 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.6505882, g: 0.78763705, b: 0.92941177, a: 0.78431374}
-        key1: {r: 0.9254902, g: 0.82862747, b: 0.3239216, a: 0.78431374}
-        key2: {r: 0.32529414, g: 0.6298911, b: 0.92941177, a: 0.78431374}
+        key1: {r: 0.9254902, g: 0.8831373, b: 0.6478431, a: 0.78431374}
+        key2: {r: 0.9254902, g: 0.8831373, b: 0.6478431, a: 0.78431374}
         key3: {r: 0.9254902, g: 0.8831373, b: 0.6478431, a: 0.78431374}
         key4: {r: 1, g: 1, b: 1, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 26214
-        ctime2: 45875
+        ctime1: 65535
+        ctime2: 65535
         ctime3: 65535
         ctime4: 65535
         ctime5: 0
@@ -252,7 +252,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_ColorSpace: 0
-        m_NumColorKeys: 4
+        m_NumColorKeys: 2
         m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
