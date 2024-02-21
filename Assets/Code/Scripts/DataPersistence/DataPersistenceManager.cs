@@ -22,6 +22,7 @@ public class DataPersistenceManager : MonoBehaviour
             Debug.LogError("Found more than one Data Persistence Manager in the scene.");
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -29,6 +30,13 @@ public class DataPersistenceManager : MonoBehaviour
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+    }
+    
+    // TODO: MAKE GAME LOAD UPON OPENING NEW SCENE
+
+    private void OnApplicationQuit()
+    {
+        SaveGame();
     }
 
     public void NewGame()
@@ -70,10 +78,5 @@ public class DataPersistenceManager : MonoBehaviour
     {
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IDataPersistence>();
         return new List<IDataPersistence>(dataPersistenceObjects);
-    }
-
-    private void OnApplicationQuit()
-    {
-        SaveGame();
     }
 }

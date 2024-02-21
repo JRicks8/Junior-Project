@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    // Game
     public SerializableDictionary<string, bool> lostSoulsCollected;
     public uint coins;
     public float personalRecord;
@@ -15,9 +16,12 @@ public class GameData
     public bool hasGrapple;
     public float fastestSpeedAchieved;
     public Transform spawnPoint;
+    // Settings
+    public bool vsync;
 
     public GameData()
     {
+        // Game
         lostSoulsCollected = new SerializableDictionary<string, bool>();
         coins = 0;
         personalRecord = 0;
@@ -28,5 +32,7 @@ public class GameData
         hasGrapple = false;
         fastestSpeedAchieved = 0;
         spawnPoint = null;
+        // Settings
+        vsync = false;
     }
 }
