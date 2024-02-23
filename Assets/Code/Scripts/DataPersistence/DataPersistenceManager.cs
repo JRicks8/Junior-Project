@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
-using System;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -22,7 +19,8 @@ public class DataPersistenceManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogError("Found more than one Data Persistence Manager in the scene.");
+            Destroy(gameObject);
+            return;
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
@@ -44,6 +42,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
 

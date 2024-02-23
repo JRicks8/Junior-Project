@@ -7,7 +7,7 @@ public class GameData
 {
     // Game
     public SerializableDictionary<string, bool> lostSoulsCollected;
-    public uint coins;
+    public SerializableDictionary<string, bool> coinsCollected;
     public float personalRecord;
     public float currentTime;
     public bool hasDoubleJump;
@@ -23,7 +23,7 @@ public class GameData
     {
         // Game
         lostSoulsCollected = new SerializableDictionary<string, bool>();
-        coins = 0;
+        coinsCollected = new SerializableDictionary<string, bool>();
         personalRecord = 0;
         currentTime = 0;
         hasDoubleJump = false;

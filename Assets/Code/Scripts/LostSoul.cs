@@ -19,6 +19,7 @@ public class LostSoul : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         data.lostSoulsCollected.TryGetValue(id, out collected);
+        Debug.Log(collected);
         if (collected)
         {
             visual.SetActive(false);
@@ -27,6 +28,7 @@ public class LostSoul : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        Debug.Log("Saved");
         if (data.lostSoulsCollected.ContainsKey(id))
         {
             data.lostSoulsCollected.Remove(id);
@@ -34,11 +36,25 @@ public class LostSoul : MonoBehaviour, IDataPersistence
         data.lostSoulsCollected.Add(id, collected);
     }
 
+    private void Collect()
+    {
+        visual.SetActive(false);
+        collected = true;
+    }
+
     private void OnValidate()
     {
         if (id == string.Empty)
         {
             GenerateGuid();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerController _) && !collected)
+        {
+            Collect();
         }
     }
 }

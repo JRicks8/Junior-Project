@@ -12,7 +12,8 @@ public class Settings : MonoBehaviour, IDataPersistence
     {
         if (instance != null)
         {
-            Debug.LogError("Found more than one Settings object in the scene.");
+            Destroy(gameObject);
+            return;
         }
         instance = this;
         DontDestroyOnLoad(gameObject);

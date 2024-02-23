@@ -6,8 +6,9 @@ public class GameState : MonoBehaviour, IDataPersistence
     public static GameState instance;
 
     [Header("Game Data - Serializable")]
-    public SerializableDictionary<string, bool> lostSouls;
-    public uint coins;
+    public SerializableDictionary<string, bool> lostSoulsCollected;
+    public SerializableDictionary<string, bool> coinsCollected;
+    public float coinsAmt;
     public float personalRecord;
     public float currentTime;
     public bool hasDoubleJump;
@@ -17,14 +18,12 @@ public class GameState : MonoBehaviour, IDataPersistence
     public float fastestSpeedAchieved;
     public Transform spawnPoint;
 
-    [Header("Other")]
-    private static readonly uint maxCurrency = 999;
-
     private void Awake()
     {
         if (instance != null)
         {
-            Debug.LogError("Found more than one Game State in the scene.");
+            Destroy(gameObject);
+            return;
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
@@ -32,8 +31,8 @@ public class GameState : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        lostSouls = data.lostSoulsCollected;
-        coins = data.coins;
+        lostSoulsCollected = data.lostSoulsCollected;
+        coinsCollected = data.coinsCollected;
         personalRecord = data.personalRecord;
         currentTime = data.currentTime;
         hasDoubleJump = data.hasDoubleJump;
@@ -46,8 +45,8 @@ public class GameState : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        data.lostSoulsCollected = lostSouls;
-        data.coins = coins;
+        data.lostSoulsCollected = lostSoulsCollected;
+        data.coinsCollected = coinsCollected;
         data.personalRecord = personalRecord;
         data.currentTime = currentTime;
         data.hasDoubleJump = hasDoubleJump;
@@ -60,15 +59,14 @@ public class GameState : MonoBehaviour, IDataPersistence
 
     public void CollectCurrency(uint amt)
     {
-        coins += amt;
-        if (coins > maxCurrency) coins = maxCurrency;
+        coinsAmt += amt;
     }
     
     public void SpendCurrency(uint amt)
     {
-        if (amt > coins)
-            coins = 0;
+        if (amt > coinsAmt)
+            coinsAmt = 0;
         else
-            coins -= amt;
+            coinsAmt -= amt;
     }
 }
