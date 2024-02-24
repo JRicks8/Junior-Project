@@ -23,6 +23,15 @@ public class Coin : MonoBehaviour, IDataPersistence
         {
             visual.SetActive(false);
         }
+        if (collected)
+        {
+            visual.SetActive(false);
+        }
+    }
+    private void Collect()
+    {
+        visual.SetActive(false);
+        collected = true;
     }
 
     public void SaveData(ref GameData data)
@@ -39,6 +48,13 @@ public class Coin : MonoBehaviour, IDataPersistence
         if (id == string.Empty)
         {
             GenerateGuid();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerController _) && !collected)
+        {
+            Collect();
         }
     }
 }
