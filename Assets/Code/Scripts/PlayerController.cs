@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour
     private string bufferedAction;
 
     [Header("Camera")]
-    [SerializeField] private CursorLockMode cursorLockState;
-    [SerializeField] private bool cursorVisible;
     [SerializeField] private Transform CameraFocusPoint;
     [SerializeField] private Vector2 cameraRotation = Vector2.zero;
     [SerializeField] private float cameraDistance; // Where x is the horizontal offset and y is the vertical offset
@@ -140,8 +138,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = cursorVisible;
-        Cursor.lockState = cursorLockState;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         if (hasDoubleJump)
             maxNumJumps = 2;
@@ -151,6 +149,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.paused)
+            return;
+
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
@@ -168,6 +169,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PauseMenu.paused)
+            return;
+
         ExecuteBufferedAction();
 
         gravityScale = defaultGravityScale; // Set before checkground because it might be changed
