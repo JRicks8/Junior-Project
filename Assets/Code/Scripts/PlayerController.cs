@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour
     private string bufferedAction;
 
     [Header("Camera")]
-    [SerializeField] private CursorLockMode cursorLockState;
-    [SerializeField] private bool cursorVisible;
     [SerializeField] private Transform CameraFocusPoint;
     [SerializeField] private Vector2 cameraRotation = Vector2.zero;
     [SerializeField] private float cameraDistance; // Where x is the horizontal offset and y is the vertical offset
@@ -140,8 +138,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = cursorVisible;
-        Cursor.lockState = cursorLockState;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         if (hasDoubleJump)
             maxNumJumps = 2;
@@ -151,6 +149,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.paused)
+            return;
+
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
@@ -168,6 +169,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PauseMenu.paused)
+            return;
+
         ExecuteBufferedAction();
 
         gravityScale = defaultGravityScale; // Set before checkground because it might be changed
@@ -256,6 +260,13 @@ public class PlayerController : MonoBehaviour
     // Return value is the success of the command
     private bool Jump()
     {
+        if (diving && jumpsLeft > 0) // Cancel dive
+        {
+            StopCoroutine(diveHandler);
+            diving = false;
+            busy = false;
+        }
+
         if (jumpsLeft <= 0 || busy) return false;
         jumpsLeft--;
         jumping = true;
@@ -273,6 +284,13 @@ public class PlayerController : MonoBehaviour
     // Return value is the success of the command
     private bool Dash()
     {
+        if (diving && dashesLeft > 0) // Cancel dive
+        {
+            StopCoroutine(diveHandler);
+            diving = false;
+            busy = false;
+        }
+
         // Do not dash if we're already dashing or committed to another action
         if (dashing || grappling || busy || dashesLeft <= 0) return false;
         dashing = true;
@@ -297,7 +315,15 @@ public class PlayerController : MonoBehaviour
     // horizontal velocity is restored and the player destroys nearby objects that can be destroyed.
     private bool Dive()
     {
-        if (diving || grappling || busy || grounded) return false;
+        if (diving) // Cancel dive
+        {
+            StopCoroutine(diveHandler);
+            diving = false;
+            busy = false;
+            return true;
+        }
+
+        if (grappling || busy || grounded) return false;
 
         diving = true;
         busy = true;
@@ -610,7 +636,7 @@ public class PlayerController : MonoBehaviour
     {
         float timer = diveMaxDuration;
 
-        while (!grounded && timer > 0)
+        while (!grounded && timer > 0 && diving)
         {
             yield return new WaitForFixedUpdate();
             timer -= Time.fixedDeltaTime;
@@ -753,7 +779,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnGrappleStart(InputAction.CallbackContext context)
     {
-        if (grappling || dashing || diving || busy || !hasGrapple) return;
+        if (grappling || dashing || !hasGrapple) 
+            return;
 
         Collider[] overlapped = Physics.OverlapSphere(transform.position, grappleRange);
 
@@ -765,6 +792,16 @@ public class PlayerController : MonoBehaviour
             {
                 if (grapplePoint == null || camDot > Vector3.Dot(grapplePoint.position - transform.position, cam.transform.forward))
                 {
+                    if (diving) // Cancel dive
+                    {
+                        StopCoroutine(diveHandler);
+                        diving = false;
+                        busy = false;
+                    }
+
+                    if (busy) 
+                        return;
+
                     grapplePoint = collider.transform;
                 }
             }

@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.5
+  m_fontSize: 45.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -243,7 +243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2697958440082646770
 RectTransform:
   m_ObjectHideFlags: 0
@@ -552,7 +552,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.5
+  m_fontSize: 27.1
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -603,13 +603,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6721573456149013107}
+  - component: {fileID: 2913359682745220199}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6721573456149013107
 RectTransform:
   m_ObjectHideFlags: 0
@@ -630,6 +631,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2913359682745220199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4344560344572847775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4437ab5342741340b3fe343ee4c6b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: 5c2596107436aa7499e6eaf13741314b, type: 3}
+  menuContent: {fileID: 2435598899162589852}
 --- !u!1 &5269895229466692137
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +902,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4519096491985439995}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2913359682745220199}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: OnQuitButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6195570678299542044
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,8 +1023,6 @@ MonoBehaviour:
   grappleVisualScript: {fileID: 5202534815765795267}
   actions: {fileID: -944628639613478452, guid: 5c2596107436aa7499e6eaf13741314b, type: 3}
   bufferInputThres: 0.3
-  cursorLockState: 1
-  cursorVisible: 1
   CameraFocusPoint: {fileID: 2852978606247082711}
   cameraRotation: {x: 0, y: 0}
   cameraDistance: 10
@@ -1017,17 +1042,20 @@ MonoBehaviour:
   groundIdleDrag: 0.82
   airIdleDrag: 0.99
   slopeLimit: 0.8
+  hasDoubleJump: 1
   jumpUpForce: 10
   jumpForwardForce: 1.5
-  maxNumJumps: 2
+  hasDash: 1
   dashVelocityMagnitude: 18
   dashDuration: 0.25
   maxAirMagPostDash: 15
   maxNumDashes: 1
+  hasDive: 1
   diveMaxDuration: 5
   diveVelocity: {x: 0, y: -25, z: 0}
   stepHeight: 0.25
   forwardStepTest: 0.7
+  hasGrapple: 1
   grappleRange: 10
   grappleMinDistance: 2
   grappleAcceleration: 0.5
@@ -1180,7 +1208,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6389662129140721096}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2913359682745220199}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: OnResumeButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7919641739514711267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1313,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.35
+  m_fontSize: 25.45
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
