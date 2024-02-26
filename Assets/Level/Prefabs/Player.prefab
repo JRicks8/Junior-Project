@@ -1017,17 +1017,20 @@ MonoBehaviour:
   groundIdleDrag: 0.82
   airIdleDrag: 0.99
   slopeLimit: 0.8
+  hasDoubleJump: 1
   jumpUpForce: 10
   jumpForwardForce: 1.5
-  maxNumJumps: 2
+  hasDash: 1
   dashVelocityMagnitude: 18
   dashDuration: 0.25
   maxAirMagPostDash: 15
   maxNumDashes: 1
+  hasDive: 1
   diveMaxDuration: 5
   diveVelocity: {x: 0, y: -25, z: 0}
   stepHeight: 0.25
   forwardStepTest: 0.7
+  hasGrapple: 1
   grappleRange: 10
   grappleMinDistance: 2
   grappleAcceleration: 0.5
