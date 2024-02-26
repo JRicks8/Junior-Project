@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
-using System.Transactions;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum Abilities 
+    {
+        DoubleJump,
+        Dash,
+        Dive,
+        Grapple,
+    }
+
     [Header("Object References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Camera cam;
@@ -51,21 +56,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.01f, 1.0f)] private float airIdleDrag;
     [SerializeField][Range(0.0f, 1.0f)] private float slopeLimit; // Dot value. 1.0f is no limit to slope, 0.0f means you can't walk on any surface basically.
     [Header("Jumping")]
+    [SerializeField] private bool hasDoubleJump;
     [SerializeField] private float jumpUpForce;
     [SerializeField] private float jumpForwardForce;
-    [SerializeField] private int maxNumJumps;
+    private int maxNumJumps;
     [Header("Dashing")]
+    [SerializeField] private bool hasDash;
     [SerializeField] private float dashVelocityMagnitude;
     [SerializeField] private float dashDuration;
     [SerializeField] private float maxAirMagPostDash; // The max air magnitude after dashing
     [SerializeField] private int maxNumDashes;
     [Header("Diving")]
+    [SerializeField] private bool hasDive;
     [SerializeField] private float diveMaxDuration; // The dive persists until hitting the ground or the max time is reached
     [SerializeField] private Vector3 diveVelocity;
     [Header("Step Up")]
     [SerializeField] private float stepHeight;
     [SerializeField] private float forwardStepTest;
     [Header("Grapple")]
+    [SerializeField] private bool hasGrapple;
     [SerializeField] private float grappleRange;
     [SerializeField] private float grappleMinDistance;
     [SerializeField] private float grappleAcceleration;
@@ -133,6 +142,11 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.visible = cursorVisible;
         Cursor.lockState = cursorLockState;
+
+        if (hasDoubleJump)
+            maxNumJumps = 2;
+        else
+            maxNumJumps = 1;
     }
 
     private void Update()
@@ -677,6 +691,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnDashAction(InputAction.CallbackContext context)
     {
+        if (!hasDash)
+            return;
+        
         bool dashSuccess = Dash();
         if (!dashSuccess)
         {
@@ -695,6 +712,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnDiveAction(InputAction.CallbackContext context)
     {
+        if (!hasDive)
+            return;
+
         bool diveSuccess = Dive();
         if (!diveSuccess)
         {
@@ -733,7 +753,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnGrappleStart(InputAction.CallbackContext context)
     {
-        if (grappling || dashing || diving || busy) return;
+        if (grappling || dashing || diving || busy || !hasGrapple) return;
 
         Collider[] overlapped = Physics.OverlapSphere(transform.position, grappleRange);
 
@@ -761,6 +781,30 @@ public class PlayerController : MonoBehaviour
     private void OnGrappleEnd(InputAction.CallbackContext context)
     {
         grappling = false;
+    }
+
+    public void SetHasAbility(Abilities ability, bool hasAbility)
+    {
+        if (ability == Abilities.DoubleJump)
+        {
+            hasDoubleJump = hasAbility;
+            if (hasAbility)
+                maxNumJumps = 2;
+            else
+                maxNumJumps = 1;
+        }
+        else if (ability == Abilities.Dash)
+        {
+            hasDash = hasAbility;
+        }
+        else if (ability == Abilities.Dive)
+        {
+            hasDive = hasAbility;
+        }
+        else if (ability == Abilities.Grapple)
+        {
+            hasGrapple = hasAbility;
+        }
     }
 
     void OnEnable()
