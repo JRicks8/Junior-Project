@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
-using System.Transactions;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum Abilities 
+    {
+        DoubleJump,
+        Dash,
+        Dive,
+        Grapple,
+    }
+
     [Header("Object References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Camera cam;
@@ -26,8 +31,6 @@ public class PlayerController : MonoBehaviour
     private string bufferedAction;
 
     [Header("Camera")]
-    [SerializeField] private CursorLockMode cursorLockState;
-    [SerializeField] private bool cursorVisible;
     [SerializeField] private Transform CameraFocusPoint;
     [SerializeField] private Vector2 cameraRotation = Vector2.zero;
     [SerializeField] private float cameraDistance; // Where x is the horizontal offset and y is the vertical offset
@@ -51,21 +54,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.01f, 1.0f)] private float airIdleDrag;
     [SerializeField][Range(0.0f, 1.0f)] private float slopeLimit; // Dot value. 1.0f is no limit to slope, 0.0f means you can't walk on any surface basically.
     [Header("Jumping")]
+    [SerializeField] private bool hasDoubleJump;
     [SerializeField] private float jumpUpForce;
     [SerializeField] private float jumpForwardForce;
-    [SerializeField] private int maxNumJumps;
+    private int maxNumJumps;
     [Header("Dashing")]
+    [SerializeField] private bool hasDash;
     [SerializeField] private float dashVelocityMagnitude;
     [SerializeField] private float dashDuration;
     [SerializeField] private float maxAirMagPostDash; // The max air magnitude after dashing
     [SerializeField] private int maxNumDashes;
     [Header("Diving")]
+    [SerializeField] private bool hasDive;
     [SerializeField] private float diveMaxDuration; // The dive persists until hitting the ground or the max time is reached
     [SerializeField] private Vector3 diveVelocity;
     [Header("Step Up")]
     [SerializeField] private float stepHeight;
     [SerializeField] private float forwardStepTest;
     [Header("Grapple")]
+    [SerializeField] private bool hasGrapple;
     [SerializeField] private float grappleRange;
     [SerializeField] private float grappleMinDistance;
     [SerializeField] private float grappleAcceleration;
@@ -131,12 +138,20 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = cursorVisible;
-        Cursor.lockState = cursorLockState;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        if (hasDoubleJump)
+            maxNumJumps = 2;
+        else
+            maxNumJumps = 1;
     }
 
     private void Update()
     {
+        if (PauseMenu.paused)
+            return;
+
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
@@ -154,6 +169,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PauseMenu.paused)
+            return;
+
         ExecuteBufferedAction();
 
         gravityScale = defaultGravityScale; // Set before checkground because it might be changed
@@ -242,6 +260,13 @@ public class PlayerController : MonoBehaviour
     // Return value is the success of the command
     private bool Jump()
     {
+        if (diving && jumpsLeft > 0) // Cancel dive
+        {
+            StopCoroutine(diveHandler);
+            diving = false;
+            busy = false;
+        }
+
         if (jumpsLeft <= 0 || busy) return false;
         jumpsLeft--;
         jumping = true;
@@ -259,6 +284,13 @@ public class PlayerController : MonoBehaviour
     // Return value is the success of the command
     private bool Dash()
     {
+        if (diving && dashesLeft > 0) // Cancel dive
+        {
+            StopCoroutine(diveHandler);
+            diving = false;
+            busy = false;
+        }
+
         // Do not dash if we're already dashing or committed to another action
         if (dashing || grappling || busy || dashesLeft <= 0) return false;
         dashing = true;
@@ -283,7 +315,15 @@ public class PlayerController : MonoBehaviour
     // horizontal velocity is restored and the player destroys nearby objects that can be destroyed.
     private bool Dive()
     {
-        if (diving || grappling || busy || grounded) return false;
+        if (diving) // Cancel dive
+        {
+            StopCoroutine(diveHandler);
+            diving = false;
+            busy = false;
+            return true;
+        }
+
+        if (grappling || busy || grounded) return false;
 
         diving = true;
         busy = true;
@@ -596,7 +636,7 @@ public class PlayerController : MonoBehaviour
     {
         float timer = diveMaxDuration;
 
-        while (!grounded && timer > 0)
+        while (!grounded && timer > 0 && diving)
         {
             yield return new WaitForFixedUpdate();
             timer -= Time.fixedDeltaTime;
@@ -677,6 +717,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnDashAction(InputAction.CallbackContext context)
     {
+        if (!hasDash)
+            return;
+        
         bool dashSuccess = Dash();
         if (!dashSuccess)
         {
@@ -695,6 +738,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnDiveAction(InputAction.CallbackContext context)
     {
+        if (!hasDive)
+            return;
+
         bool diveSuccess = Dive();
         if (!diveSuccess)
         {
@@ -733,7 +779,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnGrappleStart(InputAction.CallbackContext context)
     {
-        if (grappling || dashing || diving || busy) return;
+        if (grappling || dashing || !hasGrapple) 
+            return;
 
         Collider[] overlapped = Physics.OverlapSphere(transform.position, grappleRange);
 
@@ -745,6 +792,16 @@ public class PlayerController : MonoBehaviour
             {
                 if (grapplePoint == null || camDot > Vector3.Dot(grapplePoint.position - transform.position, cam.transform.forward))
                 {
+                    if (diving) // Cancel dive
+                    {
+                        StopCoroutine(diveHandler);
+                        diving = false;
+                        busy = false;
+                    }
+
+                    if (busy) 
+                        return;
+
                     grapplePoint = collider.transform;
                 }
             }
@@ -761,6 +818,30 @@ public class PlayerController : MonoBehaviour
     private void OnGrappleEnd(InputAction.CallbackContext context)
     {
         grappling = false;
+    }
+
+    public void SetHasAbility(Abilities ability, bool hasAbility)
+    {
+        if (ability == Abilities.DoubleJump)
+        {
+            hasDoubleJump = hasAbility;
+            if (hasAbility)
+                maxNumJumps = 2;
+            else
+                maxNumJumps = 1;
+        }
+        else if (ability == Abilities.Dash)
+        {
+            hasDash = hasAbility;
+        }
+        else if (ability == Abilities.Dive)
+        {
+            hasDive = hasAbility;
+        }
+        else if (ability == Abilities.Grapple)
+        {
+            hasGrapple = hasAbility;
+        }
     }
 
     void OnEnable()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class HoverSpin : MonoBehaviour
 {
 
-    [SerializeField]  private float bobHeight;
+    [SerializeField] private float bobHeight;
     [SerializeField][Range(-100, 100)] private float spinSpeed;
     [SerializeField][Range(1, 100)] private float bobSpeed;
 
@@ -24,7 +24,7 @@ public class HoverSpin : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x,transform.eulerAngles.y + spinSpeed / 100f, transform.eulerAngles.z);
         if (targetPosition.y > homePosition.y)
         {
-            transform.position = transform.position + new Vector3(0f, bobSpeed / 100, 0f);
+            transform.position = transform.position + new Vector3(0f, bobSpeed / 1000, 0f);
             if (transform.position.y > targetPosition.y)
             {
                 targetPosition = homePosition - new Vector3(0f, bobHeight, 0f);
@@ -32,7 +32,7 @@ public class HoverSpin : MonoBehaviour
         }
         if (targetPosition.y < homePosition.y)
         {
-            transform.position = transform.position - new Vector3(0f, bobSpeed / 100, 0f);
+            transform.position = transform.position - new Vector3(0f, bobSpeed / 1000, 0f);
             if (transform.position.y < targetPosition.y)
             {
                 targetPosition = homePosition + new Vector3(0f, bobHeight, 0f);
