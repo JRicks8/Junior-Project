@@ -3,7 +3,12 @@ guid: 5f159993861fa2144a767d2156f810b9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Athena_small_package_Athena_small_packageMat
+    second: {fileID: 2100000, guid: 9dbb182593957304aa179e89876a1499, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
