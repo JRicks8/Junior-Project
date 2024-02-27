@@ -8919,7 +8919,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35116
+  m_Name: pb_Mesh39162
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -13760,7 +13760,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35464
+  m_Name: pb_Mesh39514
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -27128,18 +27128,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1697053669039487490, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
-      propertyPath: MaxDistance
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1697053669039487490, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
-      propertyPath: DopplerLevel
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1697053669039487490, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
-      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
-      value: 0.0027777778
-      objectReference: {fileID: 0}
     - target: {fileID: 5274757221957221495, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
       propertyPath: m_Name
       value: Lost Soul
@@ -33725,7 +33713,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35328
+  m_Name: pb_Mesh39374
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
