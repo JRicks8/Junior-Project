@@ -370,7 +370,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.7
+  m_fontSize: 24.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.6
+  m_fontSize: 20.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.6
+  m_fontSize: 20.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1603,7 +1603,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.6
+  m_fontSize: 20.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1760,10 +1760,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6459e11e07c35ac44a33e2097fa7c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostSouls:
+  lostSoulsCollected:
     keys: []
     values: 
-  coins: 0
+  coinsCollected:
+    keys: []
+    values: 
+  coinsAmt: 0
   personalRecord: 0
   currentTime: 0
   hasDoubleJump: 0
@@ -1846,7 +1849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenuObject: {fileID: 194957135}
-  gameSceneName: Movement Testing
+  gameSceneName: HUBSection
 --- !u!1 &1034328271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2886,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.6
+  m_fontSize: 20.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
