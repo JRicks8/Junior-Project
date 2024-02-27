@@ -27132,6 +27132,14 @@ PrefabInstance:
       propertyPath: MaxDistance
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1697053669039487490, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697053669039487490, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.0027777778
+      objectReference: {fileID: 0}
     - target: {fileID: 5274757221957221495, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
       propertyPath: m_Name
       value: Lost Soul
@@ -31569,15 +31577,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852978606247082711, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 614.45
+      value: 492.43
       objectReference: {fileID: 0}
     - target: {fileID: 2852978606247082711, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 247.51001
+      value: 267.1
       objectReference: {fileID: 0}
     - target: {fileID: 2852978606247082711, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 595.32
+      value: 513.65
       objectReference: {fileID: 0}
     - target: {fileID: 2852978606247082711, guid: 58756b25fd889c44daf6bb0bbbe65380, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32685,7 +32693,7 @@ MonoBehaviour:
   locationsToCycleThrough:
   - {x: 500, y: 300, z: 500}
   - {x: 540.4, y: 300, z: 500}
-  timeToMove: 10
+  timeToMove: 5
   waitDuration: 1
   rotateAmountOnWait: 0
 --- !u!65 &1805403252
