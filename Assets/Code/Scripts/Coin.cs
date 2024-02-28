@@ -55,6 +55,11 @@ public class Coin : MonoBehaviour, IDataPersistence
         if (other.TryGetComponent(out PlayerController _) && !collected)
         {
             Collect();
+
+            GetComponent<PlayEffectOnTouch>().enabled = false;
+            GetComponent<PlaySoundOnTouch>().enabled = false;
         }
     }
+
+    
 }

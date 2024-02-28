@@ -11,9 +11,12 @@ public class PlaySoundOnTouch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!enabled) return;
         if (other.CompareTag(tagToCheck))
         {
-            if (!audioToPlay.isPlaying) audioToPlay.Play();
+            audioToPlay.gameObject.transform.position = transform.position;
+            audioToPlay.time = 0;
+            audioToPlay.Play();
         }
     }
 }

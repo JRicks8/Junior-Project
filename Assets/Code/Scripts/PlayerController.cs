@@ -889,4 +889,9 @@ public class PlayerController : MonoBehaviour
         else
             mRenderer.material = defaultMaterial;
     }
+
+    public bool IsDashing(){ return dashing; }
+    public bool IsDiving(){  return diving; }
+    public bool IsJumping() { return jumping;  }
+    public bool IsGrappling() { return grappling; }
 }
