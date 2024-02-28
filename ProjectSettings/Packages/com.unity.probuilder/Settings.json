@@ -24,8 +24,11 @@
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "key": "editor.autoRecalculateCollisions",
 =======
+=======
+>>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
                 "key": "experimental.meshesAreAssets",
                 "value": "{\"m_Value\":false}"
             },
@@ -37,6 +40,9 @@
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ShapeComponent.ResetSettings",
+<<<<<<< HEAD
+>>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
+=======
 >>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
                 "value": "{\"m_Value\":false}"
             },
@@ -52,7 +58,10 @@
             },
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "mesh.newShapesSnapToGrid",
                 "value": "{\"m_Value\":true}"
@@ -88,6 +97,9 @@
                 "value": "{\"m_Value\":8}"
             },
             {
+<<<<<<< HEAD
+>>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
+=======
 >>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
                 "type": "UnityEngine.ProBuilder.LogLevel, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "log.level",
@@ -130,6 +142,7 @@
             },
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "type": "UnityEngine.ProBuilder.SelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "editor.lastMeshSelectMode",
                 "value": "{\"m_Value\":8}"
@@ -143,6 +156,13 @@
                 "value": "{\"m_Value\":{\"x\":-9.671432495117188,\"y\":-7.4813995361328129,\"z\":2.6677494049072267}}"
             },
             {
+=======
+                "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "ShapeBuilder.LastPivotPosition",
+                "value": "{\"m_Value\":{\"x\":-9.671432495117188,\"y\":-7.4813995361328129,\"z\":2.6677494049072267}}"
+            },
+            {
+>>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
                 "value": "{\"m_Value\":{\"x\":19.342864990234376,\"y\":14.962814331054688,\"z\":-5.335498809814453}}"
@@ -170,6 +190,9 @@
             {
                 "type": "UnityEngine.ProBuilder.ColliderType, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "mesh.newShapeColliderType",
+<<<<<<< HEAD
+>>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
+=======
 >>>>>>> d9c2d2fef7ce9540910cbdf432147be3dbda1d55
                 "value": "{\"m_Value\":2}"
             },
