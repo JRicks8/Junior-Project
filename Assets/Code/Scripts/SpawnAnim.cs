@@ -11,16 +11,12 @@ public class SpawnAnim : MonoBehaviour
     private Vector3 animStartPosition;
     [SerializeField] private float jumpHeight;
 
-    private void Awake()
-    {
-        spawnAnimCoroutine = AnimMovement();
-    }
-
     public void StartSpawnAnimFrom(Vector3 position)
     {
         homePosition = transform.position;
         animStartPosition = position;
         transform.position = position;
+        spawnAnimCoroutine = AnimMovement();
         StartCoroutine(spawnAnimCoroutine);
     }
 
