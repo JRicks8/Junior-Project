@@ -25,8 +25,6 @@ public class PauseMenu : MonoBehaviour
     {
         paused = !menuContent.activeSelf;
 
-        Debug.Log(paused);
-
         menuContent.SetActive(paused);
         Cursor.visible = paused;
 
@@ -49,6 +47,13 @@ public class PauseMenu : MonoBehaviour
 
     public void OnQuitButtonClicked()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("Main Menu");
+    }
+
+    private void OnDestroy()
+    {
+        // Remove Listeners
+        escapeAction.performed -= TogglePauseMenu;
     }
 }

@@ -853,6 +853,18 @@ public class PlayerController : MonoBehaviour
         actions.FindActionMap("gameplay").Disable();
     }
 
+    private void OnDestroy()
+    {
+        // Remove Listeners
+        InputActionMap actionMap = actions.FindActionMap("Gameplay");
+        actionMap.FindAction("dash").performed -= OnDashAction;
+        actionMap.FindAction("dive").performed -= OnDiveAction;
+        actionMap.FindAction("interact").performed -= OnInteractAction;
+        actionMap.FindAction("grapple").started -= OnGrappleStart;
+        actionMap.FindAction("grapple").canceled -= OnGrappleEnd;
+        jumpAction.performed -= OnJumpAction;
+    }
+
     // Debug
     [Header("Debug")]
     public TextMeshProUGUI speedText;
@@ -877,4 +889,9 @@ public class PlayerController : MonoBehaviour
         else
             mRenderer.material = defaultMaterial;
     }
+
+    public bool IsDashing(){ return dashing; }
+    public bool IsDiving(){  return diving; }
+    public bool IsJumping() { return jumping;  }
+    public bool IsGrappling() { return grappling; }
 }
