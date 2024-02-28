@@ -3378,10 +3378,6 @@ PrefabInstance:
       propertyPath: tagToCheck
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7759562488639790624, guid: 4cfaa516d252023479a7ea8f1011e57b, type: 3}
-      propertyPath: effectToPlay
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8529755486938933660, guid: 4cfaa516d252023479a7ea8f1011e57b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -5409,10 +5405,6 @@ PrefabInstance:
     - target: {fileID: 7759562488639790624, guid: 4cfaa516d252023479a7ea8f1011e57b, type: 3}
       propertyPath: tagToCheck
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7759562488639790624, guid: 4cfaa516d252023479a7ea8f1011e57b, type: 3}
-      propertyPath: effectToPlay
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20929,10 +20921,6 @@ PrefabInstance:
       propertyPath: tagToCheck
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7759562488639790624, guid: 4cfaa516d252023479a7ea8f1011e57b, type: 3}
-      propertyPath: effectToPlay
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22072,7 +22060,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38928
+  m_Name: pb_Mesh61746
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
