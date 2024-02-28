@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagToCheck: Player
-  effectToPlay: {fileID: 0}
+  effectToPlay: {fileID: 5582122906755518143, guid: 4899fa0b5b93e4043bef7c3f1a444fe8, type: 3}
 --- !u!114 &6771242262019375797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagToCheck: Player
+  audioClip: {fileID: 8300000, guid: bd2cbcc84ee91084aa9a910d4f1a4196, type: 3}
   audioToPlay: {fileID: 0}
 --- !u!114 &8610121057086306016
 MonoBehaviour:

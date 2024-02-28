@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnObjectOnDestroy : MonoBehaviour
 {
     [Header("Does not actually spawn 'new' objects. Requires references to disabled prefabs from hierarchy to re-enable.")]
-    [SerializeField] private GameObject[] objectsToSpawn;
+    [SerializeField] private List<GameObject> objectsToSpawn;
 
     private void OnDestroy()
     {
