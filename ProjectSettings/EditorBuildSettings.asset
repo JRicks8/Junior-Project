@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Level/Scenes/ZeusSection.unity
     guid: 093f2ee53df3dfa4aae9131d7468f964
   - enabled: 1
-    path: Assets/Level/Scenes/Athenalevel.unity
+    path: Assets/Athenalevel.unity
     guid: 61d8a32762a1c214ebbdf22ef61eafe9
   - enabled: 1
     path: Assets/Level/Scenes/DionysusSection.unity

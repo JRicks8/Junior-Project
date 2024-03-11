@@ -9403,7 +9403,7 @@ GameObject:
   - component: {fileID: 224041530}
   - component: {fileID: 224041529}
   m_Layer: 0
-  m_Name: HermesLevelLoadingZone
+  m_Name: HubLevelLoadingZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10278,7 +10278,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38198
+  m_Name: pb_Mesh48956
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
