@@ -19,7 +19,6 @@ public class LostSoul : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         data.lostSoulsCollected.TryGetValue(id, out collected);
-        Debug.Log(collected);
         if (collected)
         {
             visual.SetActive(false);

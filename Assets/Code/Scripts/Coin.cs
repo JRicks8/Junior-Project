@@ -23,6 +23,15 @@ public class Coin : MonoBehaviour, IDataPersistence
         {
             visual.SetActive(false);
         }
+        if (collected)
+        {
+            visual.SetActive(false);
+        }
+    }
+    private void Collect()
+    {
+        visual.SetActive(false);
+        collected = true;
     }
 
     public void SaveData(ref GameData data)
@@ -41,4 +50,16 @@ public class Coin : MonoBehaviour, IDataPersistence
             GenerateGuid();
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerController _) && !collected)
+        {
+            Collect();
+
+            GetComponent<PlayEffectOnTouch>().enabled = false;
+            GetComponent<PlaySoundOnTouch>().enabled = false;
+        }
+    }
+
+    
 }

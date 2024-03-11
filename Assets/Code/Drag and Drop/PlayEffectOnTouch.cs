@@ -8,13 +8,19 @@ public class PlayEffectOnTouch : MonoBehaviour
     [SerializeField] private string tagToCheck;
 
     [Header("Make sure to turn off 'looping' and 'play on awake' :D")]
-    [SerializeField] private ParticleSystem effectToPlay;
+    [SerializeField] private GameObject effectToPlay;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!enabled) return;
         if (other.CompareTag(tagToCheck))
         {
-            effectToPlay.Play();
+            GameObject newInst = Instantiate(effectToPlay);
+            newInst.SetActive(true);
+            newInst.transform.position = transform.position;
+            newInst.transform.rotation = transform.rotation;
+            newInst.GetComponent<ParticleSystem>().Play();
+            newInst.GetComponent<DestroyEffectOnFinish>().enabled = true;
         }
     }
 }

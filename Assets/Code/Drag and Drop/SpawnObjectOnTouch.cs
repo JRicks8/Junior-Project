@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class SpawnObjectOnTouch : MonoBehaviour
 {
     [Header("Set this to 'Player' if you want player touch to spawn the object.")]
