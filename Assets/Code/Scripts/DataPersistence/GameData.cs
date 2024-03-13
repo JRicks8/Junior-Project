@@ -15,7 +15,7 @@ public class GameData
     public bool hasDive;
     public bool hasGrapple;
     public float fastestSpeedAchieved;
-    public Transform spawnPoint;
+    public SerializableDictionary<string, Vector3> checkpoints;
     // Settings
     public bool vsync;
 
@@ -31,7 +31,7 @@ public class GameData
         hasDive = false;
         hasGrapple = false;
         fastestSpeedAchieved = 0;
-        spawnPoint = null;
+        checkpoints = new SerializableDictionary<string, Vector3>();
         // Settings
         vsync = false;
     }
