@@ -69,9 +69,4 @@ public class GameState : MonoBehaviour, IDataPersistence
         else
             coinsAmt -= amt;
     }
-
-    public void SetSpawnPoint(Transform spawnPoint)
-    {
-        this.spawnPoint = spawnPoint;
-    }
 }
