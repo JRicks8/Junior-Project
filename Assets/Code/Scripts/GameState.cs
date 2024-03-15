@@ -91,6 +91,12 @@ public class GameState : MonoBehaviour, IDataPersistence
         {
             checkpoints[SceneManager.GetActiveScene().name] = checkpointLocation;
             // TODO: Set location of player to the checkpoint location
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                player.transform.position = checkpointLocation;
+            }
         }
+        else Debug.Log("Checkpoint not found!");
     }
 }
