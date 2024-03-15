@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.1f, 2.0f)] private float cameraSensitivity;
     [SerializeField] private float yRotationLimit = 88.0f;
     [SerializeField] private LayerMask CameraBlocking;
+    private bool isInHermesSection = true;
 
     [Header("Interact")]
     [SerializeField] private float interactRange;
@@ -134,6 +136,14 @@ public class PlayerController : MonoBehaviour
 
         // Objects
         rb = GetComponent<Rigidbody>();
+
+        isInHermesSection = SceneManager.GetActiveScene().name.Equals("HermesSection");
+        if (isInHermesSection)
+        {
+            cam = Camera.main;
+            cam.transform.parent = null;
+            cam.transform.SetPositionAndRotation(new Vector3(13.2399998f, 13.29f, 0f), Quaternion.Euler(41.387f, -90.0f, 0.0f));
+        }
     }
 
     private void Start()
@@ -155,7 +165,7 @@ public class PlayerController : MonoBehaviour
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
         moveInput = moveAction.ReadValue<Vector2>();
 
-        CameraUpdate(lookInput);
+        if (!isInHermesSection) CameraUpdate(lookInput);
 
         // If we're moving, step up. This needs to be in update to prevent catching on stairs too often
         if ((new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude > 0.1f && grounded)

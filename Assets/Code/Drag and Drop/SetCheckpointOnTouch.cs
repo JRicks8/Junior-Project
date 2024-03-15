@@ -18,7 +18,6 @@ public class SetCheckpointOnTouch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
         if (other.CompareTag("Player"))
         {
             GameState.instance.SetCheckpoint(checkpointLocation);
