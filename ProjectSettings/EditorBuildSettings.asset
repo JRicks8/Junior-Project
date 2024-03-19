@@ -4,6 +4,24 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Level/Scenes/Main Menu.unity
+    guid: f8ddefe2bec8fcb40ba62eb32471d474
+  - enabled: 1
+    path: Assets/Level/Scenes/HUBSection.unity
+    guid: b747d06b4b3b28a499ae373efa4db567
+  - enabled: 1
+    path: Assets/Level/Scenes/HermesSection.unity
+    guid: 2acfcd9a7927326428da169a56d2f368
+  - enabled: 1
+    path: Assets/Level/Scenes/ZeusSection.unity
+    guid: 093f2ee53df3dfa4aae9131d7468f964
+  - enabled: 1
+    path: Assets/Level/Scenes/DionysusSection.unity
+    guid: 5dd7d02afcaba714d960be7947b9115b
+  - enabled: 1
+    path: Assets/Level/Scenes/Athenalevel.unity
+    guid: 61d8a32762a1c214ebbdf22ef61eafe9
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
