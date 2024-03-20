@@ -14,6 +14,7 @@ public class GameData
     public bool hasDash;
     public bool hasDive;
     public bool hasGrapple;
+    public bool hasPackage;
     public float fastestSpeedAchieved;
     public SerializableDictionary<string, Vector3> checkpoints;
     // Settings
@@ -30,6 +31,7 @@ public class GameData
         hasDash = false;
         hasDive = false;
         hasGrapple = false;
+        hasPackage = false;
         fastestSpeedAchieved = 0;
         checkpoints = new SerializableDictionary<string, Vector3>();
         // Settings

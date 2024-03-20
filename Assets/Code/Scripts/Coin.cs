@@ -28,10 +28,13 @@ public class Coin : MonoBehaviour, IDataPersistence
             visual.SetActive(false);
         }
     }
+
     private void Collect()
     {
         visual.SetActive(false);
         collected = true;
+
+        GameState.instance.CollectCoins(1);
     }
 
     public void SaveData(ref GameData data)
