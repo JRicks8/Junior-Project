@@ -33,6 +33,7 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGame();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.activeSceneChanged += OnSceneChange;
     }
 
     private void OnApplicationQuit()
@@ -44,6 +45,11 @@ public class DataPersistenceManager : MonoBehaviour
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+    }
+
+    private void OnSceneChange(Scene scene1, Scene scene2)
+    {
+        SaveGame();
     }
 
     public void NewGame()

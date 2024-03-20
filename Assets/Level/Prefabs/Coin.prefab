@@ -87,6 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagToCheck: Player
   audioClip: {fileID: 8300000, guid: bd2cbcc84ee91084aa9a910d4f1a4196, type: 3}
+  audioToPlay: {fileID: 0}
 --- !u!114 &8610121057086306016
 MonoBehaviour:
   m_ObjectHideFlags: 0

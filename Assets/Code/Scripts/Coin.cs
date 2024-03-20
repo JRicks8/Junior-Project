@@ -40,7 +40,7 @@ public class Coin : MonoBehaviour, IDataPersistence
         {
             data.coinsCollected.Remove(id);
         }
-        data.lostSoulsCollected.Add(id, collected);
+        data.coinsCollected.Add(id, collected);
     }
 
     private void OnValidate()
@@ -60,6 +60,4 @@ public class Coin : MonoBehaviour, IDataPersistence
             GetComponent<PlaySoundOnTouch>().enabled = false;
         }
     }
-
-    
 }
