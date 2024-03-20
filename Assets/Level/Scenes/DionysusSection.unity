@@ -15710,9 +15710,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationsToCycleThrough:
   - {x: 20.04554, y: 8.79, z: -70.44592}
-  - {x: 15.9, y: 12.6, z: -70.44592}
+  - {x: 15.9, y: 25, z: -70.44592}
+  - {x: 15.9, y: 8.79, z: -70.44592}
   timeToMove: 5
-  waitDuration: 7
+  waitDuration: 0
   rotateAmountOnWait: 0
 --- !u!850595691 &644387166
 LightingSettings:
@@ -17879,11 +17880,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_Name: pb_Mesh347444
-=======
-  m_Name: pb_Mesh33550
->>>>>>> Stashed changes
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -65885,11 +65882,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_Name: pb_Mesh347786
-=======
-  m_Name: pb_Mesh33892
->>>>>>> Stashed changes
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
