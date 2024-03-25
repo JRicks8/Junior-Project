@@ -41,6 +41,8 @@ public class GameState : MonoBehaviour, IDataPersistence
     {
         lostSoulsCollected = data.lostSoulsCollected;
         coinsCollected = data.coinsCollected;
+        coinsAmt = data.coinsAmt;
+        soulsAmt = data.soulsAmt;
         personalRecord = data.personalRecord;
         currentTime = data.currentTime;
         hasDoubleJump = data.hasDoubleJump;
@@ -55,6 +57,8 @@ public class GameState : MonoBehaviour, IDataPersistence
     {
         data.lostSoulsCollected = lostSoulsCollected;
         data.coinsCollected = coinsCollected;
+        data.coinsAmt = coinsAmt;
+        data.soulsAmt = soulsAmt;
         data.personalRecord = personalRecord;
         data.currentTime = currentTime;
         data.hasDoubleJump = hasDoubleJump;
@@ -69,6 +73,12 @@ public class GameState : MonoBehaviour, IDataPersistence
     {
         coinsAmt += amt;
         CoinCollected.Invoke();
+    }
+
+    public void CollectLostSoul()
+    {
+        soulsAmt++;
+        LostSoulCollected.Invoke();
     }
     
     public void SpendCoins(uint amt)
@@ -96,7 +106,6 @@ public class GameState : MonoBehaviour, IDataPersistence
         if (checkpoints.TryGetValue(SceneManager.GetActiveScene().name, out Vector3 checkpointLocation))
         {
             checkpoints[SceneManager.GetActiveScene().name] = checkpointLocation;
-            // TODO: Set location of player to the checkpoint location
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {

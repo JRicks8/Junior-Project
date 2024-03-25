@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour, IDataPersistence
 {
-    // Each lost soul has a unique id. This is for the save system and remembering which ones we have collected.
+    // Each coin has a unique id. This is for the save system and remembering which ones we have collected.
     [SerializeField] private string id;
 
     [ContextMenu("Generate guid for id")]
@@ -22,19 +22,9 @@ public class Coin : MonoBehaviour, IDataPersistence
         if (collected)
         {
             visual.SetActive(false);
+            GetComponent<PlayEffectOnTouch>().enabled = false;
+            GetComponent<PlaySoundOnTouch>().enabled = false;
         }
-        if (collected)
-        {
-            visual.SetActive(false);
-        }
-    }
-
-    private void Collect()
-    {
-        visual.SetActive(false);
-        collected = true;
-
-        GameState.instance.CollectCoins(1);
     }
 
     public void SaveData(ref GameData data)
@@ -46,6 +36,17 @@ public class Coin : MonoBehaviour, IDataPersistence
         data.coinsCollected.Add(id, collected);
     }
 
+    private void Collect()
+    {
+        visual.SetActive(false);
+        collected = true;
+
+        GameState.instance.CollectCoins(1);
+
+        GetComponent<PlayEffectOnTouch>().enabled = false;
+        GetComponent<PlaySoundOnTouch>().enabled = false;
+    }
+
     private void OnValidate()
     {
         if (id == string.Empty)
@@ -53,14 +54,12 @@ public class Coin : MonoBehaviour, IDataPersistence
             GenerateGuid();
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerController _) && !collected)
         {
             Collect();
-
-            GetComponent<PlayEffectOnTouch>().enabled = false;
-            GetComponent<PlaySoundOnTouch>().enabled = false;
         }
     }
 }

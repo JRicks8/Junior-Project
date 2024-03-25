@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LostSoul : MonoBehaviour, IDataPersistence
+public class Package : MonoBehaviour, IDataPersistence
 {
-    // Each lost soul has a unique id. This is for the save system and remembering which ones we have collected.
     [SerializeField] private string id;
 
     [ContextMenu("Generate guid for id")]
@@ -18,20 +17,22 @@ public class LostSoul : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        data.lostSoulsCollected.TryGetValue(id, out collected);
+        data.packagesCollected.TryGetValue(id, out collected);
         if (collected)
         {
             visual.SetActive(false);
+            //GetComponent<PlayEffectOnTouch>().enabled = false;
+            //GetComponent<PlaySoundOnTouch>().enabled = false;
         }
     }
 
     public void SaveData(ref GameData data)
     {
-        if (data.lostSoulsCollected.ContainsKey(id))
+        if (data.packagesCollected.ContainsKey(id))
         {
-            data.lostSoulsCollected.Remove(id);
+            data.packagesCollected.Remove(id);
         }
-        data.lostSoulsCollected.Add(id, collected);
+        data.packagesCollected.Add(id, collected);
     }
 
     private void Collect()
@@ -39,15 +40,10 @@ public class LostSoul : MonoBehaviour, IDataPersistence
         visual.SetActive(false);
         collected = true;
 
-        GameState.instance.CollectLostSoul();
-    }
+        // TODO: On collect, save package state to game state and update player GUI
 
-    private void OnValidate()
-    {
-        if (id == string.Empty)
-        {
-            GenerateGuid();
-        }
+        //GetComponent<PlayEffectOnTouch>().enabled = false;
+        //GetComponent<PlaySoundOnTouch>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpawnAnim : MonoBehaviour
 {
-
     private IEnumerator spawnAnimCoroutine;
     [SerializeField] private float animDuration;
     private Vector3 homePosition;

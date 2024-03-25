@@ -9,6 +9,8 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption;
 
+    public bool dataLoaded = false;
+
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
@@ -73,6 +75,7 @@ public class DataPersistenceManager : MonoBehaviour
         }
 
         Debug.Log("Loaded Data");
+        dataLoaded = true;
     }
 
     public void SaveGame()
@@ -87,9 +90,18 @@ public class DataPersistenceManager : MonoBehaviour
         dataHandler.Save(gameData);
     }
 
+    /// <summary>
+    /// ONLY CALL THIS FUNCTION IF YOU'RE ABSOLUTELY SURE YOU NEED THIS.
+    /// </summary>
+    public GameData GetGameData()
+    {
+        return gameData;
+    }
+
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IDataPersistence>();
+        // Use this function because we want to find ALL objects that inherit the Data Persistence interface, including disabled ones.
+        IEnumerable<IDataPersistence> dataPersistenceObjects = Resources.FindObjectsOfTypeAll<MonoBehaviour>().OfType<IDataPersistence>();
         return new List<IDataPersistence>(dataPersistenceObjects);
     }
 }

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlayerGUI : MonoBehaviour
+public class PlayerGUI : MonoBehaviour, IDataPersistence
 {
     [Header("References to Set")]
     public PlayerController controller;
@@ -17,6 +15,17 @@ public class PlayerGUI : MonoBehaviour
         GameState.instance.LostSoulCollected += OnLostSoulCollected;
     }
 
+    public void LoadData(GameData data)
+    {
+        coinsText.text = data.coinsAmt.ToString();
+        lostSoulsText.text = data.soulsAmt.ToString();
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        
+    }
+
     private void OnCoinCollected()
     {
         coinsText.text = GameState.instance.coinsAmt.ToString();
@@ -24,7 +33,6 @@ public class PlayerGUI : MonoBehaviour
 
     private void OnLostSoulCollected()
     {
-        // TODO: Implement delegate invoke on collecting a lost soul
         lostSoulsText.text = GameState.instance.soulsAmt.ToString();
     }
 }
