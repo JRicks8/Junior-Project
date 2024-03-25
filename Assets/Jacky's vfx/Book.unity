@@ -39351,8 +39351,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: simulationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
@@ -39360,7 +39376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
@@ -39368,7 +39384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.99066865
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
