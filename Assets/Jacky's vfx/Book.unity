@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162899134}
   - component: {fileID: 162899133}
+  - component: {fileID: 162899135}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -214,6 +215,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &162899135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162899132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &326329616
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +679,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5133,7 +5157,7 @@ Transform:
   m_GameObject: {fileID: 1176491963}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 26.64, z: 0}
+  m_LocalPosition: {x: 0, y: 265, z: 239}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5280,7 +5304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74225276634736962, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 28.199997
+      value: 46.7
       objectReference: {fileID: 0}
     - target: {fileID: 74225276634736962, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5317,6 +5341,30 @@ PrefabInstance:
     - target: {fileID: 2901422039856456160, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
       propertyPath: m_Name
       value: particles for book
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901422039856456160, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341080910128028860, guid: a06fcae11e4e77e49940e547bd466920, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.99066865
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
