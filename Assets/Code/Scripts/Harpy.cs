@@ -7,13 +7,14 @@ public class Harpy : MonoBehaviour
 {
 
     private PlayerController playerController;
-    [SerializeField][Range(1, 100)] private float pullPower;
+    [SerializeField][Range(2, 5)] private float pullPower;
     [SerializeField][Range(0.1f, 3)] private float pullDuration;
     [SerializeField][Range(0.1f, 4)] private float waitDuration;
     private float waitTime, pullTime = 0;
     private bool hitPlayer = false;
 
-    enum HarpyState { 
+    enum HarpyState
+    {
         IDLE,
         ACTIVE,
         WAITING,
@@ -22,7 +23,7 @@ public class Harpy : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -32,9 +33,8 @@ public class Harpy : MonoBehaviour
         if (playerController)
         {
             pullTime += Time.fixedDeltaTime;
-            if (pullTime > pullDuration)
+            if (pullTime > pullDuration + (hitPlayer ? 100000 : 0) )
             {
-                hitPlayer = false;
                 state = HarpyState.WAITING;
                 if (waitTime > waitDuration)
                 {
@@ -47,7 +47,7 @@ public class Harpy : MonoBehaviour
 
             Vector3 directionToPlayer = (transform.position - playerController.transform.position).normalized;
             Rigidbody playerRB = playerController.GetComponent<Rigidbody>();
-            playerRB.AddForce(  directionToPlayer * pullPower * 10, ForceMode.Force);
+            playerRB.AddForce((hitPlayer ? -1 : 1) * directionToPlayer * pullPower, ForceMode.VelocityChange);
         }
     }
 
@@ -67,11 +67,13 @@ public class Harpy : MonoBehaviour
 
             playerController = null;
             state = HarpyState.IDLE;
+            hitPlayer = false;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        hitPlayer = true;
+        waitTime = 0;
     }
 }
