@@ -11,6 +11,7 @@ public class SpawnObjectOnDestroy : MonoBehaviour
     {
         foreach (GameObject o in objectsToSpawn)
         {
+            if (!o) continue;
             o.SetActive(true);
             Collider oCollider = o.GetComponent<Collider>();
            if (oCollider) oCollider.enabled = false;
