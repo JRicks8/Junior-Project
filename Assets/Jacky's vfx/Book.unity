@@ -39414,7 +39414,7 @@ ParticleSystemRenderer:
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 2
+  m_LengthScale: 0.55
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -39428,7 +39428,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -40072,7 +40072,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.2
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -43472,9 +43472,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 0.019607844}
-        key1: {r: 1, g: 1, b: 1, a: 0.43529412}
-        key2: {r: 0, g: 0, b: 0, a: 0.43529412}
+        key0: {r: 1, g: 1, b: 1, a: 0.07058824}
+        key1: {r: 1, g: 1, b: 1, a: 0.22352941}
+        key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -43489,7 +43489,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 386
-        atime1: 65535
+        atime1: 22359
         atime2: 65535
         atime3: 0
         atime4: 0
@@ -43499,7 +43499,7 @@ ParticleSystem:
         m_Mode: 0
         m_ColorSpace: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -43540,21 +43540,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.1421051
-          inSlope: 0
-          outSlope: 0
+          value: 0.4736786
+          inSlope: -1.3451853
+          outSlope: -1.3451853
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.03129657
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: -0.1261261
+          outSlope: -0.1261261
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.08345759
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
