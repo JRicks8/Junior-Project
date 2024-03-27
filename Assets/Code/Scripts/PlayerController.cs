@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public GameObject currentGround;
     [SerializeField] private GameObject lastGround;
     [SerializeField] private Vector3 lastGroundPosition;
-    [SerializeField] private bool hasPackage;
+    [SerializeField] private bool hasPackage = false;
 
     private IEnumerator dashHandler;
     private IEnumerator diveHandler;
@@ -123,6 +123,24 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public delegate void GenericPlayerControllerDelegate();
     public GenericPlayerControllerDelegate PackageCollected;
     public GenericPlayerControllerDelegate PackageRemoved;
+
+    public void LoadData(GameData data)
+    {
+        hasPackage = data.hasPackage;
+        hasDoubleJump = data.hasDoubleJump;
+        hasDash = data.hasDash;
+        hasDive = data.hasDive;
+        hasGrapple = data.hasGrapple;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.hasPackage = hasPackage;
+        data.hasDoubleJump = hasDoubleJump;
+        data.hasDash = hasDash;
+        data.hasDive = hasDive;
+        data.hasGrapple = hasGrapple;
+    }
 
     private void Awake()
     {
@@ -897,24 +915,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public bool IsJumping() { return jumping; }
     public bool IsGrappling() { return grappling; }
     public bool HasPackage() { return hasPackage; }
-
-    public void LoadData(GameData data)
-    {
-        hasPackage = data.hasPackage;
-        hasDoubleJump = data.hasDoubleJump;
-        hasDash = data.hasDash;
-        hasDive = data.hasDive;
-        hasGrapple = data.hasGrapple;
-    }
-
-    public void SaveData(ref GameData data)
-    {
-        data.hasPackage = hasPackage;
-        data.hasDoubleJump = hasDoubleJump;
-        data.hasDash = hasDash;
-        data.hasDive = hasDive;
-        data.hasGrapple = hasGrapple;
-    }
 
     // Debug
     [Header("Debug")]

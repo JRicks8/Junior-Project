@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Coin : MonoBehaviour, IDataPersistence
@@ -16,8 +17,16 @@ public class Coin : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject visual;
     [SerializeField] private bool collected = false;
 
+    private void Start()
+    {
+        if (id.Equals(string.Empty))
+            Debug.LogError("GUID for this object is null. Please assign a GUID for saving data.");
+    }
+
     public void LoadData(GameData data)
     {
+        if (id.Equals(string.Empty)) return;
+
         data.coinsCollected.TryGetValue(id, out collected);
         if (collected)
         {
@@ -29,6 +38,8 @@ public class Coin : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        if (id.Equals(string.Empty)) return;
+
         if (data.coinsCollected.ContainsKey(id))
         {
             data.coinsCollected.Remove(id);
@@ -45,14 +56,6 @@ public class Coin : MonoBehaviour, IDataPersistence
 
         GetComponent<PlayEffectOnTouch>().enabled = false;
         GetComponent<PlaySoundOnTouch>().enabled = false;
-    }
-
-    private void OnValidate()
-    {
-        if (id == string.Empty)
-        {
-            GenerateGuid();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
