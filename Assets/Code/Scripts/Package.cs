@@ -15,8 +15,16 @@ public class Package : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject visual;
     [SerializeField] private bool collected = false;
 
+    private void Start()
+    {
+        if (id.Equals(string.Empty))
+            Debug.LogError("GUID for this object is null. Please assign a GUID for saving data.");
+    }
+
     public void LoadData(GameData data)
     {
+        if (id.Equals(string.Empty)) return;
+
         data.packagesCollected.TryGetValue(id, out collected);
         if (collected)
         {
@@ -28,7 +36,8 @@ public class Package : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        Debug.Log(collected);
+        if (id.Equals(string.Empty)) return;
+
         if (data.packagesCollected.ContainsKey(id))
         {
             data.packagesCollected.Remove(id);

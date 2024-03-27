@@ -20,6 +20,12 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
     public delegate void PackageDeliveryZoneDelegate(GameObject zone);
     public PackageDeliveryZoneDelegate ZoneCollectedPackage;
 
+    private void Start()
+    {
+        if (id.Equals(string.Empty))
+            Debug.LogError("GUID for this object is null. Please assign a GUID for saving data.");
+    }
+
     public void LoadData(GameData data)
     {
         data.collectionZones.TryGetValue(id, out collectedPackage);

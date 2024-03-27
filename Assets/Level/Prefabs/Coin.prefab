@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5db5ad2867ed594e862d05766eb93e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 28ea7d54-f00c-41f3-beda-637a858beafe
+  id: 
   visual: {fileID: 6459681235387199612}
   collected: 0
 --- !u!114 &2203280819816930391
