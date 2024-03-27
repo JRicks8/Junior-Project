@@ -1437,6 +1437,7 @@ MonoBehaviour:
   currentGround: {fileID: 0}
   lastGround: {fileID: 0}
   lastGroundPosition: {x: 0, y: 0, z: 0}
+  hasPackage: 0
   speedText: {fileID: 0}
   mRenderer: {fileID: 8385750798783661132}
   defaultMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
@@ -2048,6 +2049,7 @@ MonoBehaviour:
   controller: {fileID: 2101969855281247971}
   coinsText: {fileID: 6515315185647565482}
   lostSoulsText: {fileID: 5585929000571448953}
+  packageImage: {fileID: 5081917565267626887}
 --- !u!1 &8400987438890150118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,7 +2067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &173773768898969067
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2100,7 +2102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400987438890150118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

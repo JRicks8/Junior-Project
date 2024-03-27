@@ -28,6 +28,7 @@ public class Package : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        Debug.Log(collected);
         if (data.packagesCollected.ContainsKey(id))
         {
             data.packagesCollected.Remove(id);
@@ -40,17 +41,16 @@ public class Package : MonoBehaviour, IDataPersistence
         visual.SetActive(false);
         collected = true;
 
-        // TODO: On collect, save package state to game state and update player GUI
-
         //GetComponent<PlayEffectOnTouch>().enabled = false;
         //GetComponent<PlaySoundOnTouch>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerController _) && !collected)
+        if (other.TryGetComponent(out PlayerController playerController) && !collected && !playerController.HasPackage())
         {
             Collect();
+            playerController.CollectPackage();
         }
     }
 }
