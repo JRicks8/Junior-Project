@@ -85,6 +85,12 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObj.SaveData(ref gameData);
         }
 
+        // Handle overflow of coin and lost soul amount (shouldn't ever happen in the shipped game)
+        if (gameData.coinsAmt > gameData.coinsCollected.Count)
+            gameData.coinsAmt = (uint)gameData.coinsCollected.Count;
+        if (gameData.soulsAmt > gameData.lostSoulsCollected.Count)
+            gameData.soulsAmt = (uint)gameData.lostSoulsCollected.Count;
+
         Debug.Log("Saved Data");
 
         dataHandler.Save(gameData);

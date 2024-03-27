@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistence
 {
     public enum Abilities 
     {
@@ -114,10 +114,15 @@ public class PlayerController : MonoBehaviour
     public GameObject currentGround;
     [SerializeField] private GameObject lastGround;
     [SerializeField] private Vector3 lastGroundPosition;
+    [SerializeField] private bool hasPackage;
 
     private IEnumerator dashHandler;
     private IEnumerator diveHandler;
     private IEnumerator grappleHandler;
+
+    public delegate void GenericPlayerControllerDelegate();
+    public GenericPlayerControllerDelegate PackageCollected;
+    public GenericPlayerControllerDelegate PackageRemoved;
 
     private void Awake()
     {
@@ -854,6 +859,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void CollectPackage()
+    {
+        hasPackage = true;
+        PackageCollected?.Invoke();
+    }
+
+    public void RemovePackage()
+    {
+        hasPackage = false;
+        PackageRemoved?.Invoke();
+    }
+
     void OnEnable()
     {
         actions.FindActionMap("gameplay").Enable();
@@ -873,6 +890,30 @@ public class PlayerController : MonoBehaviour
         actionMap.FindAction("grapple").started -= OnGrappleStart;
         actionMap.FindAction("grapple").canceled -= OnGrappleEnd;
         jumpAction.performed -= OnJumpAction;
+    }
+
+    public bool IsDashing() { return dashing; }
+    public bool IsDiving() { return diving; }
+    public bool IsJumping() { return jumping; }
+    public bool IsGrappling() { return grappling; }
+    public bool HasPackage() { return hasPackage; }
+
+    public void LoadData(GameData data)
+    {
+        hasPackage = data.hasPackage;
+        hasDoubleJump = data.hasDoubleJump;
+        hasDash = data.hasDash;
+        hasDive = data.hasDive;
+        hasGrapple = data.hasGrapple;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.hasPackage = hasPackage;
+        data.hasDoubleJump = hasDoubleJump;
+        data.hasDash = hasDash;
+        data.hasDive = hasDive;
+        data.hasGrapple = hasGrapple;
     }
 
     // Debug
@@ -899,9 +940,4 @@ public class PlayerController : MonoBehaviour
         else
             mRenderer.material = defaultMaterial;
     }
-
-    public bool IsDashing(){ return dashing; }
-    public bool IsDiving(){  return diving; }
-    public bool IsJumping() { return jumping;  }
-    public bool IsGrappling() { return grappling; }
 }
