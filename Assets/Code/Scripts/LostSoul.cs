@@ -27,7 +27,6 @@ public class LostSoul : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        Debug.Log("Saved");
         if (data.lostSoulsCollected.ContainsKey(id))
         {
             data.lostSoulsCollected.Remove(id);
@@ -39,6 +38,8 @@ public class LostSoul : MonoBehaviour, IDataPersistence
     {
         visual.SetActive(false);
         collected = true;
+
+        GameState.instance.CollectLostSoul();
     }
 
     private void OnValidate()

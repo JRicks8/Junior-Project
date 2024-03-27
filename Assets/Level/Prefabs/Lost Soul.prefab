@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 16d1b8bd-389d-4727-a113-0a623cc0bb16
   visual: {fileID: 8007884660556209659}
-  collected: 0
+  collected: 1
 --- !u!1 &8007884660556209659
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7789437955510312516
 Transform:
   m_ObjectHideFlags: 0
