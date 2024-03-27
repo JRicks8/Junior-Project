@@ -6,9 +6,9 @@ public class MovingObject : MonoBehaviour
 {
     [Header("Change this object's layer type to 'turrain'.\nDo not add a trigger box to this object.\nAn added trigger box will move player with weird behavior.")]
     [SerializeField] List<Vector3> locationsToCycleThrough = new();
-    [SerializeField][Range(0.5f, 60)] private float timeToMove;
-    [SerializeField][Range(.5f, 60)] private float waitDuration;
-    [SerializeField][Range(0, 360)] private float rotateAmountOnWait;
+    [SerializeField][Range(0.5f, 60)] private float timeToMove = 0.5f;
+    [SerializeField][Range(.5f, 60)] private float waitDuration = 0.5f;
+    [SerializeField][Range(0, 360)] private float rotateAmountOnWait = 0f;
     private float elapsedTime = 0;
     private float waitTime = 0;
 
