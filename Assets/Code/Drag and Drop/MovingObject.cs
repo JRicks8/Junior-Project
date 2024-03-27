@@ -42,7 +42,7 @@ public class MovingObject : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        locationsToCycleThrough[0] = transform.position;
+        if (locationsToCycleThrough.Count > 0) locationsToCycleThrough[0] = transform.position;
 
         for (int i = 0; i < locationsToCycleThrough.Count; i++)
         {
