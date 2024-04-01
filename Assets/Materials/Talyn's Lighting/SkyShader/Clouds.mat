@@ -96,27 +96,35 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _BaseStrength: 1
+    - _Base_Scale: 0.003
+    - _Base_Speed: 0.2
+    - _Base_Strength: 0.01
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
+    - _Curvature: 341.68
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EmissionStrength: 0
     - _EnvironmentReflections: 1
+    - _FresnelOpacity: 0.6
+    - _Fresnel_Power: 17.01
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseEdge1: -0.08
-    - _NoiseHeight: 50
-    - _NoisePower: 0.87
-    - _NoiseSpeed: 7
-    - _Noise_Edge2: 1.11
+    - _NoiseEdge1: -1
+    - _NoiseHeight: 20
+    - _NoisePower: 1
+    - _NoiseSpeed: 21.54
+    - _Noise_Edge2: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -133,11 +141,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorPeak: {r: 0.9198113, g: 0.96723, b: 1, a: 0}
-    - _ColorValley: {r: 0.37767, g: 0.49396905, b: 0.6509434, a: 0}
+    - _ColorPeak: {r: 0.74069065, g: 0.8666485, b: 0.9528302, a: 0}
+    - _ColorValley: {r: 0.30245635, g: 0.5609724, b: 0.9056604, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseRemap: {r: 0, g: 1, b: -1, a: 0}
-    - _NoiseScale: {r: 0.01, g: 0, b: 0, a: 0}
+    - _NoiseScale: {r: 0.006, g: 0, b: 0, a: 0}
     - _RotateProjetion: {r: 1, g: 0, b: 0, a: 90}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
