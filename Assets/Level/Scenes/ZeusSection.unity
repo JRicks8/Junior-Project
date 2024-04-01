@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 302913e94f8443a4bb0f411113ceeb65, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.11664838, g: 0.2672443, b: 0.37996376, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -357,6 +357,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1290,6 +1294,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8654,7 +8662,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33840
+  m_Name: pb_Mesh111412
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -9817,6 +9825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10367,6 +10379,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10440,6 +10456,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10512,6 +10532,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10649,6 +10673,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14723,6 +14751,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18198,7 +18230,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34112
+  m_Name: pb_Mesh111684
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -18534,6 +18566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18675,6 +18711,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19355,6 +19395,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20137,6 +20181,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20288,6 +20336,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20676,6 +20728,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25325,6 +25381,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25755,6 +25815,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27116,6 +27180,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29957,7 +30025,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33784
+  m_Name: pb_Mesh111356
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -30183,6 +30251,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30994,6 +31066,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52289,6 +52365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52361,6 +52441,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -53956,6 +54040,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54039,6 +54127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54087,7 +54179,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh34514
+  m_Name: pb_Mesh112086
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -55025,6 +55117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: coinpilelowpoly (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -55536,6 +55632,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
       propertyPath: m_Name
       value: coinpilelowpoly (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b31ad7942104e940aae263f4250828c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
