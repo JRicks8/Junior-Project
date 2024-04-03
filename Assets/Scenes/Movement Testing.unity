@@ -6131,7 +6131,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh45542
+  m_Name: pb_Mesh31144
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -20762,6 +20762,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5021662255103378850, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
+      propertyPath: id
+      value: 9ceb61a0-fb9f-4744-8edb-69cabb9c6e7d
+      objectReference: {fileID: 0}
     - target: {fileID: 5274757221957221495, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
       propertyPath: m_Name
       value: Lost Soul
@@ -20805,6 +20809,10 @@ PrefabInstance:
     - target: {fileID: 6844812544532182208, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007884660556209659, guid: aeea8d99b30f6854ba143941a26a4e76, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
