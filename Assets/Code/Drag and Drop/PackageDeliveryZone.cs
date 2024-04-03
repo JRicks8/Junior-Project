@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
 {
@@ -17,13 +18,15 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
 
     [SerializeField] bool collectedPackage = false;
 
-    public delegate void PackageDeliveryZoneDelegate(GameObject zone);
-    public PackageDeliveryZoneDelegate ZoneCollectedPackage;
+    public UnityEvent PackageDelivered;
 
     private void Start()
     {
         if (id.Equals(string.Empty))
             Debug.LogError("GUID for this object is null. Please assign a GUID for saving data.");
+
+        if (PackageDelivered == null)
+            PackageDelivered = new UnityEvent();
     }
 
     public void LoadData(GameData data)
@@ -46,7 +49,8 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
         {
             playerController.RemovePackage();
             collectedPackage = true;
-            ZoneCollectedPackage?.Invoke(gameObject);
+
+            PackageDelivered?.Invoke();
         }
     }
 }
