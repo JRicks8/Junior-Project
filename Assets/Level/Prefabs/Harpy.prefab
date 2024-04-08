@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa290b2c2a85b7b4c800649fe6cd0fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullPower: 10
+  pullPower: 5
   pullDuration: 0.5
   waitDuration: 1
 --- !u!136 &5502627262350568868
