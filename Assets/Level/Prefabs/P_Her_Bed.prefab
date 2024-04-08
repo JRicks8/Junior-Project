@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3990944655321601027}
   - component: {fileID: 519582869457902624}
   - component: {fileID: 7358776840790746200}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pillow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3990944655321601027
 Transform:
@@ -95,12 +95,12 @@ GameObject:
   - component: {fileID: 3358593542036056714}
   - component: {fileID: 2606362040840203555}
   - component: {fileID: 4224582386635486920}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7301436439973595390
 Transform:
@@ -204,7 +204,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5580000792587742932
 Transform:
@@ -230,10 +230,10 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8376982787389698697}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b18a54ac418d84645aa894bbe40f6f87, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -242,8 +242,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.77, y: 1, z: 4.54}
-  m_Center: {x: 0, y: 2.3, z: 1.08}
+  m_Size: {x: 3.77, y: 1, z: 3.93}
+  m_Center: {x: 0, y: 2.42, z: 1.08}
 --- !u!114 &1463901977369095909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,4 +257,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 2
-  shouldPreserveMomentum: 0
+  shouldPreserveMomentum: 1
