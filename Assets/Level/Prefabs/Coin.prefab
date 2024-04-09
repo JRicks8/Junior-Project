@@ -87,7 +87,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagToCheck: Player
   audioClip: {fileID: 8300000, guid: bd2cbcc84ee91084aa9a910d4f1a4196, type: 3}
-  audioToPlay: {fileID: 0}
 --- !u!114 &8610121057086306016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5db5ad2867ed594e862d05766eb93e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 28ea7d54-f00c-41f3-beda-637a858beafe
+  id: 
   visual: {fileID: 6459681235387199612}
   collected: 0
 --- !u!114 &2203280819816930391
@@ -173,7 +172,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6459681235387199612}
-  m_Mesh: {fileID: -951608786083511892, guid: 823ad1c77dd6e1c4cb2159b5980b2dac, type: 3}
+  m_Mesh: {fileID: -951608786083511892, guid: 6c51cbc09ec8dab4a8ad642f57ea7641, type: 3}
 --- !u!23 &8529755486938933660
 MeshRenderer:
   m_ObjectHideFlags: 0

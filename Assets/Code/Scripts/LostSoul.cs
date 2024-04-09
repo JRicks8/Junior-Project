@@ -16,8 +16,16 @@ public class LostSoul : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject visual;
     [SerializeField] private bool collected = false;
 
+    private void Start()
+    {
+        if (id.Equals(string.Empty))
+            Debug.LogError("GUID for this object is null. Please assign a GUID for saving data.");
+    }
+
     public void LoadData(GameData data)
     {
+        if (id.Equals(string.Empty)) return;
+
         data.lostSoulsCollected.TryGetValue(id, out collected);
         if (collected)
         {
@@ -27,7 +35,8 @@ public class LostSoul : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        Debug.Log("Saved");
+        if (id.Equals(string.Empty)) return;
+
         if (data.lostSoulsCollected.ContainsKey(id))
         {
             data.lostSoulsCollected.Remove(id);
@@ -39,14 +48,8 @@ public class LostSoul : MonoBehaviour, IDataPersistence
     {
         visual.SetActive(false);
         collected = true;
-    }
 
-    private void OnValidate()
-    {
-        if (id == string.Empty)
-        {
-            GenerateGuid();
-        }
+        GameState.instance.CollectLostSoul();
     }
 
     private void OnTriggerEnter(Collider other)

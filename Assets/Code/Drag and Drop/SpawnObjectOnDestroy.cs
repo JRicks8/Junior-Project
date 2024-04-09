@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +10,15 @@ public class SpawnObjectOnDestroy : MonoBehaviour
     {
         foreach (GameObject o in objectsToSpawn)
         {
+            if (!o) continue;
             o.SetActive(true);
             Collider oCollider = o.GetComponent<Collider>();
-           if (oCollider) oCollider.enabled = false;
+            if (oCollider) oCollider.enabled = false;
             o.GetComponent<SpawnAnim>().StartSpawnAnimFrom(transform.position);
+            if (o.TryGetComponent(out Coin coinScript))
+            {
+
+            }
         }
     }
 }

@@ -9,7 +9,8 @@ public class GameState : MonoBehaviour, IDataPersistence
     [Header("Game Data - Serializable")]
     public SerializableDictionary<string, bool> lostSoulsCollected;
     public SerializableDictionary<string, bool> coinsCollected;
-    public float coinsAmt;
+    public uint coinsAmt;
+    public uint soulsAmt;
     public float personalRecord;
     public float currentTime;
     public bool hasDoubleJump;
@@ -18,6 +19,10 @@ public class GameState : MonoBehaviour, IDataPersistence
     public bool hasGrapple;
     public float fastestSpeedAchieved;
     public SerializableDictionary<string, Vector3> checkpoints;
+
+    public delegate void GenericGameStateDelegate();
+    public GenericGameStateDelegate CoinCollected;
+    public GenericGameStateDelegate LostSoulCollected;
 
     private void Awake()
     {
@@ -36,6 +41,8 @@ public class GameState : MonoBehaviour, IDataPersistence
     {
         lostSoulsCollected = data.lostSoulsCollected;
         coinsCollected = data.coinsCollected;
+        coinsAmt = data.coinsAmt;
+        soulsAmt = data.soulsAmt;
         personalRecord = data.personalRecord;
         currentTime = data.currentTime;
         hasDoubleJump = data.hasDoubleJump;
@@ -50,6 +57,8 @@ public class GameState : MonoBehaviour, IDataPersistence
     {
         data.lostSoulsCollected = lostSoulsCollected;
         data.coinsCollected = coinsCollected;
+        data.coinsAmt = coinsAmt;
+        data.soulsAmt = soulsAmt;
         data.personalRecord = personalRecord;
         data.currentTime = currentTime;
         data.hasDoubleJump = hasDoubleJump;
@@ -60,12 +69,19 @@ public class GameState : MonoBehaviour, IDataPersistence
         data.checkpoints = checkpoints;
     }
 
-    public void CollectCurrency(uint amt)
+    public void CollectCoins(uint amt)
     {
         coinsAmt += amt;
+        CoinCollected.Invoke();
+    }
+
+    public void CollectLostSoul()
+    {
+        soulsAmt++;
+        LostSoulCollected.Invoke();
     }
     
-    public void SpendCurrency(uint amt)
+    public void SpendCoins(uint amt)
     {
         if (amt > coinsAmt)
             coinsAmt = 0;
@@ -90,7 +106,6 @@ public class GameState : MonoBehaviour, IDataPersistence
         if (checkpoints.TryGetValue(SceneManager.GetActiveScene().name, out Vector3 checkpointLocation))
         {
             checkpoints[SceneManager.GetActiveScene().name] = checkpointLocation;
-            // TODO: Set location of player to the checkpoint location
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {
