@@ -23,10 +23,10 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
         data.vsync = vsyncToggle.isOn;
     }
 
-    public void OnToggleVSync(bool value)
+    public void OnToggleVSync(bool _)
     {
-        Settings.instance.SetVSync(value);
-        if (value)
+        Settings.instance.SetVSync(vsyncToggle.isOn);
+        if (vsyncToggle.isOn)
             QualitySettings.vSyncCount = 1;
         else
             QualitySettings.vSyncCount = 0;
