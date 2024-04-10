@@ -677,6 +677,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             rb.velocity = diveVelocity;
         }
 
+        yield return new WaitForFixedUpdate(); // Wait for another physics update frame to let collision handlers do their stuff (destroy on dive script & others)
+
         rb.velocity = storedFlatVelocity;
         diving = false;
         busy = false;
