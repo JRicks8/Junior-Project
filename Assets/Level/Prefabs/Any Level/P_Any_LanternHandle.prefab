@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8234274277639420797}
   - component: {fileID: 4373367970175977253}
   - component: {fileID: 3412360866645175110}
-  - component: {fileID: 761322250120532681}
+  - component: {fileID: 260924651612557346}
   m_Layer: 0
   m_Name: P_Any_LanternHandle
   m_TagString: Untagged
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9142348160247981766}
-  m_Mesh: {fileID: -1567956690501319012, guid: 3efe0a51f87150643bf791c1e0c6c6b7, type: 3}
+  m_Mesh: {fileID: -1567956690501319012, guid: 0fc5faff9fa756043a9fb8c69b62e06b, type: 3}
 --- !u!23 &3412360866645175110
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,7 +62,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0396cb3da7155954ea7ba823b5dd9e84, type: 2}
+  - {fileID: 2100000, guid: ebca9160b301871488c068f45723a77a, type: 2}
+  - {fileID: 2100000, guid: fb9ad2b1bff212742b0af1c75a208287, type: 2}
+  - {fileID: 2100000, guid: 38abc5bfe1bc14e4b8c1170f1084f9f5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &761322250120532681
+--- !u!65 &260924651612557346
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,5 +105,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 37.7833, y: 50.889656, z: 55.310535}
-  m_Center: {x: 0, y: -23.224422, z: 29.052986}
+  m_Size: {x: 0.95969576, y: 1.2925973, z: 1.4048876}
+  m_Center: {x: 0, y: -0.5899003, z: 0.73794585}
