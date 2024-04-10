@@ -21,6 +21,7 @@ public class GameData
     public SerializableDictionary<string, Vector3> checkpoints;
     // Settings
     public bool vsync;
+    public float volume;
 
     public GameData()
     {
@@ -42,5 +43,6 @@ public class GameData
         checkpoints = new SerializableDictionary<string, Vector3>();
         // Settings
         vsync = false;
+        volume = 0.5f;
     }
 }
