@@ -473,6 +473,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Props_HermesOffice_TheChair
       objectReference: {fileID: 0}
+    - target: {fileID: 8424073627695423409, guid: bfcea6eaca7198f4fad89db3c8e2867b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e26c95d861191624d8be82f4c751b0cd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1464,6 +1468,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Props_HermesOffice_TheBed
       objectReference: {fileID: 0}
+    - target: {fileID: 4407187375235809858, guid: 8fa1fe1aa52a2d94dbda480b86cea08f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 24068040e010da2419da1705302647df, type: 2}
+    - target: {fileID: 8424073627695423409, guid: 8fa1fe1aa52a2d94dbda480b86cea08f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 24068040e010da2419da1705302647df, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1483,7 +1495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 47e29478fd1f7ae4298e389ed4b3cf0b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 47e29478fd1f7ae4298e389ed4b3cf0b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3494,63 +3506,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 169bff3f33739cb46bbdb9d2751b8e1e, type: 3}
---- !u!1001 &1718690393
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -104.44
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -103.07001
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
-      propertyPath: m_Name
-      value: Nightclub_Wooden_Bar_Table
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7a4e99d91205a5f4ebf6276a9f343340, type: 3}
 --- !u!1001 &1722476007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3954,6 +3909,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2048c6db65fc66841af4e292caa1b984, type: 3}
+--- !u!1001 &1865220024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -110.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.92
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -107.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6711637638465017378, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2b9b7a4586036a14fbb0f4c51a89f600, type: 2}
+    - target: {fileID: 919132149155446097, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
+      propertyPath: m_Name
+      value: Dionysus_Bar_Stool_EZ
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa0eabe072a1fe24cb1dde6447db6539, type: 3}
 --- !u!1001 &1896627980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4002,6 +4018,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d781d4cb44b8aad439ba44c904a16bae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d6dc6beb9135ea641a4a00f7de9f311c, type: 2}
     - target: {fileID: 919132149155446097, guid: d781d4cb44b8aad439ba44c904a16bae, type: 3}
       propertyPath: m_Name
       value: P_BookShelf
@@ -4310,7 +4330,6 @@ SceneRoots:
   - {fileID: 735287358}
   - {fileID: 1499050927}
   - {fileID: 1818391130}
-  - {fileID: 1718690393}
   - {fileID: 1896627980}
   - {fileID: 741403712}
   - {fileID: 1985667152}
@@ -4368,3 +4387,4 @@ SceneRoots:
   - {fileID: 763135142}
   - {fileID: 408839512}
   - {fileID: 921089067}
+  - {fileID: 1865220024}
