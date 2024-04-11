@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1392721672051860566}
   - component: {fileID: 5937845190918268581}
   - component: {fileID: 4325628298411576457}
-  - component: {fileID: 2978617933898694194}
+  - component: {fileID: 5283878220955669563}
   m_Layer: 0
   m_Name: P_Her_MailShelf
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2978617933898694194
+--- !u!65 &5283878220955669563
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 27.816925, y: 80.30523, z: 89.1022}
-  m_Center: {x: 0, y: 40.152615, z: 0}
+  m_Size: {x: 2.225354, y: 6.424418, z: 7.128176}
+  m_Center: {x: 0, y: 3.212209, z: 0}

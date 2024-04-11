@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2136867851871544612}
   - component: {fileID: 1159172012737518511}
   - component: {fileID: 396049767832060714}
-  - component: {fileID: 5132054868589489115}
+  - component: {fileID: 1006253064372790684}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a2220bb799af51f4b8b7eb7e860c89ce, type: 2}
+  - {fileID: 2100000, guid: 9943324ad8af4df4ea57eb79e68ae329, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,7 +117,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5132054868589489115
+--- !u!65 &1006253064372790684
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,8 +136,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 37.18, y: 56.662178, z: 43.1}
-  m_Center: {x: 1.4174156, y: 28.331089, z: 0.16}
+  m_Size: {x: 3.6931934, y: 4.5329742, z: 3.7400763}
+  m_Center: {x: 0.11339325, y: 2.2664871, z: -0.114705205}
 --- !u!1 &9184956141465085945
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +199,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a2220bb799af51f4b8b7eb7e860c89ce, type: 2}
+  - {fileID: 2100000, guid: 9943324ad8af4df4ea57eb79e68ae329, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
