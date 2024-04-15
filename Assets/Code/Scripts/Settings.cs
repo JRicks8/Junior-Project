@@ -7,6 +7,7 @@ public class Settings : MonoBehaviour, IDataPersistence
     public static Settings instance;
 
     [SerializeField] private bool vsync;
+    [SerializeField] private float globalVolume;
 
     private void Awake()
     {
@@ -32,5 +33,10 @@ public class Settings : MonoBehaviour, IDataPersistence
     public void SetVSync(bool value)
     {
         vsync = value;
+    }
+
+    public void SetVolume(float value)
+    {
+        globalVolume = value;
     }
 }

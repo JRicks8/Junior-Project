@@ -4,29 +4,33 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private GameObject mainMenuObject;
-
     [SerializeField] private Toggle vsyncToggle;
+    [SerializeField] private Slider volumeSlider;
 
     private void Awake()
     {
         vsyncToggle.onValueChanged.AddListener(OnToggleVSync);
+        volumeSlider.onValueChanged.AddListener(OnVolumeOptionChanged);
     }
 
     public void LoadData(GameData data)
     {
         vsyncToggle.isOn = data.vsync;
         OnToggleVSync(data.vsync);
+        volumeSlider.value = data.volume;
+        OnVolumeOptionChanged(data.volume);
     }
 
     public void SaveData(ref GameData data)
     {
         data.vsync = vsyncToggle.isOn;
+        data.volume = volumeSlider.value;
     }
 
-    public void OnToggleVSync(bool value)
+    public void OnToggleVSync(bool _)
     {
-        Settings.instance.SetVSync(value);
-        if (value)
+        Settings.instance.SetVSync(vsyncToggle.isOn);
+        if (vsyncToggle.isOn)
             QualitySettings.vSyncCount = 1;
         else
             QualitySettings.vSyncCount = 0;
@@ -36,5 +40,11 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
     {
         mainMenuObject.SetActive(true);
         gameObject.SetActive(false);
+    }
+
+    public void OnVolumeOptionChanged(float value)
+    {
+        Settings.instance.SetVolume(value);
+        AudioListener.volume = value;
     }
 }
