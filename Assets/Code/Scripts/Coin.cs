@@ -49,13 +49,16 @@ public class Coin : MonoBehaviour, IDataPersistence
 
     private void Collect()
     {
+
+        GetComponent<PlayEffectOnTouch>().enabled = false;
+        GetComponent<PlaySoundOnTouch>().enabled = false;
+
         visual.SetActive(false);
         collected = true;
 
         GameState.instance.CollectCoins(1);
 
-        GetComponent<PlayEffectOnTouch>().enabled = false;
-        GetComponent<PlaySoundOnTouch>().enabled = false;
+        
     }
 
     private void OnTriggerEnter(Collider other)
