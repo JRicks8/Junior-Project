@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -418,6 +422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -651,6 +659,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3308,6 +3320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3446,6 +3462,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Vase3_JDDL
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3da978ec2d7365842a7ef279b375a724, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3540,6 +3560,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
       propertyPath: m_Name
       value: Any_Wine1_JDDL (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4073,6 +4097,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4309,6 +4337,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4617,6 +4649,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4686,6 +4722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4707,7 +4747,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &314320932
 MonoBehaviour:
@@ -7663,6 +7703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7788,6 +7832,10 @@ PrefabInstance:
     - target: {fileID: 3549523767214404775, guid: c3110a5ce56fefe4eb92b6e3cb8e1f82, type: 3}
       propertyPath: m_Name
       value: P_Her_BagOfLetters (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549523767214404775, guid: c3110a5ce56fefe4eb92b6e3cb8e1f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8126,6 +8174,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9063,6 +9115,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
       propertyPath: m_Name
       value: Any_Wine1_JDDL (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13466,6 +13522,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13828,6 +13888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13953,6 +14017,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14255,6 +14323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14323,6 +14395,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 89d41f88a3d6e8d459c3d4dff3b74a92, type: 3}
       propertyPath: m_Name
       value: HUB_CrateShort_JDDL
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 89d41f88a3d6e8d459c3d4dff3b74a92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14706,6 +14782,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
       propertyPath: m_Name
       value: Any_Wine1_JDDL (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17200,6 +17280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18416,6 +18500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19304,6 +19392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19372,6 +19464,10 @@ PrefabInstance:
     - target: {fileID: 8124339918690411622, guid: db98ffe8dabe35142afd8329566f69a2, type: 3}
       propertyPath: m_Name
       value: P_Ath_BookPlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124339918690411622, guid: db98ffe8dabe35142afd8329566f69a2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19682,6 +19778,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22357,6 +22457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22827,6 +22931,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36228,6 +36336,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36368,6 +36480,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36556,6 +36672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36729,6 +36849,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37102,6 +37226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37170,6 +37298,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39172,6 +39304,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39730,6 +39866,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40097,6 +40237,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -40676,6 +40820,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41770,6 +41918,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42493,6 +42645,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUB_CrateShort_JDDL (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 89d41f88a3d6e8d459c3d4dff3b74a92, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42692,6 +42848,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42856,6 +43016,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -43458,6 +43622,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44024,6 +44192,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44501,6 +44673,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_BagOfLetters
       objectReference: {fileID: 0}
+    - target: {fileID: 3549523767214404775, guid: c3110a5ce56fefe4eb92b6e3cb8e1f82, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44569,6 +44745,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
       propertyPath: m_Name
       value: Any_Wine1_JDDL (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44872,6 +45052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44940,6 +45124,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45241,6 +45429,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
       propertyPath: m_Name
       value: Any_Wine1_JDDL (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45743,6 +45935,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46459,6 +46655,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Her_Trophy (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46614,6 +46814,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46874,6 +47078,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47466,6 +47674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Any_Wine1_JDDL (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fb0de684994640d46ba6e34216e0eb9f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47591,6 +47803,10 @@ PrefabInstance:
     - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
       propertyPath: m_Name
       value: P_Her_Trophy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8611854438493441768, guid: 2748099d052a121418d93a53acc4006e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
