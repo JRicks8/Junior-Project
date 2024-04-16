@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: -5000765382653930767}
   - component: {fileID: 2334502524972455106}
   - component: {fileID: -9125071337288816155}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_Any_Wine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1704051250746438148
 Transform:
