@@ -78,7 +78,11 @@ public class MovingObject : MonoBehaviour
         //lastFramePosition = transform.position;
         if (waitTime < waitDuration) 
         {
-            transform.rotation = Quaternion.Lerp(lastRotationOnWait, Quaternion.Euler(0f, lastRotationOnWait.eulerAngles.y + rotateAmountOnWait, 0f), waitTime / waitDuration);
+            transform.rotation = Quaternion.Lerp(lastRotationOnWait, 
+                                                Quaternion.Euler(transform.rotation.eulerAngles.x, 
+                                                                lastRotationOnWait.eulerAngles.y + rotateAmountOnWait, 
+                                                                transform.rotation.eulerAngles.z),
+                                                waitTime / waitDuration);
 
             waitTime += Time.fixedDeltaTime;
             return;
