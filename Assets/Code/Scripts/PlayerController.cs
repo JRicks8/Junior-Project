@@ -922,7 +922,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [Header("Debug")]
     public TextMeshProUGUI speedText;
 
-    [SerializeField] private MeshRenderer mRenderer;
+    [SerializeField] private SkinnedMeshRenderer mRenderer;
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material diveMaterial;
     [SerializeField] private Material dashMaterial;
