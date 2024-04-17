@@ -30,8 +30,8 @@ public class MovingObject : MonoBehaviour
         playerRidingBox = gameObject.AddComponent<BoxCollider>();
         playerRidingBox.isTrigger = true;
         playerRidingBox.size = new(objectCollision.size.x, 0.2f, objectCollision.size.z);
-        playerRidingBox.center = new Vector3(0f, objectCollision.size.y + playerRidingBox.size.y * 2, 0f);  
-        lastRotationOnWait = Quaternion.identity;
+        playerRidingBox.center = new Vector3(0f, objectCollision.size.y + playerRidingBox.size.y * 2, 0f);
+        lastRotationOnWait = transform.rotation;
     }
 
     void Start()
