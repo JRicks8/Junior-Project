@@ -30,8 +30,8 @@ public class MovingObject : MonoBehaviour
         playerRidingBox = gameObject.AddComponent<BoxCollider>();
         playerRidingBox.isTrigger = true;
         playerRidingBox.size = new(objectCollision.size.x, 0.2f, objectCollision.size.z);
-        playerRidingBox.center = new Vector3(0f, objectCollision.size.y + playerRidingBox.size.y * 2, 0f);  
-        lastRotationOnWait = Quaternion.identity;
+        playerRidingBox.center = new Vector3(0f, objectCollision.size.y + playerRidingBox.size.y * 2, 0f);
+        lastRotationOnWait = transform.rotation;
     }
 
     void Start()
@@ -78,7 +78,11 @@ public class MovingObject : MonoBehaviour
         //lastFramePosition = transform.position;
         if (waitTime < waitDuration) 
         {
-            transform.rotation = Quaternion.Lerp(lastRotationOnWait, Quaternion.Euler(0f, lastRotationOnWait.eulerAngles.y + rotateAmountOnWait, 0f), waitTime / waitDuration);
+            transform.rotation = Quaternion.Lerp(lastRotationOnWait, 
+                                                Quaternion.Euler(transform.rotation.eulerAngles.x, 
+                                                                lastRotationOnWait.eulerAngles.y + rotateAmountOnWait, 
+                                                                transform.rotation.eulerAngles.z),
+                                                waitTime / waitDuration);
 
             waitTime += Time.fixedDeltaTime;
             return;
