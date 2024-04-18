@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 607907528922638640}
   - component: {fileID: 2567889959173094615}
   - component: {fileID: 5810763516284118011}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_Her_MiniFridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1946324496799213725
 Transform:
@@ -91,7 +91,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8079206647431235976}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b18a54ac418d84645aa894bbe40f6f87, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
