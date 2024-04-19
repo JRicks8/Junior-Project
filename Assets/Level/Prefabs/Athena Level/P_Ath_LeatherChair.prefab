@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6988814025801658606}
   - component: {fileID: 7597065586625847326}
   - component: {fileID: 2869655920282302779}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_Ath_LeatherChair
   m_TagString: Untagged
   m_Icon: {fileID: 0}

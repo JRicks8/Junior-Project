@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6531470258619790643}
   - component: {fileID: 4025320920578930886}
   - component: {fileID: 3400376440672758631}
-  - component: {fileID: 1752468035621388404}
-  m_Layer: 0
+  - component: {fileID: 9099042824225634343}
+  m_Layer: 7
   m_Name: P_Ath_CartographyTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,14 +84,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1752468035621388404
-BoxCollider:
+--- !u!64 &9099042824225634343
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024224458711369947}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b18a54ac418d84645aa894bbe40f6f87, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.042, y: 2.6543384, z: 8.214422}
-  m_Center: {x: 0, y: 1.0913098, z: -0.64682436}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: 4c8fef2b69c1ce148a09cc83d75c3a1c, type: 3}
