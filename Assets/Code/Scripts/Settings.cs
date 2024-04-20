@@ -9,6 +9,8 @@ public class Settings : MonoBehaviour, IDataPersistence
     [SerializeField] private bool vsync;
     [SerializeField] private float globalVolume;
 
+    private bool isPrefab = true;
+
     private void Awake()
     {
         if (instance != null)
@@ -18,6 +20,8 @@ public class Settings : MonoBehaviour, IDataPersistence
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        isPrefab = false;
     }
 
     public void LoadData(GameData data)
@@ -27,6 +31,7 @@ public class Settings : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        if (isPrefab) return;
         data.vsync = vsync;
     }
 

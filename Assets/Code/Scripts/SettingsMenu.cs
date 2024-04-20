@@ -7,10 +7,14 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
     [SerializeField] private Toggle vsyncToggle;
     [SerializeField] private Slider volumeSlider;
 
+    private bool isPrefab = true;
+
     private void Awake()
     {
         vsyncToggle.onValueChanged.AddListener(OnToggleVSync);
         volumeSlider.onValueChanged.AddListener(OnVolumeOptionChanged);
+
+        isPrefab = false;
     }
 
     public void LoadData(GameData data)
@@ -23,6 +27,7 @@ public class SettingsMenu : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        if (isPrefab) return;
         data.vsync = vsyncToggle.isOn;
         data.volume = volumeSlider.value;
     }

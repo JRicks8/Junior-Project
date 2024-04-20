@@ -55,6 +55,8 @@ public class FileDataHandler
 
             string dataToStore = JsonUtility.ToJson(data, true);
 
+            Debug.Log(dataToStore);
+
             if (useEncryption)
             {
                 dataToStore = EncryptDecrypt(dataToStore);

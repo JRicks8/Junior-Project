@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,8 @@ public class GameState : MonoBehaviour, IDataPersistence
     public float fastestSpeedAchieved;
     public SerializableDictionary<string, Vector3> checkpoints;
 
+    private bool isPrefab = true;
+
     public delegate void GenericGameStateDelegate();
     public GenericGameStateDelegate CoinCollected;
     public GenericGameStateDelegate LostSoulCollected;
@@ -35,36 +38,34 @@ public class GameState : MonoBehaviour, IDataPersistence
         DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        isPrefab = false;
     }
 
     public void LoadData(GameData data)
     {
+        if (isPrefab) return;
+        Debug.Log("load " + data.lostSoulsCollected.Count);
         lostSoulsCollected = data.lostSoulsCollected;
         coinsCollected = data.coinsCollected;
         coinsAmt = data.coinsAmt;
         soulsAmt = data.soulsAmt;
         personalRecord = data.personalRecord;
         currentTime = data.currentTime;
-        hasDoubleJump = data.hasDoubleJump;
-        hasDash = data.hasDash;
-        hasDive = data.hasDive;
-        hasGrapple = data.hasGrapple;
         fastestSpeedAchieved = data.fastestSpeedAchieved;
         checkpoints = data.checkpoints;
     }
 
     public void SaveData(ref GameData data)
     {
+        if (isPrefab) return;
+        Debug.Log("save " + lostSoulsCollected.Count);
         data.lostSoulsCollected = lostSoulsCollected;
         data.coinsCollected = coinsCollected;
         data.coinsAmt = coinsAmt;
         data.soulsAmt = soulsAmt;
         data.personalRecord = personalRecord;
         data.currentTime = currentTime;
-        data.hasDoubleJump = hasDoubleJump;
-        data.hasDash = hasDash;
-        data.hasDive = hasDive;
-        data.hasGrapple = hasGrapple;
         data.fastestSpeedAchieved = fastestSpeedAchieved;
         data.checkpoints = checkpoints;
     }
