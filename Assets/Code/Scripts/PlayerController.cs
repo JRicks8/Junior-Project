@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] private GameObject lastGround;
     [SerializeField] private Vector3 lastGroundPosition;
     [SerializeField] private bool hasPackage = false;
+    private bool isPrefab = true; // For saving. We can't have the prefab saving data.
 
     private IEnumerator dashHandler;
     private IEnumerator diveHandler;
@@ -135,6 +136,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
+        if (isPrefab) return;
+        Debug.Log(hasPackage);
         data.hasPackage = hasPackage;
         data.hasDoubleJump = hasDoubleJump;
         data.hasDash = hasDash;
@@ -167,6 +170,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             cam.transform.parent = null;
             cam.transform.SetPositionAndRotation(new Vector3(13.2399998f, 13.29f, 0f), Quaternion.Euler(41.387f, -90.0f, 0.0f));
         }
+
+        isPrefab = false; // We called awake, so we are not a prefab, and are an instance.
     }
 
     private void Start()
