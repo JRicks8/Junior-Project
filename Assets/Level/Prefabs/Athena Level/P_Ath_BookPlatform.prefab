@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -2592559580976316924}
   - component: {fileID: -6966759032786597358}
   - component: {fileID: 124931888199241094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_Ath_BookPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
