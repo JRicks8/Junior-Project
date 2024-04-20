@@ -455,6 +455,68 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &42060343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42060345}
+  - component: {fileID: 42060344}
+  m_Layer: 0
+  m_Name: GameState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &42060344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42060343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6459e11e07c35ac44a33e2097fa7c874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lostSoulsCollected:
+    keys: []
+    values: 
+  coinsCollected:
+    keys: []
+    values: 
+  coinsAmt: 0
+  soulsAmt: 0
+  personalRecord: 0
+  currentTime: 0
+  hasDoubleJump: 0
+  hasDash: 0
+  hasDive: 0
+  hasGrapple: 0
+  fastestSpeedAchieved: 0
+  checkpoints:
+    keys: []
+    values: []
+--- !u!4 &42060345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42060343}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -48.772842, y: 18.450182, z: -0.95905304}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &44510062
 Mesh:
   m_ObjectHideFlags: 0
@@ -60809,7 +60871,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32706
+  m_Name: pb_Mesh258658
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -67237,3 +67299,4 @@ SceneRoots:
   - {fileID: 204347099}
   - {fileID: 264226146}
   - {fileID: 912182639}
+  - {fileID: 42060345}
