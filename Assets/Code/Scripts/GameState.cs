@@ -45,7 +45,6 @@ public class GameState : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         if (isPrefab) return;
-        Debug.Log("load " + data.lostSoulsCollected.Count);
         lostSoulsCollected = data.lostSoulsCollected;
         coinsCollected = data.coinsCollected;
         coinsAmt = data.coinsAmt;
@@ -59,7 +58,6 @@ public class GameState : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         if (isPrefab) return;
-        Debug.Log("save " + lostSoulsCollected.Count);
         data.lostSoulsCollected = lostSoulsCollected;
         data.coinsCollected = coinsCollected;
         data.coinsAmt = coinsAmt;
