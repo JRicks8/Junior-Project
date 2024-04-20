@@ -1159,7 +1159,6 @@ GameObject:
   - component: {fileID: 4301232367206676288}
   - component: {fileID: 3775852608108523331}
   - component: {fileID: 2101969855281247971}
-  - component: {fileID: 1331279133078826877}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1322,18 +1321,6 @@ MonoBehaviour:
   defaultMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   diveMaterial: {fileID: 2100000, guid: 5ea07e1bc1a4fdf45982043412c41431, type: 2}
   dashMaterial: {fileID: 2100000, guid: 9911237beacc63e4a8ad936a550ff35e, type: 2}
---- !u!114 &1331279133078826877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6195570678299542044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6970a6f9ad3cf8d43943b24b6046bc30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6320531405165838887
 GameObject:
   m_ObjectHideFlags: 0

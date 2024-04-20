@@ -62,4 +62,9 @@ public class Package : MonoBehaviour, IDataPersistence
             playerController.CollectPackage();
         }
     }
+
+    public bool GetWasCollected()
+    {
+        return collected;
+    }
 }

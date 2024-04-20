@@ -11,6 +11,7 @@ public class OpenLevelOnTouch : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(levelToOpenName);
+            
         }
     }
 }
