@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -4697814597799734631}
   - component: {fileID: -7016027989132202349}
   - component: {fileID: 2233476065665852178}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_Zeus_MoneyPile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
