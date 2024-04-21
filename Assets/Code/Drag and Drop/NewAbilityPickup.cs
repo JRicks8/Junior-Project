@@ -9,6 +9,14 @@ public class NewAbilityPickup : MonoBehaviour
 
     private void Awake()
     {
+        GameObject playerController = GameObject.FindGameObjectWithTag("Player");
+        if (playerController != null)
+        {
+            PlayerController pScript = playerController.GetComponent<PlayerController>();
+            if (pScript.GetHasAbility(abilityToGet))
+                gameObject.SetActive(false);
+        }
+
         GetComponent<Collider>().isTrigger = true;
     }
 
