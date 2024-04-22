@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimHermesBehavior : StateMachineBehaviour
 {
-    private enum Parameters
+    public enum HermesAnimParameters
     {
         xzVelMag,
         yVelocity,
@@ -26,7 +26,11 @@ public class AnimHermesBehavior : StateMachineBehaviour
 
     public void SetReferences(PlayerController playerController, Animator playerAnimator, Rigidbody rb)
     {
+        this.playerController = playerController;
+        this.playerAnimator = playerAnimator;
+        this.rb = rb;
 
+        referencesSet = true;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -35,9 +39,9 @@ public class AnimHermesBehavior : StateMachineBehaviour
 
         if (referencesSet)
         {
-            animator.SetFloat(Parameters.xzVelMag.ToString(), new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude);
-            animator.SetFloat(Parameters.yVelocity.ToString(), rb.velocity.y);
-            animator.SetBool(Parameters.isGrounded.ToString(), playerController.IsGrounded());
+            playerAnimator.SetFloat(HermesAnimParameters.xzVelMag.ToString(), new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude);
+            playerAnimator.SetFloat(HermesAnimParameters.yVelocity.ToString(), rb.velocity.y);
+            playerAnimator.SetBool(HermesAnimParameters.isGrounded.ToString(), playerController.IsGrounded());
         }
     }
 }

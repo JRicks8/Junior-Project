@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7.05
+  m_fontSize: 10.25
   m_fontSizeBase: 25.05
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   bottom: {fileID: 5106829021206888699}
   grappleVisualScript: {fileID: 5202534815765795267}
   playerMesh: {fileID: 3895218920534349716}
-  animator: {fileID: 0}
+  animator: {fileID: 6984718177291292142}
   actions: {fileID: -944628639613478452, guid: 5c2596107436aa7499e6eaf13741314b, type: 3}
   bufferInputThres: 0.3
   CameraFocusPoint: {fileID: 2852978606247082711}
@@ -1388,7 +1388,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7.05
+  m_fontSize: 10.25
   m_fontSizeBase: 25.05
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2056,7 +2056,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400987438890150118}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2152,6 +2152,11 @@ SkinnedMeshRenderer:
 --- !u!4 &3895218920534349716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 226e02322c9872448954dab62db12968, type: 3}
+  m_PrefabInstance: {fileID: 3568013660140466303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6984718177291292142 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 226e02322c9872448954dab62db12968, type: 3}
   m_PrefabInstance: {fileID: 3568013660140466303}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5726107542116853814
