@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 4
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.35
+  m_fontSize: 7.05
   m_fontSizeBase: 25.05
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1253,6 +1253,8 @@ MonoBehaviour:
   cam: {fileID: 2882775554230415901}
   bottom: {fileID: 5106829021206888699}
   grappleVisualScript: {fileID: 5202534815765795267}
+  playerMesh: {fileID: 3895218920534349716}
+  animator: {fileID: 0}
   actions: {fileID: -944628639613478452, guid: 5c2596107436aa7499e6eaf13741314b, type: 3}
   bufferInputThres: 0.3
   CameraFocusPoint: {fileID: 2852978606247082711}
@@ -1302,8 +1304,8 @@ MonoBehaviour:
   tempMaxAirMag: 0
   gravityScale: 0
   moveInput: {x: 0, y: 0}
-  facingDirection: {x: 0, y: 0, z: 0}
-  desiredDirection: {x: 0, y: 0, z: 0}
+  facingDirection: {x: 0, y: 0, z: 1}
+  desiredDirection: {x: 0, y: 0, z: 1}
   busy: 0
   grounded: 0
   jumping: 0
@@ -1317,7 +1319,7 @@ MonoBehaviour:
   lastGroundPosition: {x: 0, y: 0, z: 0}
   hasPackage: 0
   speedText: {fileID: 0}
-  mRenderer: {fileID: 0}
+  mRenderer: {fileID: 2842806657873696257}
   defaultMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   diveMaterial: {fileID: 2100000, guid: 5ea07e1bc1a4fdf45982043412c41431, type: 2}
   dashMaterial: {fileID: 2100000, guid: 9911237beacc63e4a8ad936a550ff35e, type: 2}
@@ -1386,7 +1388,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1413,7 +1415,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.35
+  m_fontSize: 7.05
   m_fontSizeBase: 25.05
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2054,7 +2056,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400987438890150118}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2142,6 +2144,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 226e02322c9872448954dab62db12968, type: 3}
+--- !u!137 &2842806657873696257 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1654945400807007870, guid: 226e02322c9872448954dab62db12968, type: 3}
+  m_PrefabInstance: {fileID: 3568013660140466303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3895218920534349716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 226e02322c9872448954dab62db12968, type: 3}
