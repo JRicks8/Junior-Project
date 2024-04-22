@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8267128720110309365}
   - component: {fileID: 1476799990801748415}
   m_Layer: 0
-  m_Name: Feathers
+  m_Name: Feathers_AthenaOWL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
