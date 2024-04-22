@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] private Transform bottom;
     [SerializeField] private GrappleVisual grappleVisualScript;
     [SerializeField] private Transform playerMesh;
+    [SerializeField] private Animator animator;
 
     [Header("Input")]
     [SerializeField] private InputActionAsset actions;
@@ -939,6 +940,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public bool IsDiving() { return diving; }
     public bool IsJumping() { return jumping; }
     public bool IsGrappling() { return grappling; }
+    public bool IsGrounded() {  return grounded; }
     public bool HasPackage() { return hasPackage; }
 
     // Debug
