@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] private Camera cam;
     [SerializeField] private Transform bottom;
     [SerializeField] private GrappleVisual grappleVisualScript;
+    [SerializeField] private Transform playerMesh;
 
     [Header("Input")]
     [SerializeField] private InputActionAsset actions;
@@ -220,6 +221,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         rb.AddForce(new Vector3(0, gravity * gravityScale, 0), ForceMode.Acceleration);
 
         Move();
+
+        playerMesh.rotation = Quaternion.LookRotation(facingDirection, Vector3.up);
     }
 
     /// <summary>
