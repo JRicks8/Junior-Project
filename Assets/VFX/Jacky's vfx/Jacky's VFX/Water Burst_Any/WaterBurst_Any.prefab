@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3205992934937322978}
   - component: {fileID: 911814492335720633}
   m_Layer: 0
-  m_Name: Water_Burst
+  m_Name: WaterBurst_Any
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
