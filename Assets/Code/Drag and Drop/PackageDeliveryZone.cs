@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +7,7 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
     [Description("When the player touches the trigger collider attached to this Game Object, whatever package the player is holding will be delivered.")]
 
     [SerializeField] private string id;
+    [SerializeField] private GameObject objectToEnableOnDelivery;
 
     [ContextMenu("Generate guid for id")]
     private void GenerateGuid()
@@ -49,7 +48,7 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
         {
             playerController.RemovePackage();
             collectedPackage = true;
-
+            if (objectToEnableOnDelivery) objectToEnableOnDelivery.SetActive(true);
             PackageDelivered?.Invoke();
         }
     }

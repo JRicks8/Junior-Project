@@ -12,7 +12,7 @@ public class SpawnAbility : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.GetComponent<PlayerController>().HasPackage())
         {
-            ability.SetActive(true);
+            //ability
         }
     }
 }
