@@ -885,6 +885,20 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         }
     }
 
+    public bool GetHasAbility(Abilities ability)
+    {
+        if (ability == Abilities.DoubleJump)
+            return hasDoubleJump;
+        else if (ability == Abilities.Dash)
+            return hasDash;
+        else if (ability == Abilities.Dive)
+            return hasDive;
+        else if (ability == Abilities.Grapple)
+            return hasGrapple;
+
+        else return false;
+    }
+
     public void CollectPackage()
     {
         hasPackage = true;
