@@ -9666,7 +9666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 723676167823191886}
   m_Layer: 0
-  m_Name: Fire2
+  m_Name: Fire_Sould_DropOff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
