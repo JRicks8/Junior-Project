@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingObject : MonoBehaviour
 {
     [Header("Change this object's layer type to 'turrain'.\nDo not add a trigger box to this object.\nAn added trigger box will move player with weird behavior.")]
-    [SerializeField] List<Vector3> locationsToCycleThrough = new();
+    [SerializeField] private List<Vector3> locationsToCycleThrough = new();
     [SerializeField][Range(0.5f, 60)] private float timeToMove = 0.5f;
     [SerializeField][Range(.5f, 60)] private float waitDuration = 0.5f;
     [SerializeField][Range(0, 360)] private float rotateAmountOnWait = 0f;
@@ -56,26 +56,20 @@ public class MovingObject : MonoBehaviour
             Gizmos.color = locationColor[i];
             Gizmos.DrawSphere(locationsToCycleThrough[i], .2f);
         }
+
+        //Debug.Log(targetLocationIndex);
     }
 
     private void FixedUpdate()
     {
         MoveObject();
-
-        //if (playerRigidBody)
-        //{
-
-        //    Vector3 platformChangeInPosition = new(transform.position.x - lastFramePosition.x,
-        //                                            0f,
-        //                                            transform.position.z - lastFramePosition.z);
-        //    playerRigidBody.AddForce(platformChangeInPosition * 700 , ForceMode.Force);            
-        //}
         
     }
 
     private void MoveObject()
     {
         //lastFramePosition = transform.position;
+        if (locationsToCycleThrough.Count < 2) return;
         if (waitTime < waitDuration) 
         {
             transform.rotation = Quaternion.Lerp(lastRotationOnWait, 

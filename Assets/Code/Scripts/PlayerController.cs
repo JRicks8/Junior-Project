@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] private Transform bottom;
     [SerializeField] private GrappleVisual grappleVisualScript;
     [SerializeField] private Transform playerMesh;
+    [SerializeField] private Animator animator;
 
     [Header("Input")]
     [SerializeField] private InputActionAsset actions;
@@ -185,6 +186,8 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             maxNumJumps = 2;
         else
             maxNumJumps = 1;
+
+        animator.GetBehaviour<AnimHermesBehavior>().SetReferences(this, animator, rb);
     }
 
     private void Update()
@@ -320,6 +323,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         compositeForce.y += jumpUpForce;
         rb.AddForce(compositeForce * rb.mass, ForceMode.Impulse);
         CalculateTempAirMaxMagnitude(false);
+        animator.SetTrigger(AnimHermesBehavior.HermesAnimParameters.jumpTrigger.ToString());
         return true;
     }
 
@@ -341,6 +345,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         Vector3 velocity = desiredDirection * dashVelocityMagnitude;
         dashHandler = DashHandler(velocity);
         StartCoroutine(dashHandler);
+        animator.SetTrigger(AnimHermesBehavior.HermesAnimParameters.dashTrigger.ToString());
 
         // Adjust the facing direction
         facingDirection = desiredDirection;
@@ -372,6 +377,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         diveHandler = DiveHandler(flatVelocity);
         StartCoroutine(diveHandler);
+        animator.SetTrigger(AnimHermesBehavior.HermesAnimParameters.diveTrigger.ToString());
         return true;
     }
 
@@ -627,6 +633,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         jumping = false;
         dashesLeft = maxNumDashes;
         StartCoroutine(RegainJumpsAfterDelay(0.06f));
+        animator.SetTrigger(AnimHermesBehavior.HermesAnimParameters.landTrigger.ToString());
     }
 
     // Recalculates the temporary maximum value for air movement.
@@ -856,12 +863,14 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             grappling = true;
             grappleHandler = GrappleHandler(grapplePoint);
             StartCoroutine(grappleHandler);
+            animator.SetTrigger(AnimHermesBehavior.HermesAnimParameters.grappleTrigger.ToString());
         }
     }
 
     private void OnGrappleEnd(InputAction.CallbackContext context)
     {
         grappling = false;
+        animator.SetTrigger(AnimHermesBehavior.HermesAnimParameters.stopGrappleTrigger.ToString());
     }
 
     public void SetHasAbility(Abilities ability, bool hasAbility)
@@ -939,6 +948,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public bool IsDiving() { return diving; }
     public bool IsJumping() { return jumping; }
     public bool IsGrappling() { return grappling; }
+    public bool IsGrounded() {  return grounded; }
     public bool HasPackage() { return hasPackage; }
 
     // Debug
@@ -957,12 +967,5 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             decimal value = Math.Round((decimal)flatVelocity.magnitude, 3);
             speedText.text = "Speed: " + value;
         }
-
-        if (diving)
-            mRenderer.material = diveMaterial;
-        else if (dashing) 
-            mRenderer.material = dashMaterial;
-        else
-            mRenderer.material = defaultMaterial;
     }
 }
