@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] private bool hasPackage = false;
 
     private bool isPrefab = true; // For saving. We can't have the prefab saving data.
+    private bool isBingo = false;
 
     private IEnumerator dashHandler;
     private IEnumerator diveHandler;
@@ -137,6 +138,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         hasDash = data.hasDash;
         hasDive = data.hasDive;
         hasGrapple = data.hasGrapple;
+        isBingo = data.isBingo;
     }
 
     public void SaveData(ref GameData data)
@@ -147,6 +149,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         data.hasDash = hasDash;
         data.hasDive = hasDive;
         data.hasGrapple = hasGrapple;
+        data.isBingo = isBingo;
     }
 
     private void Awake()
@@ -189,6 +192,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             maxNumJumps = 1;
 
         animator.GetBehaviour<AnimHermesBehavior>().SetReferences(this, animator, rb);
+
+        if (isBingo)
+            SetNewMesh();
     }
 
     private void Update()

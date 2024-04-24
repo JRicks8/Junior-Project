@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 [System.Serializable]
@@ -22,6 +23,7 @@ public class GameData
     // Settings
     public bool vsync;
     public float volume;
+    public bool isBingo;
 
     public GameData()
     {
@@ -44,5 +46,6 @@ public class GameData
         // Settings
         vsync = false;
         volume = 0.5f;
+        isBingo = false;
     }
 }
