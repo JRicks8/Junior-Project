@@ -496,6 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: fc4cd7e6-daa9-4ccc-adb8-b31ee04ee832
+  objectToEnableOnDelivery: {fileID: 0}
   collectedPackage: 0
   PackageDelivered:
     m_PersistentCalls:
