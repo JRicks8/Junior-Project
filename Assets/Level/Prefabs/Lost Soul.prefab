@@ -168,8 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bobHeight: 0.3
-  spinSpeed: 0
-  bobSpeed: 2
+  spinSpeed: 20
+  bobSpeed: 3
+  animStartOffset: 0
 --- !u!82 &1697053669039487490
 AudioSource:
   m_ObjectHideFlags: 0
