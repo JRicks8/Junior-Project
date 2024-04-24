@@ -12,6 +12,8 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - BEVEL_ON
+  - GLOW_ON
   - OUTLINE_ON
   m_InvalidKeywords:
   - _EMISSION
