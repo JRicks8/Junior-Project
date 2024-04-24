@@ -977,6 +977,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     }
 
     public void SetNewMesh() {
+        isBingo = true;
         playerMesh.gameObject.SetActive(false);
         playerMesh = bingoMesh;
         animator = bingoMesh.GetComponent<Animator>();
