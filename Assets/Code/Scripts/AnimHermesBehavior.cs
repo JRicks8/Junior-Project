@@ -9,6 +9,7 @@ public class AnimHermesBehavior : StateMachineBehaviour
         xzVelMag,
         yVelocity,
         isGrounded,
+        grappling,
         jumpTrigger,
         landTrigger,
         grappleTrigger,
@@ -42,6 +43,7 @@ public class AnimHermesBehavior : StateMachineBehaviour
             playerAnimator.SetFloat(HermesAnimParameters.xzVelMag.ToString(), new Vector3(rb.velocity.x, 0, rb.velocity.z).magnitude);
             playerAnimator.SetFloat(HermesAnimParameters.yVelocity.ToString(), rb.velocity.y);
             playerAnimator.SetBool(HermesAnimParameters.isGrounded.ToString(), playerController.IsGrounded());
+            playerAnimator.SetBool(HermesAnimParameters.isGrounded.ToString(), playerController.IsGrappling());
         }
     }
 }
