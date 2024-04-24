@@ -8,6 +8,7 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
 
     [SerializeField] private string id;
     [SerializeField] private GameObject objectToEnableOnDelivery;
+    private bool isPrefab = true;
 
     [ContextMenu("Generate guid for id")]
     private void GenerateGuid()
@@ -21,6 +22,8 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
+        isPrefab = false;
+
         if (id.Equals(string.Empty))
             Debug.LogError("GUID for this object is null. Please assign a GUID for saving data.");
 
@@ -30,11 +33,14 @@ public class PackageDeliveryZone : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
+        if (isPrefab) return;
         data.collectionZones.TryGetValue(id, out collectedPackage);
     }
 
     public void SaveData(ref GameData data)
     {
+        if (isPrefab) return;
+
         if (data.collectionZones.ContainsKey(id))
         {
             data.collectionZones.Remove(id);

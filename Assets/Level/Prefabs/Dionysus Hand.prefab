@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20e35c14c4ce1e4295d00d862906ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: fc4cd7e6-daa9-4ccc-adb8-b31ee04ee832
+  id: 
   objectToEnableOnDelivery: {fileID: 0}
   collectedPackage: 0
   PackageDelivered:
