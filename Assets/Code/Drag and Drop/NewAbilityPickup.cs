@@ -7,7 +7,7 @@ public class NewAbilityPickup : MonoBehaviour
 {
     [SerializeField] private PlayerController.Abilities abilityToGet;
 
-    private void Awake()
+    private void Start()
     {
         GameObject playerController = GameObject.FindGameObjectWithTag("Player");
         if (playerController != null)
