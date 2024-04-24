@@ -12,17 +12,19 @@ public class PackagePickup : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (player.GetComponent<PlayerController>().HasPackage())
+        {
+            Debug.Log("Package will not spawn: already have a package");
+            return;
+        }
+        foreach (GameObject obj in packages)
+        {
+            if (obj.TryGetComponent(out Package pkg) && !pkg.GetWasCollected())
             {
-                Debug.Log("Package will not spawn: already have a package");
+                obj.SetActive(true);
                 return;
             }
-            foreach (GameObject obj in packages)
-            {
-                if (!obj.GetComponent<Package>().GetWasCollected())
-                {
-                    obj.SetActive(true);
-                    return;
-                }
-            }
+            obj.SetActive(true);
+
+        }
     }
 }
