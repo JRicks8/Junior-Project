@@ -46,6 +46,5 @@ public class AnimHermesBehavior : StateMachineBehaviour
             playerAnimator.SetBool(HermesAnimParameters.grappling.ToString(), playerController.IsGrappling());
         }
 
-        Debug.Log(playerController.IsGrounded());
     }
 }

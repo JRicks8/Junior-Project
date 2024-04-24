@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     [SerializeField] private GrappleVisual grappleVisualScript;
     [SerializeField] private Transform playerMesh;
     [SerializeField] private Animator animator;
+    [SerializeField] private Transform bingoMesh;
 
     [Header("Input")]
     [SerializeField] private InputActionAsset actions;
@@ -967,5 +968,13 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             decimal value = Math.Round((decimal)flatVelocity.magnitude, 3);
             speedText.text = "Speed: " + value;
         }
+    }
+
+    public void SetNewMesh() {
+        playerMesh.gameObject.SetActive(false);
+        playerMesh = bingoMesh;
+        animator = bingoMesh.GetComponent<Animator>();
+        playerMesh.gameObject.SetActive(true);
+        animator.GetBehaviour<AnimHermesBehavior>().SetReferences(this, animator, rb);
     }
 }
